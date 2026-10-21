@@ -63,6 +63,8 @@ while preserving all critical instructions. The agent must still communicate wit
 
 ### 项目工作流
 
+* **部署运行环境：** Jekyll GitHub Actions 构建固定使用 `ubuntu-24.04` 与 Ruby `4.0`，匹配当前 Bundler 4 锁文件。升级时一起验证 runner、Ruby 和 Bundler；不要使用 Ruby 3.1 搭配 `ubuntu-latest`（Ubuntu 26.04 无对应预编译版本）。
+
 * 以 [Makefile](Makefile) 为唯一指令来源；常用目标 `make`/`make serve-current`、`make dev`、`make stop`、`make convert`、`make convert-single`（细节见 [README.md](README.md)）。
 * 顺序很关键：stop → build projects → convert notebooks/docx → split courses → jekyll serve（以 [Makefile](Makefile) 为准）。
 * 项目构建后必须运行 [SASS 导入生成器](scripts/generate_sass_imports.py)，以创建 `_sass/projects/_all.scss`；`build-registered-projects` 负责此依赖，避免 Jekyll 的 `projects/all` 导入失败。
