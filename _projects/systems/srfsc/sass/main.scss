@@ -12,6 +12,10 @@ body:has(.srfsc-app) {
     linear-gradient(180deg, rgba($srfsc-bg, 0.62) 0%, rgba($srfsc-bg, 0.9) 70%),
     srfsc-photo("home") center top / cover fixed no-repeat;
   background-color: $srfsc-bg;
+
+  // The council navigation serves as the header on SRFSC pages.
+  .site-header { display: none; }
+  .page-content { padding-top: 0; }
 }
 
 .srfsc-app {
@@ -25,4 +29,5 @@ body:has(.srfsc-app) {
   @import "home";
   @import "content";
   @import "forms";
+  @import "member";
 }

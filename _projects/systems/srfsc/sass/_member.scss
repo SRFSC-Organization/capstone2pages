@@ -1,0 +1,25 @@
+.srfsc-quiz {
+  display: grid;
+  gap: 1rem;
+}
+.srfsc-quiz__question {
+  border: 1px solid $srfsc-border;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 0;
+  legend { font-weight: 600; padding: 0 0.4rem; }
+}
+.srfsc-quiz__option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.55rem 0;
+  cursor: pointer;
+  input { margin-top: 0.3rem; accent-color: $srfsc-amber; }
+  input:focus-visible { outline: 2px solid $srfsc-amber; outline-offset: 3px; }
+}
+.srfsc-member-details {
+  dt { color: $srfsc-muted; margin-top: 0.8rem; }
+  dd { margin: 0; overflow-wrap: anywhere; }
+}
+[hidden] { display: none !important; }
