@@ -13,6 +13,12 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
 
 }
 
+// SRFSC accounts live in SRFSC-Backend, which has routes absent from the shared OCS service.
+// A production origin must be configured explicitly; never send member credentials to a fallback.
+export const srfscAccountURI = ['localhost', '127.0.0.1'].includes(location.hostname)
+    ? `http://${location.hostname}:8587`
+    : {{ site.srfsc_account_api_url | default: '' | jsonify }};
+
 export var javaURI;
 // 127.0.0.1:8585 does not work for some machines
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {

@@ -19,9 +19,10 @@ hide: true
         <label class="srfsc-field" for="srfsc-password">Password
           <input id="srfsc-password" name="password" type="password" autocomplete="current-password" required>
         </label>
-        <button class="ocs__btn alert-green fill" type="submit">Sign in &amp; open my profile</button>
+        <button class="ocs__btn alert-green fill" type="submit" disabled>Sign in &amp; open my profile</button>
       </form>
       <p id="srfsc-login-status" class="srfsc-form__status" role="status" aria-live="polite"></p>
+      <button id="srfsc-login-retry" class="ocs__btn" type="button" hidden>Connect again</button>
       <a id="srfsc-login-continue" href="{{ site.baseurl }}/capstone/srfsc/app/profile/" hidden>Continue to your profile</a>
       <p class="srfsc-panel__note">Use your existing verified account. Need an account or help signing in? <a href="mailto:srfiresafecouncil@gmail.com">Contact the council</a>.</p>
     </section>

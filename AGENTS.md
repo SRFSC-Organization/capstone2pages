@@ -84,6 +84,8 @@ while preserving all critical instructions. The agent must still communicate wit
 
 ### 后端边界
 
+* **SRFSC 账号服务：** 登录/个人资料/兴趣问卷使用兄弟仓库 `SRFSC-Backend`（本地 8587）；生产地址由 `_config.yml` 的 `srfsc_account_api_url` 显式配置，禁止回退到没有 SRFSC 路由的共享 OCS 服务。活动/报告仍使用 `srfsc_backend/`（8599）；部署需同时验证 nginx/Flask 凭据 CORS 与认证 cookie 域。
+
 * 后端服务位于 [node_backend/README.md](node_backend/README.md)，与站点构建流程分离；改动前先阅读该文档。
 
 ## 编码标准
