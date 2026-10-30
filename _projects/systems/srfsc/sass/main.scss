@@ -12,8 +12,7 @@
 // Calm solid background on every SRFSC page; photos stay in the banners and hub cards.
 // :has() limits it to pages that contain the app.
 body:has(.srfsc-app) {
-  background: linear-gradient(180deg, darken($srfsc-forest-deep, 4%) 0%, $srfsc-bg 420px);
-  background-color: $srfsc-bg;
+  background: $srfsc-bg;
 
   // The council navigation serves as the header on SRFSC pages.
   .site-header { display: none; }

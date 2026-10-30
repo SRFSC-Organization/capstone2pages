@@ -2,16 +2,17 @@
 $srfsc-forest-deep: #173b2f;
 $srfsc-forest: #2f6d4c;
 $srfsc-ember: #d8572a;
-$srfsc-slate: #49615b;
+$srfsc-slate: #5b5f66;
 $srfsc-amber: #f0b342;
 $srfsc-red: #c0392b;
-$srfsc-bg: #0f1a16;
-// Eye comfort: solid surfaces, softened white text, and a muted gold for links and accents
-// (the brighter amber stays for meters and weather levels).
-$srfsc-card: #15231d;
-$srfsc-border: rgba(120, 160, 140, 0.22);
-$srfsc-text: #e3eae6;
-$srfsc-muted: #b3c2bb;
+$srfsc-bg: #111214;
+// Eye comfort: neutral charcoal surfaces, softened white text, and a muted gold for links and accents
+// (green is kept for meaning: success, live numbers, the green button).
+$srfsc-card: #1a1b1e;
+$srfsc-raised: #26272b;
+$srfsc-border: rgba(255, 255, 255, 0.08);
+$srfsc-text: #e7e7e5;
+$srfsc-muted: #b4b4b0;
 $srfsc-gold: #e6c27a;
 $srfsc-radius: 14px;
 
@@ -51,7 +52,7 @@ $srfsc-weather-levels: (
 
 @mixin srfsc-card {
   background: $srfsc-card;
-  border: 1px solid $srfsc-border;
+  border: 1px solid transparent;
   border-radius: $srfsc-radius;
 }
 

@@ -8,7 +8,7 @@
 .opencs-bar {
   position: relative;
   z-index: 30;
-  background: rgba(10, 18, 15, 0.92);
+  background: rgba($srfsc-bg, 0.92);
   border-bottom: 1px solid $srfsc-border;
   font-family: $srfsc-font-mono;
 }
@@ -45,7 +45,7 @@
   user-select: none;
   transition: background-color 0.15s ease;
 
-  &:hover { background: rgba($srfsc-forest, 0.45); }
+  &:hover { background: $srfsc-raised; }
 }
 .opencs-drawer-button__mark {
   display: inline-flex;
@@ -70,7 +70,7 @@
   bottom: 0;
   width: min(320px, 86vw);
   z-index: 70;
-  background: rgba(15, 26, 22, 0.98);
+  background: rgba($srfsc-card, 0.98);
   border-right: 1px solid $srfsc-border;
   box-shadow: 6px 0 24px rgba(0, 0, 0, 0.5);
   transform: translateX(-105%);
@@ -129,5 +129,5 @@
   font-weight: 600;
   font-size: 0.95rem;
 
-  &:hover { color: $srfsc-text; background: rgba($srfsc-forest, 0.4); }
+  &:hover { color: $srfsc-text; background: $srfsc-raised; }
 }

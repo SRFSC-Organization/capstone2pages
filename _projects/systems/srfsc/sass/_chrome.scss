@@ -74,7 +74,7 @@
     font-weight: 600;
     text-decoration: none;
 
-    &:hover { color: $srfsc-text; background: rgba($srfsc-forest, 0.3); }
+    &:hover { color: $srfsc-text; background: $srfsc-raised; }
     &[aria-current="page"] { color: $srfsc-text; box-shadow: inset 0 -2px 0 $srfsc-ember; border-radius: 8px 8px 2px 2px; }
   }
 }
@@ -88,7 +88,7 @@
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  &:hover, &[aria-current="page"] { background: rgba($srfsc-forest, 0.3); }
+  &:hover, &[aria-current="page"] { background: $srfsc-raised; }
 }
 .srfsc-nav__toggle {
   display: inline-flex;
@@ -145,7 +145,6 @@
   align-items: flex-end;
   padding: 2rem;
   margin-bottom: 1rem;
-  border: 1px solid $srfsc-border;
 
   @each $name, $file in $srfsc-photos {
     &--#{$name} { @include srfsc-photo-overlay($name, 0.62); }
@@ -164,12 +163,12 @@
 .srfsc-banner__lead { margin: 0.6rem 0 0; color: $srfsc-text; font-size: 1.05rem; max-width: 56ch; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7); }
 
 .srfsc-footer {
-  @include srfsc-card;
   display: grid;
+  border-top: 1px solid $srfsc-border;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  padding: 1.25rem;
-  margin-top: 2rem;
+  padding: 1.5rem 0.25rem 0;
+  margin-top: 2.5rem;
   font-size: 0.92rem;
   color: $srfsc-muted;
 

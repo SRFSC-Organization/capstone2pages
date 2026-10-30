@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: $srfsc-forest-deep;
+  background: $srfsc-raised;
   padding: 0.4rem 0;
   line-height: 1.1;
 }
@@ -31,7 +31,7 @@
   display: inline-block;
   padding: 0.05rem 0.55rem;
   border-radius: 999px;
-  background: rgba($srfsc-forest, 0.45);
+  background: $srfsc-raised;
   font-size: 0.82rem;
 }
 .srfsc-event__title { margin: 0.3rem 0 0.1rem; font-size: 1rem; }
@@ -55,8 +55,7 @@
 .srfsc-program {
   padding: 1rem;
   border-radius: 10px;
-  background: rgba($srfsc-bg, 0.6);
-  border-top: 4px solid $srfsc-forest;
+  background: $srfsc-raised;
   display: flex;
   flex-direction: column;
 
@@ -76,11 +75,11 @@
 .srfsc-zone-card {
   @include srfsc-card;
   padding: 1.2rem;
-  border-top: 5px solid $srfsc-red;
+  border-top: 3px solid $srfsc-red;
   &--1 { border-top-color: $srfsc-ember; }
   &--2 { border-top-color: $srfsc-gold; }
   // The shared OCS grid-cell class adds its own gray fill and border; keep the council card look.
-  &.ocs__grid-cell { background: $srfsc-card; border: 1px solid $srfsc-border; border-top: 5px solid $srfsc-red; }
+  &.ocs__grid-cell { background: $srfsc-card; border: 1px solid transparent; border-top: 3px solid $srfsc-red; }
   &--1.ocs__grid-cell { border-top-color: $srfsc-ember; }
   &--2.ocs__grid-cell { border-top-color: $srfsc-gold; }
   p { color: $srfsc-muted; margin: 0; font-size: 0.9rem; }
@@ -90,7 +89,7 @@
 
 // Readiness checklist
 .srfsc-meter { margin-bottom: 0.8rem; }
-.srfsc-meter__track { height: 12px; border-radius: 999px; background: rgba($srfsc-slate, 0.6); overflow: hidden; }
+.srfsc-meter__track { height: 10px; border-radius: 999px; background: $srfsc-raised; overflow: hidden; }
 .srfsc-meter__fill {
   height: 100%;
   width: 0;
@@ -125,7 +124,6 @@
 .srfsc-role {
   @include srfsc-card;
   padding: 1.1rem;
-  border-left: 4px solid $srfsc-forest;
   p { color: $srfsc-muted; margin: 0; font-size: 0.88rem; }
 }
 .srfsc-role__title { font-size: 1rem; }
@@ -163,7 +161,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  li { padding: 0.35rem 0.8rem; border-radius: 8px; background: $srfsc-forest-deep; font-size: 0.85rem; }
+  li { padding: 0.35rem 0.8rem; border-radius: 8px; background: $srfsc-raised; font-size: 0.85rem; }
 }
 
 // History timeline (About)

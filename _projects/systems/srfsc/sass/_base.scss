@@ -13,6 +13,8 @@ p, li, dd, label, input, select, textarea, button { font-family: $srfsc-font-san
 a { color: $srfsc-gold; text-underline-offset: 0.18em; }
 // Links inside sentences are underlined so they don't rely on color alone.
 p a:not([class]), li a:not([class]), dd a:not([class]) { text-decoration: underline; text-decoration-thickness: 1px; }
+// Menus and the footer's one-link lines are clearly links already; keep them clean.
+.srfsc-nav a:not([class]), .srfsc-footer p:not(.srfsc-footer__credits) a { text-decoration: none; }
 a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-offset: 3px; }
 
 // Buttons: solid fills with white text instead of the site-wide tinted style, so every
@@ -112,16 +114,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-
   gap: 0.6rem;
   margin-top: 0.8rem;
 }
+// KPI numbers sit on the page with a thin divider instead of a box each.
 .srfsc-kpi {
-  @include srfsc-card;
-  padding: 0.9rem 1rem;
+  padding: 0.25rem 1rem;
+  border-left: 2px solid $srfsc-border;
   display: flex;
   flex-direction: column;
 }
 .srfsc-kpi__value { font-family: $srfsc-font-sans; font-size: 1.7rem; font-weight: 800; color: $srfsc-gold; letter-spacing: -0.02em; }
 .srfsc-kpi__label { color: $srfsc-muted; font-size: 0.85rem; font-weight: 500; }
 .srfsc-kpi--live {
-  border-color: rgba($srfsc-forest, 0.9);
   .srfsc-kpi__value { color: lighten($srfsc-forest, 25%); }
 }
 
