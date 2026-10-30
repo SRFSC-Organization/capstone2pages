@@ -33,6 +33,7 @@ hide: true
         <dt>Participation</dt><dd id="srfsc-participation"></dd>
       </dl>
       <p id="srfsc-quiz-progress"></p>
+      <p id="srfsc-council-link" hidden><a class="ocs__btn alert-green fill small" href="{{ site.baseurl }}/capstone/srfsc/app/council/">Review council requests</a></p>
       <h3 class="srfsc-panel__subtitle">Suggested next steps</h3>
       <ul id="srfsc-recommendations"></ul>
       <p class="srfsc-panel__note">Your participation choice describes your interests. Administrator permissions are managed by the council.</p>

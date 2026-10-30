@@ -29,6 +29,7 @@ function renderQuestion(question, answers) {
 
 function renderSummary(profile) {
   document.querySelector('#srfsc-account-role').textContent = profile.account_role;
+  document.querySelector('#srfsc-council-link').hidden = profile.account_role !== 'Admin';
   document.querySelector('#srfsc-participation').textContent = profile.participation_role === 'volunteer' ? 'Volunteer' : 'Resident';
   document.querySelector('#srfsc-quiz-progress').textContent = profile.completed
     ? `Quiz complete · Saved ${new Date(profile.updated_at).toLocaleString()}`

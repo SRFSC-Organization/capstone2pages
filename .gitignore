@@ -85,3 +85,6 @@ _notebooks/**/*_content.md
 
 # Claude Code session artifacts
 .claude/
+
+# Local notes and issue drafts (not part of the site)
+claude-notes/

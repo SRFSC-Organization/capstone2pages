@@ -6,6 +6,9 @@
 
 @import "tokens";
 
+// Root-level chrome shared by every SRFSC page (lives OUTSIDE .srfsc-app so position:fixed stays viewport-anchored).
+@import "opencs-drawer";
+
 // Wildfire photo behind every SRFSC page. :has() limits it to pages that contain the app.
 body:has(.srfsc-app) {
   background:
@@ -22,7 +25,12 @@ body:has(.srfsc-app) {
   max-width: 1200px;
   margin: 0 auto 2rem;
   color: $srfsc-text;
-  line-height: 1.5;
+  font-family: $srfsc-font-sans;
+  font-size: 1rem;
+  line-height: 1.6;
+
+  // Keep the same width (and one-row nav) on pages that also carry the OCS container class.
+  &.ocs__container { max-width: 1200px; }
 
   @import "base";
   @import "chrome";

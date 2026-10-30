@@ -13,6 +13,7 @@ hide: true
 
   <div class="srfsc-columns srfsc-columns--wide-left">
     <section class="srfsc-panel">
+      <h2 class="srfsc-panel__title">Latest updates</h2>
       <div class="srfsc-chips" role="group" aria-label="Filter updates">
         <button type="button" class="srfsc-chips__chip" data-category="All" aria-pressed="true">All</button>
         <button type="button" class="srfsc-chips__chip" data-category="News" aria-pressed="false">News</button>

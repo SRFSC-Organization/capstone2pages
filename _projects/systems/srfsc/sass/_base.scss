@@ -1,8 +1,61 @@
 // Shared building blocks used on every SRFSC page (nested inside .srfsc-app by main.scss).
-h1, h2, h3, h4 { color: $srfsc-text; margin: 0 0 0.4rem; }
+h1, h2, h3, h4 {
+  color: $srfsc-text;
+  margin: 0 0 0.4rem;
+  font-family: $srfsc-font-sans;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
 // Another project's CSS ships a global `h1 { display: none }` and a green glow; undo both in the app.
 h1 { display: block; text-shadow: none; font-size: 1.6rem; }
-a { color: $srfsc-amber; }
+p, li, dd, label, input, select, textarea, button { font-family: $srfsc-font-sans; }
+a { color: $srfsc-amber; text-underline-offset: 0.18em; }
+a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-amber; outline-offset: 3px; }
+
+// Buttons: solid fills with white text instead of the site-wide tinted style, so every
+// variant passes contrast. Markup keeps the shared OCS classes (ocs__btn alert-* fill).
+.ocs__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
+  border: 1.5px solid rgba($srfsc-text, 0.55);
+  border-radius: 10px;
+  background: rgba($srfsc-bg, 0.55);
+  color: $srfsc-text;
+  font-family: $srfsc-font-sans;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+
+  &:hover, &:focus-visible { background: rgba($srfsc-text, 0.12); border-color: $srfsc-text; color: $srfsc-text; }
+  &:active { transform: translateY(1px); }
+  &:disabled { opacity: 0.6; cursor: wait; }
+  &.small { min-height: 36px; padding: 0.4rem 0.85rem; font-size: 0.85rem; }
+
+  @each $name, $fill in ("red": $srfsc-red-strong, "green": $srfsc-forest-strong, "ember": $srfsc-ember-strong) {
+    &.alert-#{$name}.fill {
+      background: $fill;
+      border-color: $fill;
+      color: #fff;
+      &:hover, &:focus-visible { background: lighten($fill, 6%); border-color: lighten($fill, 6%); color: #fff; }
+    }
+  }
+  &.alert-yellow.fill {
+    background: $srfsc-amber;
+    border-color: $srfsc-amber;
+    color: $srfsc-bg;
+    &:hover, &:focus-visible { background: lighten($srfsc-amber, 8%); color: $srfsc-bg; }
+  }
+}
+// Mono accent: small uppercase labels keep the OpenCS code-font character.
+.srfsc-eyebrow-font { font-family: $srfsc-font-mono; letter-spacing: 0.08em; text-transform: uppercase; }
 [hidden] { display: none !important; }
 
 .srfsc-panel {
@@ -56,8 +109,8 @@ a { color: $srfsc-amber; }
   display: flex;
   flex-direction: column;
 }
-.srfsc-kpi__value { font-size: 1.6rem; font-weight: 800; color: $srfsc-amber; }
-.srfsc-kpi__label { color: $srfsc-muted; font-size: 0.8rem; }
+.srfsc-kpi__value { font-family: $srfsc-font-sans; font-size: 1.7rem; font-weight: 800; color: $srfsc-amber; letter-spacing: -0.02em; }
+.srfsc-kpi__label { color: $srfsc-muted; font-family: $srfsc-font-mono; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .srfsc-kpi--live {
   border-color: rgba($srfsc-forest, 0.9);
   .srfsc-kpi__value { color: lighten($srfsc-forest, 25%); }

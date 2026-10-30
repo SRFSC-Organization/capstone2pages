@@ -22,15 +22,14 @@ author: Krish Kelageri, Jasan Boprai, Shourya Patel
         That gives residents more time to act, supports first responders, and strengthens the whole community.
       </p>
       <div class="srfsc-actions" id="actions">
-        <a class="ocs__btn alert-green fill" href="{{ srfsc_root }}get-involved/">Volunteer</a>
-        <a class="ocs__btn alert-yellow fill" href="{{ srfsc_root }}events/" id="srfsc-next-event-cta">Join the next event</a>
-        <a class="ocs__btn alert-red fill" href="{{ srfsc_root }}report/">Report a hazard</a>
-        <a class="ocs__btn" href="{{ srfsc_root }}get-involved/#donate">Donate</a>
+        <a class="ocs__btn alert-ember fill srfsc-btn--large" href="{{ srfsc_root }}report/">Report a hazard</a>
+        <a class="ocs__btn srfsc-btn--large" href="{{ srfsc_root }}get-involved/">Volunteer with us</a>
+        <a class="srfsc-actions__link" href="{{ srfsc_root }}events/" id="srfsc-next-event-cta">Join the next event</a>
       </div>
     </div>
 
     <!-- Live fire-weather card: makes "understand the risk" concrete -->
-    <aside class="srfsc-weather" id="srfsc-weather" data-level="Unknown" aria-live="polite">
+    <section class="srfsc-weather" id="srfsc-weather" data-level="Unknown" aria-label="Today's fire weather" aria-live="polite">
       <p class="srfsc-weather__label">Today's fire weather</p>
       <p class="srfsc-weather__level" id="srfsc-weather-level">Loading…</p>
       <dl class="srfsc-weather__readings">
@@ -41,7 +40,7 @@ author: Krish Kelageri, Jasan Boprai, Shourya Patel
       <p class="srfsc-weather__message" id="srfsc-weather-message"></p>
       <ul class="srfsc-weather__alerts" id="srfsc-weather-alerts"></ul>
       <p class="srfsc-weather__source" id="srfsc-weather-source">Unofficial indicator. Follow CAL FIRE and SDFR guidance.</p>
-    </aside>
+    </section>
   </section>
 
   <!-- Trust at a glance: historic impact (static, from srfiresafe.org) next to live activity -->

@@ -12,6 +12,15 @@ $srfsc-text: #eef3ef;
 $srfsc-muted: #b7c6bf;
 $srfsc-radius: 14px;
 
+// Readable sans for body copy; the site-wide code font stays as a small accent (eyebrows, labels).
+$srfsc-font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$srfsc-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+// Solid button fills that keep white text above WCAG AA (4.5:1).
+$srfsc-ember-strong: #b3421b;
+$srfsc-red-strong: #a8321f;
+$srfsc-forest-strong: #2a6145;
+
 // Photos live in images/projects/srfsc/ (copied by the project Makefile). Paths are relative to the
 // compiled /assets/css/style.css, so they keep working under any site baseurl.
 $srfsc-photo-root: "../../images/projects/srfsc/";

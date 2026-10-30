@@ -36,6 +36,19 @@ follow the Flask Blueprint/Api/Resource structure used by `/api/jokes`.
 The local account hostname matches the frontend hostname so cookies also work
 when opening the frontend through `127.0.0.1`.
 
+## Council request survey
+
+`navigation/request.md` (`/capstone/srfsc/app/request/`) lets anyone send the
+council a request without an account. It uses the same account service
+(`srfsc_account_api_url`): `POST /api/srfsc/requests`. On a site without that
+service the form is disabled and shows the council's phone and email instead.
+
+Council members with the `Admin` role review requests on
+`navigation/council.md` (`/capstone/srfsc/app/council/`): they can filter by
+status and set each request to New, In review, or Resolved with a note. Admins
+are sent there after signing in, and their profile shows a link to it. Create
+an admin with `create_srfsc_member.py --role Admin` in `SRFSC-Backend`.
+
 ## Verify the deployment
 
 - `GET /api/srfsc/quiz` returns the questionnaire as JSON.

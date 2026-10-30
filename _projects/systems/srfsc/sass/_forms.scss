@@ -1,23 +1,35 @@
 // Forms (volunteer, report, RSVP) and the admin tools.
-.srfsc-form { display: flex; flex-direction: column; gap: 0.6rem; }
+.srfsc-form { display: flex; flex-direction: column; gap: 0.9rem; }
 .srfsc-field,
 .srfsc-rsvp {
-  font-size: 0.85rem;
-  color: $srfsc-muted;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $srfsc-text;
 
   input, select, textarea {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 0.65rem;
-    border: 1px solid $srfsc-border;
-    border-radius: 8px;
-    background: rgba($srfsc-bg, 0.9);
+    min-height: 46px;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid rgba($srfsc-text, 0.22);
+    border-radius: 10px;
+    background: rgba($srfsc-bg, 0.92);
     color: $srfsc-text;
     font: inherit;
-    &:focus { outline: 2px solid $srfsc-amber; outline-offset: 1px; }
+    font-weight: 400;
+    font-size: 1rem; // 16px+ stops iOS from zooming into the field
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    &::placeholder { color: rgba($srfsc-muted, 0.7); }
+    &:hover { border-color: rgba($srfsc-text, 0.4); }
+    &:focus { outline: none; border-color: $srfsc-amber; box-shadow: 0 0 0 3px rgba($srfsc-amber, 0.25); }
+    // Only flag a field after the visitor has interacted with it.
+    &:user-invalid { border-color: lighten($srfsc-ember, 8%); box-shadow: 0 0 0 3px rgba($srfsc-ember, 0.2); }
   }
+  textarea { min-height: 120px; resize: vertical; }
 }
-.srfsc-field { display: flex; flex-direction: column; gap: 0.25rem; }
+.srfsc-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.srfsc-field__optional { color: $srfsc-muted; font-weight: 400; }
+.srfsc-form .ocs__btn[type="submit"] { align-self: flex-start; min-width: 12rem; }
 .srfsc-rsvp {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
@@ -29,10 +41,16 @@
 .srfsc-form__status {
   min-height: 1.1em;
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   &--pending { color: $srfsc-muted; }
-  &--success { color: lighten($srfsc-forest, 25%); }
-  &--error { color: lighten($srfsc-ember, 12%); }
+  &--success, &--error {
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid;
+    font-weight: 600;
+  }
+  &--success { color: lighten($srfsc-forest, 35%); background: rgba($srfsc-forest, 0.18); border-color: rgba($srfsc-forest, 0.7); }
+  &--error { color: lighten($srfsc-ember, 22%); background: rgba($srfsc-ember, 0.12); border-color: rgba($srfsc-ember, 0.6); }
 }
 
 .srfsc-admin-gate { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }

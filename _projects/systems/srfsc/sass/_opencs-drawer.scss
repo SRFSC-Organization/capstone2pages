@@ -1,0 +1,133 @@
+// OpenCS top strip + off-canvas drawer. Lives at the document root (not inside .srfsc-app) so the
+// drawer stays fixed to the viewport while the SRFSC page scrolls. The
+// checkbox#opencs-drawer-toggle in opencs_drawer.html drives open/close state in pure CSS.
+.opencs-drawer-toggle { display: none; }
+
+// Slim full-width OpenCS strip above the SRFSC page. It scrolls away so the SRFSC nav
+// becomes the sticky header; the drawer it opens stays fixed to the viewport.
+.opencs-bar {
+  position: relative;
+  z-index: 30;
+  background: rgba(10, 18, 15, 0.92);
+  border-bottom: 1px solid $srfsc-border;
+  font-family: $srfsc-font-mono;
+}
+.opencs-bar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.3rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.opencs-bar__note {
+  color: $srfsc-muted;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  @media (max-width: 480px) { display: none; }
+}
+
+.opencs-drawer-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 32px;
+  padding: 0.25rem 0.7rem 0.25rem 0.55rem;
+  border-radius: 8px;
+  color: $srfsc-text;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+
+  &:hover { background: rgba($srfsc-forest, 0.45); }
+}
+.opencs-drawer-button__mark {
+  display: inline-flex;
+  color: $srfsc-amber;
+}
+
+.opencs-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 55;
+  cursor: pointer;
+}
+
+.opencs-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(320px, 86vw);
+  z-index: 70;
+  background: rgba(15, 26, 22, 0.98);
+  border-right: 1px solid $srfsc-border;
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.5);
+  transform: translateX(-105%);
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.opencs-drawer-toggle:checked ~ .opencs-drawer { transform: translateX(0); }
+.opencs-drawer-toggle:checked ~ .opencs-drawer-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.opencs-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid $srfsc-border;
+}
+.opencs-drawer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: $srfsc-text;
+  font-weight: 800;
+  text-decoration: none;
+
+  img { height: 28px; width: auto; }
+}
+.opencs-drawer__close {
+  color: $srfsc-muted;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0 0.4rem;
+  cursor: pointer;
+
+  &:hover { color: $srfsc-text; }
+}
+
+.opencs-drawer__nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.6rem 1rem;
+  gap: 0.15rem;
+}
+.opencs-drawer__link {
+  display: block;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  color: $srfsc-muted;
+  text-decoration: none;
+  font-family: $srfsc-font-sans;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  &:hover { color: $srfsc-text; background: rgba($srfsc-forest, 0.4); }
+}

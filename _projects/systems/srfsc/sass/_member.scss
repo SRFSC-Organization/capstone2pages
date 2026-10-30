@@ -23,3 +23,55 @@
   dd { margin: 0; overflow-wrap: anywhere; }
 }
 [hidden] { display: none !important; }
+
+// Council request review page
+.srfsc-council__filter { max-width: 14rem; }
+.srfsc-council__list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.srfsc-council__card {
+  border: 1px solid $srfsc-border;
+  border-left: 4px solid $srfsc-amber;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 0;
+  &[data-status="Resolved"] { border-left-color: $srfsc-border; opacity: 0.85; }
+}
+.srfsc-council__meta { color: $srfsc-muted; font-size: 0.9rem; margin: 0.2rem 0; }
+.srfsc-council__detail { margin: 0.2rem 0; overflow-wrap: anywhere; }
+.srfsc-council__message { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0.75rem 0; }
+.srfsc-council__review { margin-top: 0.75rem; }
+
+// Sign-in page
+.srfsc-columns--auth {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  @media (max-width: 900px) { grid-template-columns: 1fr; }
+}
+.srfsc-auth { padding: 1.75rem; }
+.srfsc-auth .srfsc-form .srfsc-auth__submit { align-self: stretch; }
+.srfsc-auth .srfsc-form__status:not(:empty) { margin-top: 1rem; }
+#srfsc-login-continue { margin-top: 1rem; }
+.srfsc-perks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    position: relative;
+    padding: 0.55rem 0 0.55rem 2rem;
+    border-bottom: 1px solid $srfsc-border;
+    &:last-child { border-bottom: none; }
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0.25rem;
+      top: 0.85rem;
+      width: 0.9rem;
+      height: 0.45rem;
+      border-left: 2px solid $srfsc-amber;
+      border-bottom: 2px solid $srfsc-amber;
+      transform: rotate(-45deg);
+    }
+  }
+}

@@ -25,7 +25,7 @@ function renderFeed() {
     const slug = update.category.toLowerCase().replace(/[^a-z]+/g, '-');
     item.append(
       createElement('span', `srfsc-feed__tag srfsc-feed__tag--${slug}`, update.category),
-      createElement('h4', 'srfsc-feed__title', update.title),
+      createElement('h3', 'srfsc-feed__title', update.title),
       createElement('p', 'srfsc-feed__body', update.body),
     );
     return item;

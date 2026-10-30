@@ -6,7 +6,10 @@ import { fetchUpcomingEvents, rsvpToEvent } from './srfscApi.js';
 import { bindForm, createElement } from './srfscDom.js';
 import { OFFLINE_EVENTS_MESSAGE } from './srfscFallback.js';
 
-const rsvpLabel = (count) => (count === 1 ? '1 neighbor going' : `${count} neighbors going`);
+const rsvpLabel = (count) => {
+  if (!count) return 'Be the first to RSVP';
+  return count === 1 ? '1 neighbor going' : `${count} neighbors going`;
+};
 
 function buildDateBadge(isoDate) {
   const [year, month, day] = isoDate.split('-').map(Number);
@@ -53,7 +56,7 @@ function buildEventCard(event, onRsvp) {
   const countLabel = createElement('span', 'srfsc-event__rsvps', rsvpLabel(event.rsvp_count));
   body.append(
     createElement('span', 'srfsc-event__type', event.event_type),
-    createElement('h4', 'srfsc-event__title', event.title),
+    createElement('h3', 'srfsc-event__title', event.title),
     createElement('p', 'srfsc-event__location', event.location),
   );
   if (event.description) body.append(createElement('p', 'srfsc-event__desc', event.description));

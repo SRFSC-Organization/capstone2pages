@@ -5,7 +5,16 @@
     {%- include head.html -%}
 
     <body>
-        {%- include themes/minima/header.html -%}
+        {%- comment -%}
+        SRFSC pages carry their own top navbar (see _projects/systems/srfsc/navigation/srfsc-nav.html),
+        so instead of the OpenCS site header we render a left-side drawer launcher that keeps every
+        OpenCS link one click away without pushing the page down.
+        {%- endcomment -%}
+        {%- if page.url contains '/capstone/srfsc/' -%}
+            {%- include opencs_drawer.html -%}
+        {%- else -%}
+            {%- include themes/minima/header.html -%}
+        {%- endif -%}
 
         {% if page.microblog %}
           <div class="micro-actions-wrapper">

@@ -1,19 +1,27 @@
-<!-- SRFSC site navigation. Pass active="home|events|involved|report|prepare|community|about" to highlight a link. -->
+<!-- SRFSC site navigation. Pass active="home|events|involved|report|request|prepare|community|about|login|profile|council" to highlight a link. -->
 {%- assign srfsc_root = site.baseurl | append: "/capstone/srfsc/app/" -%}
+{%- assign srfsc_account_pages = "login,profile,council" | split: "," -%}
 <nav class="srfsc-nav" aria-label="Scripps Ranch Fire Safe Council">
-  <a class="srfsc-nav__brand" href="{{ srfsc_root }}">
-    <span class="srfsc-nav__mark" aria-hidden="true">▲</span> SRFSC
+  <a class="srfsc-nav__brand" href="{{ srfsc_root }}" {% if include.active == "home" %}aria-current="page"{% endif %}>
+    <span class="srfsc-nav__mark" aria-hidden="true">▲</span>
+    <span class="srfsc-nav__name">SRFSC<span class="srfsc-nav__tagline">Fire Safe Council</span></span>
   </a>
-  <ul class="srfsc-nav__links">
-    <li><a href="{{ srfsc_root }}" {% if include.active == "home" %}aria-current="page"{% endif %}>Dashboard</a></li>
-    <li><a href="{{ srfsc_root }}events/" {% if include.active == "events" %}aria-current="page"{% endif %}>Events</a></li>
-    <li><a href="{{ srfsc_root }}get-involved/" {% if include.active == "involved" %}aria-current="page"{% endif %}>Get Involved</a></li>
-    <li><a href="{{ srfsc_root }}report/" {% if include.active == "report" %}aria-current="page"{% endif %}>Report a Hazard</a></li>
-    <li><a href="{{ srfsc_root }}prepare/" {% if include.active == "prepare" %}aria-current="page"{% endif %}>Prepare</a></li>
-    <li><a href="{{ srfsc_root }}community/" {% if include.active == "community" %}aria-current="page"{% endif %}>Community</a></li>
-    <li><a href="{{ srfsc_root }}about/" {% if include.active == "about" %}aria-current="page"{% endif %}>About</a></li>
-    <li><a href="{{ srfsc_root }}login/" {% if include.active == "login" %}aria-current="page"{% endif %}>Login</a></li>
-    <li><a href="{{ srfsc_root }}profile/" {% if include.active == "profile" %}aria-current="page"{% endif %}>My Profile</a></li>
-  </ul>
-  <a class="ocs__btn alert-green fill small srfsc-nav__cta" href="{{ srfsc_root }}get-involved/#donate">Donate</a>
+  <button class="srfsc-nav__toggle" type="button" aria-expanded="false" aria-controls="srfsc-nav-menu" hidden>
+    <span class="srfsc-nav__toggle-bars" aria-hidden="true"></span>Menu
+  </button>
+  <div class="srfsc-nav__menu" id="srfsc-nav-menu">
+    <ul class="srfsc-nav__links">
+      <li><a href="{{ srfsc_root }}events/" {% if include.active == "events" %}aria-current="page"{% endif %}>Events</a></li>
+      <li><a href="{{ srfsc_root }}prepare/" {% if include.active == "prepare" %}aria-current="page"{% endif %}>Prepare</a></li>
+      <li><a href="{{ srfsc_root }}get-involved/" {% if include.active == "involved" %}aria-current="page"{% endif %}>Get Involved</a></li>
+      <li><a href="{{ srfsc_root }}report/" {% if include.active == "report" %}aria-current="page"{% endif %}>Report a Hazard</a></li>
+      <li><a href="{{ srfsc_root }}request/" {% if include.active == "request" %}aria-current="page"{% endif %}>Request Help</a></li>
+      <li><a href="{{ srfsc_root }}about/" {% if include.active == "about" %}aria-current="page"{% endif %}>About</a></li>
+    </ul>
+    <div class="srfsc-nav__actions">
+      <a class="srfsc-nav__account" id="srfsc-nav-account" href="{{ srfsc_root }}login/" data-profile-url="{{ srfsc_root }}profile/" {% if srfsc_account_pages contains include.active %}aria-current="page"{% endif %}>Sign in</a>
+      <a class="ocs__btn alert-ember fill small srfsc-nav__cta" href="{{ srfsc_root }}get-involved/#donate">Donate</a>
+    </div>
+  </div>
 </nav>
+<script type="module" src="{{ site.baseurl }}/assets/js/projects/srfsc/srfscNav.js"></script>

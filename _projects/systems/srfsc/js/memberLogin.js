@@ -21,7 +21,7 @@ async function connect() {
     }
     serviceReady = true;
     submit.disabled = false;
-    showStatus(status, 'Login is connected. Enter your user ID and password.', 'success');
+    showStatus(status, 'Connected. Enter your username and password.', 'success');
     try {
       await loadMemberProfile();
       document.querySelector('#srfsc-login-continue').hidden = false;
@@ -45,8 +45,9 @@ form.addEventListener('submit', async (event) => {
   try {
     await loginMember({ uid: fields.get('uid').trim(), password: fields.get('password') });
     // Confirm the browser kept the authentication cookie before opening the profile.
-    await loadMemberProfile();
-    window.location.assign(form.dataset.profileUrl);
+    const profile = await loadMemberProfile();
+    // Council admins land on the request review page; everyone else on their profile.
+    window.location.assign(profile.account_role === 'Admin' ? form.dataset.councilUrl : form.dataset.profileUrl);
   } catch (error) {
     showStatus(status, error.message, 'error');
     if (error.status === 0 || error.status >= 500) {

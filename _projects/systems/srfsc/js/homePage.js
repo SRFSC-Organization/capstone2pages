@@ -19,7 +19,7 @@ function renderNextEvent(nextEvent, siteRoot) {
   }
   const label = `${nextEvent.title} · ${formatDate(nextEvent.event_date)}`;
   status.textContent = `Next: ${label}`;
-  cta.textContent = `Join ${label}`;
+  cta.textContent = `Next event: ${label} →`;
   cta.href = `${siteRoot}events/#srfsc-event-${nextEvent.id}`;
 }
 
@@ -39,7 +39,7 @@ function buildEventPreview(event, siteRoot) {
   link.append(
     createElement('span', 'srfsc-mini-list__date', formatDate(event.event_date)),
     createElement('span', 'srfsc-mini-list__title', event.title),
-    createElement('span', 'srfsc-mini-list__meta', `${event.event_type} · ${event.rsvp_count} going`),
+    createElement('span', 'srfsc-mini-list__meta', event.rsvp_count ? `${event.event_type} · ${event.rsvp_count} going` : event.event_type),
   );
   item.append(link);
   return item;
