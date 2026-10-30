@@ -9,11 +9,10 @@
 // Root-level chrome shared by every SRFSC page (lives OUTSIDE .srfsc-app so position:fixed stays viewport-anchored).
 @import "opencs-drawer";
 
-// Wildfire photo behind every SRFSC page. :has() limits it to pages that contain the app.
+// Calm solid background on every SRFSC page; photos stay in the banners and hub cards.
+// :has() limits it to pages that contain the app.
 body:has(.srfsc-app) {
-  background:
-    linear-gradient(180deg, rgba($srfsc-bg, 0.62) 0%, rgba($srfsc-bg, 0.9) 70%),
-    srfsc-photo("home") center top / cover fixed no-repeat;
+  background: linear-gradient(180deg, darken($srfsc-forest-deep, 4%) 0%, $srfsc-bg 420px);
   background-color: $srfsc-bg;
 
   // The council navigation serves as the header on SRFSC pages.
@@ -26,8 +25,8 @@ body:has(.srfsc-app) {
   margin: 0 auto 2rem;
   color: $srfsc-text;
   font-family: $srfsc-font-sans;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.7;
 
   // Keep the same width (and one-row nav) on pages that also carry the OCS container class.
   &.ocs__container { max-width: 1200px; }

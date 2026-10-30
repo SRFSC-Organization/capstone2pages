@@ -6,10 +6,13 @@ $srfsc-slate: #49615b;
 $srfsc-amber: #f0b342;
 $srfsc-red: #c0392b;
 $srfsc-bg: #0f1a16;
-$srfsc-card: rgba(18, 31, 26, 0.88);
-$srfsc-border: rgba(120, 160, 140, 0.25);
-$srfsc-text: #eef3ef;
-$srfsc-muted: #b7c6bf;
+// Eye comfort: solid surfaces, softened white text, and a muted gold for links and accents
+// (the brighter amber stays for meters and weather levels).
+$srfsc-card: #15231d;
+$srfsc-border: rgba(120, 160, 140, 0.22);
+$srfsc-text: #e3eae6;
+$srfsc-muted: #b3c2bb;
+$srfsc-gold: #e6c27a;
 $srfsc-radius: 14px;
 
 // Readable sans for body copy; the site-wide code font stays as a small accent (eyebrows, labels).
@@ -50,7 +53,6 @@ $srfsc-weather-levels: (
   background: $srfsc-card;
   border: 1px solid $srfsc-border;
   border-radius: $srfsc-radius;
-  backdrop-filter: blur(6px);
 }
 
 // Dark gradient over a photo so white text stays readable on any image.

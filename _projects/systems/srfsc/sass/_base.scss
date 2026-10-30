@@ -10,8 +10,10 @@ h1, h2, h3, h4 {
 // Another project's CSS ships a global `h1 { display: none }` and a green glow; undo both in the app.
 h1 { display: block; text-shadow: none; font-size: 1.6rem; }
 p, li, dd, label, input, select, textarea, button { font-family: $srfsc-font-sans; }
-a { color: $srfsc-amber; text-underline-offset: 0.18em; }
-a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-amber; outline-offset: 3px; }
+a { color: $srfsc-gold; text-underline-offset: 0.18em; }
+// Links inside sentences are underlined so they don't rely on color alone.
+p a:not([class]), li a:not([class]), dd a:not([class]) { text-decoration: underline; text-decoration-thickness: 1px; }
+a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-offset: 3px; }
 
 // Buttons: solid fills with white text instead of the site-wide tinted style, so every
 // variant passes contrast. Markup keeps the shared OCS classes (ocs__btn alert-* fill).
@@ -49,7 +51,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-amber; outline
   }
   &.alert-yellow.fill {
     background: $srfsc-amber;
-    border-color: $srfsc-amber;
+    border-color: $srfsc-gold;
     color: $srfsc-bg;
     &:hover, &:focus-visible { background: lighten($srfsc-amber, 8%); color: $srfsc-bg; }
   }
@@ -57,6 +59,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-amber; outline
 // Mono accent: small uppercase labels keep the OpenCS code-font character.
 .srfsc-eyebrow-font { font-family: $srfsc-font-mono; letter-spacing: 0.08em; text-transform: uppercase; }
 [hidden] { display: none !important; }
+
+// Respect the system "reduce motion" setting.
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
 
 .srfsc-panel {
   @include srfsc-card;
@@ -71,9 +78,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-amber; outline
   margin-bottom: 0.8rem;
 }
 .srfsc-panel__title { font-size: 1.2rem; margin: 0 0 0.6rem; }
+// The shared OCS section title is uppercase and spaced out; council headings use sentence case.
+.srfsc-panel__title.ocs__section-title { text-transform: none; letter-spacing: -0.01em; }
 .srfsc-panel__header .srfsc-panel__title { margin: 0; }
-.srfsc-panel__subtitle { font-size: 1rem; margin: 1.1rem 0 0.4rem; color: $srfsc-amber; }
-.srfsc-panel__meta { color: $srfsc-muted; font-size: 0.8rem; }
+.srfsc-panel__subtitle { font-size: 1rem; margin: 1.1rem 0 0.4rem; color: $srfsc-gold; }
+.srfsc-panel__meta { color: $srfsc-muted; font-size: 0.85rem; }
 .srfsc-panel__more { font-size: 0.85rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
 .srfsc-panel__note { color: $srfsc-muted; font-size: 0.85rem; margin: 0.8rem 0 0; }
 .srfsc-empty { color: $srfsc-muted; font-style: italic; margin: 0; list-style: none; }
@@ -109,8 +118,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-amber; outline
   display: flex;
   flex-direction: column;
 }
-.srfsc-kpi__value { font-family: $srfsc-font-sans; font-size: 1.7rem; font-weight: 800; color: $srfsc-amber; letter-spacing: -0.02em; }
-.srfsc-kpi__label { color: $srfsc-muted; font-family: $srfsc-font-mono; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.srfsc-kpi__value { font-family: $srfsc-font-sans; font-size: 1.7rem; font-weight: 800; color: $srfsc-gold; letter-spacing: -0.02em; }
+.srfsc-kpi__label { color: $srfsc-muted; font-size: 0.85rem; font-weight: 500; }
 .srfsc-kpi--live {
   border-color: rgba($srfsc-forest, 0.9);
   .srfsc-kpi__value { color: lighten($srfsc-forest, 25%); }

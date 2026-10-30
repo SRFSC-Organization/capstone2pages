@@ -12,7 +12,7 @@
   border-left: 4px solid $srfsc-ember;
   scroll-margin-top: 90px;
 
-  &:target { outline: 2px solid $srfsc-amber; }
+  &:target { outline: 2px solid $srfsc-gold; }
 }
 .srfsc-event__date {
   display: flex;
@@ -24,15 +24,15 @@
   padding: 0.4rem 0;
   line-height: 1.1;
 }
-.srfsc-event__month { color: $srfsc-amber; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
+.srfsc-event__month { color: $srfsc-gold; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
 .srfsc-event__day { font-size: 1.5rem; font-weight: 800; }
-.srfsc-event__weekday { color: $srfsc-muted; font-size: 0.7rem; }
+.srfsc-event__weekday { color: $srfsc-muted; font-size: 0.8rem; }
 .srfsc-event__type {
   display: inline-block;
   padding: 0.05rem 0.55rem;
   border-radius: 999px;
   background: rgba($srfsc-forest, 0.45);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
 }
 .srfsc-event__title { margin: 0.3rem 0 0.1rem; font-size: 1rem; }
 .srfsc-event__location { color: $srfsc-muted; margin: 0; font-size: 0.85rem; }
@@ -42,7 +42,7 @@
 
 .srfsc-facts {
   margin: 0;
-  dt { color: $srfsc-amber; font-weight: 700; margin-top: 0.7rem; }
+  dt { color: $srfsc-gold; font-weight: 700; margin-top: 0.7rem; }
   dd { margin: 0.15rem 0 0; font-size: 0.9rem; color: $srfsc-muted; }
 }
 
@@ -78,10 +78,14 @@
   padding: 1.2rem;
   border-top: 5px solid $srfsc-red;
   &--1 { border-top-color: $srfsc-ember; }
-  &--2 { border-top-color: $srfsc-amber; }
+  &--2 { border-top-color: $srfsc-gold; }
+  // The shared OCS grid-cell class adds its own gray fill and border; keep the council card look.
+  &.ocs__grid-cell { background: $srfsc-card; border: 1px solid $srfsc-border; border-top: 5px solid $srfsc-red; }
+  &--1.ocs__grid-cell { border-top-color: $srfsc-ember; }
+  &--2.ocs__grid-cell { border-top-color: $srfsc-gold; }
   p { color: $srfsc-muted; margin: 0; font-size: 0.9rem; }
 }
-.srfsc-zone-card__range { font-size: 1.6rem; font-weight: 800; color: $srfsc-amber; }
+.srfsc-zone-card__range { font-size: 1.6rem; font-weight: 800; color: $srfsc-gold; }
 .srfsc-zone-card__title { font-size: 1.05rem; margin: 0.2rem 0 0.4rem; }
 
 // Readiness checklist
@@ -98,7 +102,7 @@
 .srfsc-meter__label { margin: 0.35rem 0 0; color: $srfsc-muted; font-size: 0.9rem; }
 .srfsc-checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
 .srfsc-zone { margin: 0; padding: 0.8rem 1rem; border: 1px solid $srfsc-border; border-radius: 10px; }
-.srfsc-zone__title { color: $srfsc-amber; font-weight: 700; font-size: 0.9rem; padding: 0 0.3rem; }
+.srfsc-zone__title { color: $srfsc-gold; font-weight: 700; font-size: 0.9rem; padding: 0 0.3rem; }
 .srfsc-zone__item {
   display: flex;
   gap: 0.5rem;
@@ -138,16 +142,15 @@
   font: inherit;
   font-size: 0.8rem;
   cursor: pointer;
-  &[aria-pressed="true"] { border-color: $srfsc-amber; color: $srfsc-amber; }
+  &[aria-pressed="true"] { border-color: $srfsc-gold; color: $srfsc-gold; }
 }
 .srfsc-feed { display: flex; flex-direction: column; gap: 0.7rem; }
 .srfsc-feed__item { padding-bottom: 0.7rem; border-bottom: 1px solid $srfsc-border; &:last-child { border-bottom: none; } }
 .srfsc-feed__tag {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
   font-weight: 700;
-  color: $srfsc-amber;
+  color: $srfsc-gold;
   &--impact-story { color: lighten($srfsc-forest, 25%); }
   &--partner { color: lighten($srfsc-slate, 30%); }
 }
@@ -191,5 +194,5 @@
   padding: 0.75rem 1rem;
   border-radius: 10px;
   border: 1px solid $srfsc-red;
-  background: rgba($srfsc-red, 0.2);
+  background: mix($srfsc-red, $srfsc-card, 18%);
 }

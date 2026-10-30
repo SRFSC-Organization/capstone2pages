@@ -21,7 +21,7 @@
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     &::placeholder { color: rgba($srfsc-muted, 0.7); }
     &:hover { border-color: rgba($srfsc-text, 0.4); }
-    &:focus { outline: none; border-color: $srfsc-amber; box-shadow: 0 0 0 3px rgba($srfsc-amber, 0.25); }
+    &:focus { outline: none; border-color: $srfsc-gold; box-shadow: 0 0 0 3px rgba($srfsc-gold, 0.25); }
     // Only flag a field after the visitor has interacted with it.
     &:user-invalid { border-color: lighten($srfsc-ember, 8%); box-shadow: 0 0 0 3px rgba($srfsc-ember, 0.2); }
   }

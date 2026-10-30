@@ -12,11 +12,10 @@
   @media (max-width: 820px) { grid-template-columns: 1fr; padding: 1.75rem 1.25rem 1.25rem; }
 }
 .srfsc-hero__eyebrow {
-  color: $srfsc-amber;
-  font-family: $srfsc-font-mono;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: $srfsc-gold;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   margin: 0 0 0.5rem;
 }
 .srfsc-hero__title {
@@ -31,7 +30,7 @@
 .srfsc-btn--large { min-height: 50px; padding: 0.75rem 1.4rem; font-size: 1.02rem; }
 .srfsc-actions__link {
   flex-basis: 100%;
-  color: $srfsc-amber;
+  color: $srfsc-gold;
   font-weight: 600;
   font-size: 0.95rem;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
@@ -42,7 +41,6 @@
   padding: 1.2rem;
   background: rgba($srfsc-bg, 0.82);
   border: 2px solid $srfsc-slate;
-  backdrop-filter: blur(4px);
   align-self: start;
 
   @each $level, $tone in $srfsc-weather-levels {
@@ -59,7 +57,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
   margin: 0 0 0.6rem;
-  dt { color: $srfsc-muted; font-size: 0.75rem; }
+  dt { color: $srfsc-muted; font-size: 0.82rem; }
   dd { margin: 0; font-weight: 700; white-space: nowrap; }
 }
 .srfsc-weather__message { margin: 0 0 0.5rem; font-size: 0.9rem; }
@@ -72,7 +70,7 @@
   background: rgba($srfsc-red, 0.35);
   font-size: 0.8rem;
 }
-.srfsc-weather__source { margin: 0; color: $srfsc-muted; font-size: 0.72rem; }
+.srfsc-weather__source { margin: 0; color: $srfsc-muted; font-size: 0.8rem; }
 
 // Hub cards: one per page, photo background with live status line
 .srfsc-hub {
@@ -101,17 +99,17 @@
   @each $name, $file in $srfsc-photos {
     &--#{$name} { @include srfsc-photo-overlay($name, 0.6); }
   }
-  &:hover, &:focus-visible { transform: translateY(-3px); border-color: $srfsc-amber; }
+  &:hover, &:focus-visible { transform: translateY(-3px); border-color: $srfsc-gold; }
 }
 .srfsc-hub__title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); }
-.srfsc-hub__text { font-size: 0.9rem; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9); }
+.srfsc-hub__text { font-size: 0.95rem; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9); }
 .srfsc-hub__status {
   align-self: flex-start;
   margin-top: 0.3rem;
   padding: 0.2rem 0.7rem;
   border-radius: 999px;
   background: rgba($srfsc-bg, 0.85);
-  color: $srfsc-amber;
+  color: $srfsc-gold;
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -126,8 +124,8 @@
   padding: 0.6rem 0;
   color: $srfsc-text;
   text-decoration: none;
-  &:hover .srfsc-mini-list__title { color: $srfsc-amber; }
+  &:hover .srfsc-mini-list__title { color: $srfsc-gold; }
 }
-.srfsc-mini-list__date { grid-row: span 2; color: $srfsc-amber; font-family: $srfsc-font-mono; font-size: 0.78rem; font-weight: 700; }
+.srfsc-mini-list__date { grid-row: span 2; color: $srfsc-gold; font-size: 0.85rem; font-weight: 700; }
 .srfsc-mini-list__title { font-weight: 600; }
 .srfsc-mini-list__meta { color: $srfsc-muted; font-size: 0.8rem; }
