@@ -21,7 +21,7 @@ owner_name: Open Coding Society
 github_username: open-coding-society 
 github_repo: "pages"
 baseurl: ""
-srfsc_account_api_url: "" # HTTPS origin serving SRFSC-Backend; configure before enabling deployed member login.
+srfsc_account_api_url: "https://srfsc-backend.onrender.com" # HTTPS origin serving SRFSC-Backend; configure before enabling deployed member login.
 future: true
 
 # Single source of truth for the Google OAuth client id -- assets/js/api/config.js's
