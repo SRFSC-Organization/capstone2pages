@@ -52,6 +52,7 @@
 .srfsc-auth { padding: 1.75rem; }
 .srfsc-auth .srfsc-form .srfsc-auth__submit { align-self: stretch; }
 .srfsc-auth .srfsc-form__status:not(:empty) { margin-top: 1rem; }
+.srfsc-auth__switch { margin: 1.25rem 0 0; color: $srfsc-muted; a { font-weight: 600; } }
 #srfsc-login-continue { margin-top: 1rem; }
 .srfsc-perks {
   list-style: none;

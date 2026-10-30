@@ -48,6 +48,16 @@ Council members with the `Admin` role review requests on
 status and set each request to New, In review, or Resolved with a note. Admins
 are sent there after signing in, and their profile shows a link to it. Create
 an admin with `create_srfsc_member.py --role Admin` in `SRFSC-Backend`.
+When the request table is empty, the backend adds one demo request (from
+"Demo Neighbor") at startup so the review page has something to show.
+
+## Member signup
+
+`navigation/signup.md` (`/capstone/srfsc/app/signup/`) lets neighbors create
+their own account with `POST /api/srfsc/signup`, then signs them in and opens
+their profile. Signup always makes a regular member; council admins are still
+created by an operator. The nav shows "Sign up" next to "Sign in" until the
+visitor is signed in.
 
 ## Verify the deployment
 

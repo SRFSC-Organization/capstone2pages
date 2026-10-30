@@ -1,7 +1,7 @@
 // ============================================
 // srfscNav.js
 // RESPONSIBILITY: Phone menu toggle for the SRFSC nav, and showing "My profile" instead of
-// "Sign in" when the visitor already has a session. Without JavaScript the full menu stays visible.
+// "Sign in" (and hiding "Sign up") when the visitor already has a session. Without JavaScript the full menu stays visible.
 // ============================================
 import { loadMemberProfile } from './memberApi.js';
 
@@ -30,5 +30,7 @@ if (account) {
   loadMemberProfile().then(() => {
     account.textContent = 'My profile';
     account.href = account.dataset.profileUrl;
+    const signup = document.querySelector('#srfsc-nav-signup');
+    if (signup) signup.hidden = true;
   }).catch(() => {});
 }

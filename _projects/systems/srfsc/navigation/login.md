@@ -24,7 +24,8 @@ hide: true
       <p id="srfsc-login-status" class="srfsc-form__status" role="status" aria-live="polite"></p>
       <button id="srfsc-login-retry" class="ocs__btn" type="button" hidden>Connect again</button>
       <a id="srfsc-login-continue" class="ocs__btn" href="{{ site.baseurl }}/capstone/srfsc/app/profile/" hidden>You're already signed in. Continue to your profile</a>
-      <p class="srfsc-panel__note">Accounts are set up by the council. Need one, or forgot your password? <a href="mailto:srfiresafecouncil@gmail.com">Email the council</a>.</p>
+      <p class="srfsc-auth__switch">New here? <a href="{{ site.baseurl }}/capstone/srfsc/app/signup/">Create an account</a></p>
+      <p class="srfsc-panel__note">Forgot your password? <a href="mailto:srfiresafecouncil@gmail.com">Email the council</a>.</p>
     </section>
     <aside class="srfsc-panel srfsc-auth__aside" aria-label="Why sign in">
       <h2 class="srfsc-panel__title">With an account you can</h2>

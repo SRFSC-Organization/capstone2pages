@@ -40,6 +40,7 @@ export async function memberRequest(path, { method = 'GET', body, expectJson = t
   return data;
 }
 
+export const signupMember = (account) => memberRequest('/api/srfsc/signup', { method: 'POST', body: account });
 export const loginMember = (credentials) => memberRequest('/api/login', { method: 'POST', body: credentials });
 export const logoutMember = () => memberRequest('/api/login', { method: 'DELETE', expectJson: false });
 export const loadMemberProfile = () => memberRequest('/api/srfsc/profile');

@@ -29,6 +29,7 @@
 }
 .srfsc-field { display: flex; flex-direction: column; gap: 0.4rem; }
 .srfsc-field__optional { color: $srfsc-muted; font-weight: 400; }
+.srfsc-field__hint { color: $srfsc-muted; font-size: 0.85rem; font-weight: 400; }
 .srfsc-form .ocs__btn[type="submit"] { align-self: flex-start; min-width: 12rem; }
 .srfsc-rsvp {
   display: grid;

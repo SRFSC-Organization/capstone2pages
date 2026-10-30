@@ -1,4 +1,4 @@
-<!-- SRFSC site navigation. Pass active="home|events|involved|report|request|prepare|community|about|login|profile|council" to highlight a link. -->
+<!-- SRFSC site navigation. Pass active="home|events|involved|report|request|prepare|community|about|login|signup|profile|council" to highlight a link. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
@@ -23,6 +23,7 @@
     </ul>
     <div class="srfsc-nav__actions">
       <a class="srfsc-nav__account" id="srfsc-nav-account" href="{{ srfsc_root }}login/" data-profile-url="{{ srfsc_root }}profile/" {% if srfsc_account_pages contains include.active %}aria-current="page"{% endif %}>Sign in</a>
+      <a class="srfsc-nav__account" id="srfsc-nav-signup" href="{{ srfsc_root }}signup/" {% if include.active == "signup" %}aria-current="page"{% endif %}>Sign up</a>
       <a class="ocs__btn alert-ember fill small srfsc-nav__cta" href="{{ srfsc_root }}get-involved/#donate">Donate</a>
     </div>
   </div>
