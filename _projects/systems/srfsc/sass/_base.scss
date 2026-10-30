@@ -3,7 +3,7 @@ h1, h2, h3, h4 {
   color: $srfsc-text;
   margin: 0 0 0.4rem;
   font-family: $srfsc-font-sans;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
@@ -32,7 +32,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-
   color: $srfsc-text;
   font-family: $srfsc-font-sans;
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
@@ -59,7 +59,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-
   }
 }
 // Mono accent: small uppercase labels keep the OpenCS code-font character.
-.srfsc-eyebrow-font { font-family: $srfsc-font-mono; letter-spacing: 0.08em; text-transform: uppercase; }
+.srfsc-eyebrow-font { font-weight: 500; }
 [hidden] { display: none !important; }
 
 // Respect the system "reduce motion" setting.
@@ -121,7 +121,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-
   display: flex;
   flex-direction: column;
 }
-.srfsc-kpi__value { font-family: $srfsc-font-sans; font-size: 1.7rem; font-weight: 800; color: $srfsc-gold; letter-spacing: -0.02em; }
+.srfsc-kpi__value { font-family: $srfsc-font-sans; font-size: 1.7rem; font-weight: 600; color: $srfsc-gold; letter-spacing: -0.01em; }
 .srfsc-kpi__label { color: $srfsc-muted; font-size: 0.85rem; font-weight: 500; }
 .srfsc-kpi--live {
   .srfsc-kpi__value { color: lighten($srfsc-forest, 25%); }
