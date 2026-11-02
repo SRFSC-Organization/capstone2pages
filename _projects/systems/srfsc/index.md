@@ -17,10 +17,7 @@ author: Krish Kelageri, Jasan Boprai, Shourya Patel
     <div class="srfsc-hero__message">
       <p class="srfsc-hero__eyebrow">Scripps Ranch · San Diego · All-volunteer since 2004</p>
       <h1 class="srfsc-hero__title">A prepared neighborhood is the best defense against wildfire.</h1>
-      <p class="srfsc-hero__lead">
-        We clear hazardous vegetation, maintain firebreaks along canyon edges, and help neighbors prepare before the next fire arrives.
-        That gives residents more time to act, supports first responders, and strengthens the whole community.
-      </p>
+      <p class="srfsc-hero__lead">We clear brush, keep canyon firebreaks open, and help neighbors prepare before the next fire.</p>
       <div class="srfsc-actions" id="actions">
         <a class="ocs__btn alert-ember fill srfsc-btn--large" href="{{ srfsc_root }}report/">Report a hazard</a>
         <a class="ocs__btn srfsc-btn--large" href="{{ srfsc_root }}get-involved/">Volunteer with us</a>
@@ -87,22 +84,13 @@ author: Krish Kelageri, Jasan Boprai, Shourya Patel
     </a>
   </section>
 
-  <div class="srfsc-columns">
-    <section class="srfsc-panel">
-      <header class="srfsc-panel__header">
-        <h2 class="srfsc-panel__title">Coming up</h2>
-        <a class="srfsc-panel__more" href="{{ srfsc_root }}events/">All events →</a>
-      </header>
-      <ul class="srfsc-mini-list" id="srfsc-home-events"><li class="srfsc-empty">Loading events…</li></ul>
-    </section>
-    <section class="srfsc-panel">
-      <header class="srfsc-panel__header">
-        <h2 class="srfsc-panel__title">Latest from the community</h2>
-        <a class="srfsc-panel__more" href="{{ srfsc_root }}community/">All updates →</a>
-      </header>
-      <ul class="srfsc-mini-list" id="srfsc-home-updates"><li class="srfsc-empty">Loading updates…</li></ul>
-    </section>
-  </div>
+  <section class="srfsc-panel srfsc-home-events">
+    <header class="srfsc-panel__header">
+      <h2 class="srfsc-panel__title">Coming up</h2>
+      <a class="srfsc-panel__more" href="{{ srfsc_root }}events/">All events →</a>
+    </header>
+    <ul class="srfsc-mini-list" id="srfsc-home-events"><li class="srfsc-empty">Loading events…</li></ul>
+  </section>
 
   {% include projects/srfsc/srfsc-footer.html %}
 </div>

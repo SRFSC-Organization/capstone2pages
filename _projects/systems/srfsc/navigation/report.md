@@ -27,7 +27,7 @@ hide: true
         </label>
         <label class="srfsc-field">Location<input name="location" required maxlength="255" placeholder="e.g. canyon behind Aviary Dr"></label>
         <label class="srfsc-field">What did you see?<textarea name="description" rows="5" required maxlength="2000"></textarea></label>
-        <label class="srfsc-field">Your email (optional, for follow-up)<input name="reporter_email" type="email" autocomplete="email"></label>
+        <label class="srfsc-field"><span>Your email <span class="srfsc-field__optional">(optional, for follow-up)</span></span><input name="reporter_email" type="email" autocomplete="email"></label>
         <button class="ocs__btn alert-red fill" type="submit">Send report</button>
         <p class="srfsc-form__status" aria-live="polite"></p>
       </form>

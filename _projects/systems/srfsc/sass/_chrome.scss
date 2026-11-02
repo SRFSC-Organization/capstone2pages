@@ -139,10 +139,10 @@
 // Sub-page photo banner; the photo comes from the modifier class.
 .srfsc-banner {
   border-radius: $srfsc-radius;
-  min-height: 260px;
+  min-height: 200px;
   display: flex;
   align-items: flex-end;
-  padding: 2rem;
+  padding: 1.75rem 2rem;
   margin-bottom: 1rem;
 
   @each $name, $file in $srfsc-photos {
@@ -151,20 +151,15 @@
   @media (max-width: 600px) { padding: 1.25rem; min-height: 200px; }
 }
 .srfsc-banner__content { max-width: 62ch; }
-.srfsc-banner__eyebrow {
-  margin: 0 0 0.4rem;
-  color: $srfsc-gold;
-  font-size: 0.92rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
+// Sub-page banners show just a title and one line; the small kicker above the title is hidden.
+.srfsc-banner__eyebrow { display: none; }
 .srfsc-banner__title { font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.1; letter-spacing: -0.02em; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); }
 .srfsc-banner__lead { margin: 0.6rem 0 0; color: $srfsc-text; font-size: 1.05rem; max-width: 56ch; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7); }
 
 .srfsc-footer {
   display: grid;
   border-top: 1px solid $srfsc-border;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: 1rem;
   padding: 1.5rem 0.25rem 0;
   margin-top: 2.5rem;
@@ -175,6 +170,7 @@
   strong { color: $srfsc-text; }
   @media (max-width: 700px) { grid-template-columns: 1fr; }
 }
+.srfsc-footer__links { display: flex; flex-direction: column; gap: 0.35rem; a { text-decoration: none; } }
 .srfsc-footer__emergency { color: lighten($srfsc-ember, 12%); font-weight: 600; }
 .srfsc-footer__credits {
   grid-column: 1 / -1;

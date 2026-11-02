@@ -12,23 +12,32 @@ export class MemberApiError extends Error {
   }
 }
 
-export async function memberRequest(path, { method = 'GET', body, expectJson = true } = {}) {
+// `body` is sent as JSON, or as-is when it is FormData (photo uploads). `expectBlob` returns the raw file.
+export async function memberRequest(path, { method = 'GET', body, expectJson = true, expectBlob = false } = {}) {
   if (!srfscAccountURI) {
     throw new MemberApiError(
       `Member sign-in and online requests are not available on this site yet. Please ${COUNCIL_CONTACT}.`, 0, true);
   }
   let response;
   try {
+    const isForm = body instanceof FormData;
+    // FormData sets its own multipart Content-Type (with the boundary), so drop the JSON one.
+    const { 'Content-Type': _json, ...formHeaders } = fetchOptions.headers;
     response = await fetch(`${srfscAccountURI}${path}`, {
       ...fetchOptions, method,
-      body: body === undefined ? undefined : JSON.stringify(body),
+      headers: isForm ? formHeaders : fetchOptions.headers,
+      body: body === undefined || isForm ? body : JSON.stringify(body),
     });
   } catch {
     throw new MemberApiError(`Cannot connect to the council's account service. Please try again, or ${COUNCIL_CONTACT}.`, 0, true);
   }
+  if (response.ok && expectBlob) return response.blob();
   if (response.ok && !expectJson) return {};
   const data = await response.json().catch(() => null);
   if (!response.ok) {
+    if (response.status === 413) {
+      throw new MemberApiError('Those photos are too large to send. Please choose fewer or smaller photos.', 413);
+    }
     if (response.status === 404 && !data?.message) {
       throw new MemberApiError(`Member accounts are not available on this server yet. Please ${COUNCIL_CONTACT}.`, 404, true);
     }
@@ -59,6 +68,9 @@ export async function checkLoginService() {
 // Council request survey: anyone can submit; only council Admin accounts can review.
 export const loadRequestOptions = () => memberRequest('/api/srfsc/requests/options');
 export const submitCouncilRequest = (survey) => memberRequest('/api/srfsc/requests', { method: 'POST', body: survey });
+export const loadCouncilRequest = (id) => memberRequest(`/api/srfsc/requests/${encodeURIComponent(id)}`);
+export const loadRequestPhoto = (id, photoId) =>
+  memberRequest(`/api/srfsc/requests/${encodeURIComponent(id)}/photos/${encodeURIComponent(photoId)}`, { expectBlob: true });
 export const loadCouncilRequests = (status = '') =>
   memberRequest(`/api/srfsc/requests${status ? `?status=${encodeURIComponent(status)}` : ''}`);
 export const reviewCouncilRequest = (id, review) =>

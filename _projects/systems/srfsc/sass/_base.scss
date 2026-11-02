@@ -87,6 +87,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-
 .srfsc-panel__meta { color: $srfsc-muted; font-size: 0.85rem; }
 .srfsc-panel__more { font-size: 0.85rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
 .srfsc-panel__note { color: $srfsc-muted; font-size: 0.85rem; margin: 0.8rem 0 0; }
+.srfsc-panel__note.srfsc-panel__intro { margin: 0 0 1rem; font-size: 0.95rem; }
 .srfsc-empty { color: $srfsc-muted; font-style: italic; margin: 0; list-style: none; }
 
 .srfsc-columns {

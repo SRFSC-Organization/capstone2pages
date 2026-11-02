@@ -28,8 +28,17 @@ hide: true
         </label>
         <label class="srfsc-field">Your name<input name="name" required minlength="2" maxlength="100" autocomplete="name"></label>
         <label class="srfsc-field">Email (so the council can reply)<input name="email" type="email" required autocomplete="email"></label>
-        <label class="srfsc-field">Neighborhood or street <span class="srfsc-field__optional">(optional)</span><input name="neighborhood" maxlength="100" placeholder="e.g. Ironwood Rd"></label>
+        <label class="srfsc-field"><span>Neighborhood or street <span class="srfsc-field__optional">(optional)</span></span><input name="neighborhood" maxlength="100" placeholder="e.g. Ironwood Rd"></label>
         <label class="srfsc-field">Tell us more<textarea name="message" rows="5" required minlength="10" maxlength="2000"></textarea></label>
+        <div class="srfsc-field">
+          <span>Photos <span class="srfsc-field__optional">(optional, up to 3)</span></span>
+          <label class="srfsc-photo-picker" for="srfsc-request-photos">
+            <input id="srfsc-request-photos" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-describedby="srfsc-request-photos-hint">
+            <span class="ocs__btn small">Add photos</span>
+            <span id="srfsc-request-photos-hint" class="srfsc-field__hint">A picture of the brush, tree, or area helps the council plan.</span>
+          </label>
+          <ul class="srfsc-photo-previews" id="srfsc-request-previews" aria-label="Photos to send"></ul>
+        </div>
         <button class="ocs__btn alert-green fill" type="submit">Send request</button>
         <p class="srfsc-form__status" aria-live="polite"></p>
       </form>
@@ -49,19 +58,4 @@ hide: true
   {% include projects/srfsc/srfsc-footer.html %}
 </div>
 
-<script type="module">
-  import { bindForm, showStatus } from '{{site.baseurl}}/assets/js/projects/srfsc/srfscDom.js';
-  import { loadRequestOptions, submitCouncilRequest } from '{{site.baseurl}}/assets/js/projects/srfsc/memberApi.js';
-
-  const form = document.getElementById('srfsc-request-form');
-  bindForm(form, {
-    submitFn: submitCouncilRequest,
-    successMessage: (result) => result.message,
-  });
-  // Check the request service before anyone types a long message it can't receive.
-  loadRequestOptions().catch((error) => {
-    if (!error.offline) return;
-    showStatus(form.querySelector('.srfsc-form__status'), error.message, 'error');
-    [...form.elements].forEach((field) => { field.disabled = true; });
-  });
-</script>
+<script type="module" src="{{ site.baseurl }}/assets/js/projects/srfsc/requestForm.js"></script>

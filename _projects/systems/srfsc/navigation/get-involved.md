@@ -30,14 +30,10 @@ hide: true
     </article>
   </section>
 
-  <section class="srfsc-panel" aria-labelledby="quick-start-title">
-    <h2 id="quick-start-title" class="srfsc-panel__title">Not sure where to start?</h2>
-    <p>Start with a quick volunteer sign-up and we’ll match you with the best next step—whether that’s a workday, a block meeting, or a community outreach event.</p>
-  </section>
-
   <div class="srfsc-columns">
     <section class="srfsc-panel" id="volunteer">
       <h2 class="srfsc-panel__title">Volunteer sign-up</h2>
+      <p class="srfsc-panel__note srfsc-panel__intro">Not sure where to start? Sign up and we’ll match you with a workday, block meeting, or outreach event.</p>
         <form class="srfsc-form" id="srfsc-volunteer-form" novalidate>
           <label class="srfsc-field">Name
             <input name="name" required maxlength="128" autocomplete="name" aria-label="Full name" placeholder="Full name">
@@ -45,7 +41,7 @@ hide: true
           <label class="srfsc-field">Email
             <input name="email" type="email" required autocomplete="email" aria-label="Email address" placeholder="you@example.org">
           </label>
-          <label class="srfsc-field">Phone (optional)
+          <label class="srfsc-field"><span>Phone <span class="srfsc-field__optional">(optional)</span></span>
             <input name="phone" type="tel" maxlength="32" autocomplete="tel" aria-label="Phone number" placeholder="(555) 555-5555">
           </label>
           <label class="srfsc-field">I'd like to help with
@@ -57,10 +53,10 @@ hide: true
               <option value="outreach">Events &amp; Outreach</option>
             </select>
           </label>
-          <label class="srfsc-field">Street (optional)
+          <label class="srfsc-field"><span>Street <span class="srfsc-field__optional">(optional)</span></span>
             <input name="street" maxlength="255" autocomplete="address-line1" aria-label="Street address" placeholder="123 Main St">
           </label>
-          <label class="srfsc-field">Anything else? (optional)
+          <label class="srfsc-field"><span>Anything else? <span class="srfsc-field__optional">(optional)</span></span>
             <textarea name="message" rows="3" maxlength="2000" aria-label="Additional information" placeholder="Tell us about your skills, availability, or questions"></textarea>
           </label>
           <button class="ocs__btn alert-green fill" type="submit" aria-describedby="srfsc-form-status">Sign me up</button>

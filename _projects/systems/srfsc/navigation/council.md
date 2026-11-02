@@ -8,7 +8,7 @@ search_exclude: true
 ---
 
 <!-- markdownlint-disable MD033 -->
-<div class="srfsc-app" id="srfsc-council" data-login-url="{{ site.baseurl }}/capstone/srfsc/app/login/">
+<div class="srfsc-app" id="srfsc-council" data-login-url="{{ site.baseurl }}/capstone/srfsc/app/login/" data-request-url="{{ site.baseurl }}/capstone/srfsc/app/council/request/">
   {% include projects/srfsc/srfsc-nav.html active="council" %}
 
   <section class="srfsc-panel">
@@ -25,7 +25,7 @@ search_exclude: true
     </header>
     <p id="srfsc-council-status" class="srfsc-form__status" role="status" aria-live="polite">Loading requests…</p>
     <a id="srfsc-council-login" href="{{ site.baseurl }}/capstone/srfsc/app/login/" hidden>Sign in with a council admin account</a>
-    <div id="srfsc-council-list" class="srfsc-council__list"></div>
+    <ul id="srfsc-council-list" class="srfsc-council__list" aria-label="Requests"></ul>
   </section>
 
   <noscript><p>Please enable JavaScript to review requests.</p></noscript>

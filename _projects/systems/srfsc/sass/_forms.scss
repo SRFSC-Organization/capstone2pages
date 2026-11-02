@@ -18,6 +18,7 @@
     font: inherit;
     font-weight: 400;
     font-size: 1rem; // 16px+ stops iOS from zooming into the field
+    box-shadow: none; // the site theme adds a glow under fields; keep them flat
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     &::placeholder { color: rgba($srfsc-muted, 0.7); }
     &:hover { border-color: rgba($srfsc-text, 0.4); }

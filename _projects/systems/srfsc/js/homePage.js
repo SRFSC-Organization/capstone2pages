@@ -1,6 +1,6 @@
 // ============================================
 // homePage.js
-// RESPONSIBILITY: Start the dashboard hub: weather, KPIs, hub card statuses, and the two preview lists.
+// RESPONSIBILITY: Start the dashboard hub: weather, KPIs, hub card statuses, and the upcoming-events list.
 // ============================================
 import { fetchUpcomingEvents, fetchUpdates } from './srfscApi.js';
 import { createElement, formatDate } from './srfscDom.js';
@@ -45,18 +45,6 @@ function buildEventPreview(event, siteRoot) {
   return item;
 }
 
-function buildUpdatePreview(update, siteRoot) {
-  const item = createElement('li', 'srfsc-mini-list__item');
-  const link = createElement('a', 'srfsc-mini-list__link');
-  link.href = `${siteRoot}community/`;
-  link.append(
-    createElement('span', 'srfsc-mini-list__date', update.category),
-    createElement('span', 'srfsc-mini-list__title', update.title),
-  );
-  item.append(link);
-  return item;
-}
-
 async function loadPreviews(siteRoot) {
   const latestStatus = document.getElementById('srfsc-hub-latest-update');
   try {
@@ -72,13 +60,12 @@ async function loadPreviews(siteRoot) {
     updates = await fetchUpdates(PREVIEW_COUNT);
   } catch (error) {
     if (!error.offline) {
-      document.getElementById('srfsc-home-updates').replaceChildren(createElement('li', 'srfsc-empty', error.message));
       latestStatus.textContent = 'Read the latest news →';
       return;
     }
     updates = [...FALLBACK_UPDATES];
   }
-  renderPreviewList('srfsc-home-updates', updates, (update) => buildUpdatePreview(update, siteRoot), 'No updates yet.');
+  // The newest update shows on the Community card; the full list lives on the Community page.
   latestStatus.textContent = updates.length ? `Latest: ${updates[0].title}` : 'No updates yet';
 }
 
