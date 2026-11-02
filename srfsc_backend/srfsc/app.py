@@ -20,6 +20,7 @@ DEFAULT_ALLOWED_ORIGINS = [
     'http://localhost:4500',
     'http://127.0.0.1:4500',
     'https://jas-bop2.github.io',
+    'https://srfsc-organization.github.io',
     'https://pages.opencodingsociety.com',
     r'https://.*\.opencodingsociety\.com',
 ]
