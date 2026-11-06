@@ -67,6 +67,8 @@ async function request(path, { method = 'GET', body } = {}) {
 
 // Public
 export const fetchUpcomingEvents = () => request('/events');
+export const fetchAllEvents = () => request('/events?all=true');
+export const fetchMapPins = () => request('/map');
 export const fetchStats = () => request('/stats');
 export const fetchConditions = () => request('/conditions');
 export const fetchUpdates = (limit = 10) => request(`/updates?limit=${limit}`);

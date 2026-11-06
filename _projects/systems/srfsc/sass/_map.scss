@@ -1,0 +1,134 @@
+// Calendar & Map page (navigation/events.md) and the hazard form's pin picker (navigation/report.md).
+
+// Event and pin colors; js/liveMap.js uses the same values for the map pins.
+$srfsc-pin-colors: (
+  "Clearing Day": #3fb37f,
+  "Block Meeting": #60a5fa,
+  "Fire Safety Expo": #e6c27a,
+  "Board Meeting": #b39dfa,
+  "Hazard": #e8663d,
+  "Office": #e7e7e5,
+);
+
+.srfsc-columns--calendar-map {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  @media (max-width: 900px) { grid-template-columns: 1fr; }
+}
+
+// Month calendar
+.srfsc-calendar__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  .srfsc-panel__title { margin: 0; }
+}
+.srfsc-calendar__nav { display: flex; gap: 0.35rem; }
+.srfsc-calendar__weekdays,
+.srfsc-calendar__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+.srfsc-calendar__weekdays {
+  margin-bottom: 4px;
+  li { color: $srfsc-muted; font-size: 0.8rem; text-align: center; }
+}
+.srfsc-calendar__day {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-height: 5.25rem;
+  min-width: 0;
+  padding: 0.3rem;
+  border-radius: 8px;
+  background: $srfsc-raised;
+  &--blank { background: transparent; }
+  &--today {
+    outline: 2px solid $srfsc-gold;
+    outline-offset: -2px;
+    .srfsc-calendar__date { color: $srfsc-gold; font-weight: 600; }
+  }
+  @media (max-width: 600px) { min-height: 3rem; flex-flow: row wrap; align-content: flex-start; }
+}
+.srfsc-calendar__date { color: $srfsc-muted; font-size: 0.8rem; }
+.srfsc-calendar__event {
+  --srfsc-event-color: #{$srfsc-muted};
+  display: block;
+  padding: 0.1rem 0.35rem;
+  border-left: 3px solid var(--srfsc-event-color);
+  border-radius: 4px;
+  background: $srfsc-card;
+  color: $srfsc-text;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  @each $type, $color in $srfsc-pin-colors {
+    &[data-type="#{$type}"] { --srfsc-event-color: #{$color}; }
+  }
+  &--past { color: $srfsc-muted; }
+  // Phones: a colored dot per event; the name stays for screen readers and as a tooltip.
+  @media (max-width: 600px) {
+    width: 0.6rem;
+    height: 0.6rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--srfsc-event-color);
+    font-size: 0;
+  }
+}
+
+a.srfsc-calendar__event:hover,
+a.srfsc-calendar__event:focus-visible { background: lighten($srfsc-card, 8%); color: $srfsc-text; }
+
+// Live map and pin picker
+.srfsc-map__canvas {
+  position: relative;
+  z-index: 0; // keeps Leaflet's layers under the sticky site nav
+  height: 360px;
+  border-radius: 10px;
+  background: $srfsc-raised;
+  &--picker { height: 260px; margin-top: 0.35rem; cursor: crosshair; }
+
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-tip { background: $srfsc-card; color: $srfsc-text; }
+  .leaflet-popup-content { margin: 0.65rem 0.8rem; font-family: $srfsc-font-sans; }
+  .leaflet-container a.leaflet-popup-close-button,
+  a.leaflet-popup-close-button { color: $srfsc-muted; }
+  .leaflet-control-attribution { background: rgba(255, 255, 255, 0.85); color: #1b1b1b; a { color: #0b57d0; } }
+}
+.srfsc-map__popup {
+  strong { display: block; margin-bottom: 0.2rem; }
+  p { margin: 0.1rem 0; color: $srfsc-muted; font-size: 0.85rem; }
+}
+.srfsc-map__legend {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: 0.85rem;
+  color: $srfsc-muted;
+  li { display: inline-flex; align-items: center; gap: 0.4rem; }
+  li::before { content: ""; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: $srfsc-muted; }
+  @each $type, $color in $srfsc-pin-colors {
+    li[data-type="#{$type}"]::before { background: $color; }
+  }
+}
+.srfsc-map__pin-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}

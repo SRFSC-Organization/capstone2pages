@@ -26,6 +26,14 @@ hide: true
           </select>
         </label>
         <label class="srfsc-field">Location<input name="location" required maxlength="255" placeholder="e.g. canyon behind Aviary Dr"></label>
+        <div class="srfsc-field">
+          <span>Pin it on the map <span class="srfsc-field__optional">(optional)</span></span>
+          <div class="srfsc-map__canvas srfsc-map__canvas--picker" id="srfsc-report-map" role="region" aria-label="Map: click where the hazard is to drop a pin" aria-describedby="srfsc-report-pin-status"></div>
+          <div class="srfsc-map__pin-row">
+            <span class="srfsc-field__hint" id="srfsc-report-pin-status">Click the map where the hazard is. It shows on the public map as an approximate area.</span>
+            <button type="button" class="ocs__btn small" id="srfsc-report-pin-clear" hidden>Remove pin</button>
+          </div>
+        </div>
         <label class="srfsc-field">What did you see?<textarea name="description" rows="5" required maxlength="2000"></textarea></label>
         <label class="srfsc-field"><span>Your email <span class="srfsc-field__optional">(optional, for follow-up)</span></span><input name="reporter_email" type="email" autocomplete="email"></label>
         <button class="ocs__btn alert-red fill" type="submit">Send report</button>
@@ -61,11 +69,29 @@ hide: true
   import { bindForm } from '{{site.baseurl}}/assets/js/projects/srfsc/srfscDom.js';
   import { submitHazardReport } from '{{site.baseurl}}/assets/js/projects/srfsc/srfscApi.js';
   import { loadKpiPanel } from '{{site.baseurl}}/assets/js/projects/srfsc/kpiPanel.js';
+  import { initPinPicker } from '{{site.baseurl}}/assets/js/projects/srfsc/liveMap.js';
+
+  const pinStatus = document.getElementById('srfsc-report-pin-status');
+  const clearPin = document.getElementById('srfsc-report-pin-clear');
+  const hint = pinStatus.textContent;
+  let point = null;
+  const picker = initPinPicker(document.getElementById('srfsc-report-map'), (chosen) => {
+    point = chosen;
+    pinStatus.textContent = chosen ? 'Pin dropped. Click elsewhere to move it.' : hint;
+    clearPin.hidden = !chosen;
+  }).catch(() => {
+    pinStatus.textContent = 'The map could not load, but you can still send the report with the location above.';
+    return null;
+  });
+  clearPin.addEventListener('click', async () => (await picker)?.clear());
 
   loadKpiPanel();
   bindForm(document.getElementById('srfsc-report-form'), {
-    submitFn: submitHazardReport,
+    submitFn: (report) => submitHazardReport(point ? { ...report, ...point } : report),
     successMessage: (result) => `Report #${result.id} received. The council will review it. Thank you!`,
-    onSuccess: loadKpiPanel,
+    onSuccess: async () => {
+      loadKpiPanel();
+      (await picker)?.clear();
+    },
   });
 </script>
