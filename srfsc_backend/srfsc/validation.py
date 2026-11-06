@@ -7,7 +7,8 @@ Each validator returns (clean_data, error_message); exactly one of them is None.
 import re
 from datetime import date
 
-from srfsc.models import EVENT_TYPES, VOLUNTEER_INTERESTS, HAZARD_TYPES, REPORT_STATUSES, UPDATE_CATEGORIES
+from srfsc.models import (EVENT_TYPES, VOLUNTEER_INTERESTS, HAZARD_TYPES, REPORT_STATUSES, UPDATE_CATEGORIES,
+                          SCRIPPS_RANCH_BOUNDS)
 
 EMAIL_PATTERN = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 MAX_SHORT_TEXT = 255
@@ -45,6 +46,32 @@ def _clean_email(data, field, required=True):
     return value.lower(), None
 
 
+def _clean_point(data):
+    """Optional map pin: both latitude and longitude, inside Scripps Ranch, or neither. Returns (point, error)."""
+    lat, lng = data.get("latitude"), data.get("longitude")
+    if lat is None and lng is None:
+        return (None, None), None
+    if lat is None or lng is None:
+        return None, "Send both 'latitude' and 'longitude', or neither."
+    if isinstance(lat, bool) or isinstance(lng, bool) or not isinstance(lat, (int, float)) or not isinstance(lng, (int, float)):
+        return None, "'latitude' and 'longitude' must be numbers."
+    south, west, north, east = SCRIPPS_RANCH_BOUNDS
+    if not (south <= lat <= north and west <= lng <= east):
+        return None, "The map pin must be inside Scripps Ranch."
+    return (float(lat), float(lng)), None
+
+
+def _with_point(data, clean, error):
+    """Add an optional map pin to already-validated fields."""
+    if error:
+        return None, error
+    point, error = _clean_point(data)
+    if error:
+        return None, error
+    clean["latitude"], clean["longitude"] = point
+    return clean, None
+
+
 def _collect(rules):
     """Run (name, (value, error)) pairs; stop at the first error so the user fixes one thing at a time."""
     clean = {}
@@ -71,12 +98,12 @@ def validate_volunteer(data):
 def validate_hazard_report(data):
     if not isinstance(data, dict):
         return None, "Request body must be a JSON object."
-    return _collect([
+    return _with_point(data, *_collect([
         ("hazard_type", _clean_choice(data, "hazard_type", HAZARD_TYPES)),
         ("location", _clean_text(data, "location")),
         ("description", _clean_text(data, "description", max_length=MAX_LONG_TEXT)),
         ("reporter_email", _clean_email(data, "reporter_email", required=False)),
-    ])
+    ]))
 
 
 def validate_event(data):
@@ -95,7 +122,7 @@ def validate_event(data):
         clean["event_date"] = date.fromisoformat(clean["event_date"])
     except ValueError:
         return None, "'event_date' must be in YYYY-MM-DD format."
-    return clean, None
+    return _with_point(data, clean, None)
 
 
 def validate_report_status(data):

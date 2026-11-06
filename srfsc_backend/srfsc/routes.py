@@ -158,6 +158,17 @@ class SrfscAPI:
                 "next_event": next_event.read() if next_event else None,
             }, 200
 
+    class _Map(Resource):
+        def get(self):
+            """Public map pins: upcoming events, and hazard reports that are not resolved yet."""
+            events = _upcoming_events_query().filter(SrfscEvent.latitude.isnot(None)) \
+                .order_by(SrfscEvent.event_date.asc()).all()
+            reports = SrfscHazardReport.query.filter(SrfscHazardReport.latitude.isnot(None),
+                                                     SrfscHazardReport.status != 'Resolved') \
+                .order_by(SrfscHazardReport.created_at.desc()).all()
+            return {"events": [event.read() for event in events],
+                    "hazards": [report.map_point() for report in reports]}, 200
+
     class _Conditions(Resource):
         def get(self):
             return conditions_cache.get(), 200
@@ -172,4 +183,5 @@ api.add_resource(SrfscAPI._Volunteers, '/volunteers')
 api.add_resource(SrfscAPI._Reports, '/reports')
 api.add_resource(SrfscAPI._Report, '/reports/<int:report_id>')
 api.add_resource(SrfscAPI._Stats, '/stats')
+api.add_resource(SrfscAPI._Map, '/map')
 api.add_resource(SrfscAPI._Conditions, '/conditions')

@@ -199,6 +199,65 @@ class SrfscApiTest(unittest.TestCase):
         self.assertGreater(SrfscUpdate.query.count(), 0)
 
 
+class SrfscMapTest(unittest.TestCase):
+    """The public map: pins for upcoming events and open hazard reports."""
+
+    setUp = SrfscApiTest.setUp
+    tearDown = SrfscApiTest.tearDown
+    admin_headers = SrfscApiTest.admin_headers
+
+    REPORT = {"hazard_type": "Hazard Tree", "location": "Canyon behind Aviary Dr",
+              "description": "Dead pine leaning over the trail.", "reporter_email": "pat@example.org"}
+
+    def test_pins_must_be_complete_numbers_inside_scripps_ranch(self):
+        for point, message in [({"latitude": 32.91}, "both"),
+                               ({"latitude": "32.91", "longitude": -117.09}, "numbers"),
+                               ({"latitude": True, "longitude": -117.09}, "numbers"),
+                               ({"latitude": 34.05, "longitude": -118.24}, "inside Scripps Ranch")]:
+            with self.subTest(point=point):
+                response = self.client.post('/api/srfsc/reports', json={**self.REPORT, **point})
+                self.assertEqual(response.status_code, 400)
+                self.assertIn(message, response.get_json()["message"])
+        self.assertEqual(self.client.post('/api/srfsc/reports', json=self.REPORT).status_code, 201)
+
+    def test_map_shows_upcoming_events_and_open_hazards_without_private_details(self):
+        soon = (date.today() + timedelta(days=3)).isoformat()
+        past = (date.today() - timedelta(days=3)).isoformat()
+        for day in (soon, past):
+            self.client.post('/api/srfsc/events', headers=self.admin_headers(), json={
+                "title": f"Clearing {day}", "event_type": "Clearing Day", "event_date": day,
+                "location": "Lake Miramar", "latitude": 32.9119, "longitude": -117.0950})
+        open_id = self.client.post('/api/srfsc/reports', json={
+            **self.REPORT, "latitude": 32.912345, "longitude": -117.098765}).get_json()["id"]
+        done_id = self.client.post('/api/srfsc/reports', json={
+            **self.REPORT, "latitude": 32.92, "longitude": -117.09}).get_json()["id"]
+        self.client.post('/api/srfsc/reports', json=self.REPORT)   # no pin: not on the map
+        self.client.put(f'/api/srfsc/reports/{done_id}', json={"status": "Resolved"}, headers=self.admin_headers())
+
+        pins = self.client.get('/api/srfsc/map').get_json()
+        self.assertEqual([event["event_date"] for event in pins["events"]], [soon])
+        self.assertEqual([hazard["id"] for hazard in pins["hazards"]], [open_id])
+        hazard = pins["hazards"][0]
+        self.assertEqual((hazard["latitude"], hazard["longitude"]), (32.912, -117.099))
+        self.assertNotIn("description", hazard)
+        self.assertNotIn("reporter_email", hazard)
+
+    def test_older_database_gets_map_columns_and_starter_positions(self):
+        db.drop_all()
+        with db.engine.begin() as connection:
+            connection.execute(db.text(
+                "CREATE TABLE srfsc_events (id INTEGER PRIMARY KEY, title VARCHAR(255) NOT NULL, "
+                "event_type VARCHAR(64) NOT NULL, event_date DATE NOT NULL, location VARCHAR(255) NOT NULL, "
+                "description TEXT, created_at DATETIME)"))
+            connection.execute(db.text(
+                "INSERT INTO srfsc_events (title, event_type, event_date, location) "
+                "VALUES ('Old expo', 'Fire Safety Expo', '2030-01-01', 'Scripps Ranch Community Park')"))
+        init_srfsc()
+        init_srfsc()   # running again changes nothing
+        event = SrfscEvent.query.filter_by(title='Old expo').one()
+        self.assertEqual((event.latitude, event.longitude), (32.9258, -117.0718))
+
+
 class SrfscConditionsTest(unittest.TestCase):
 
     def test_red_flag_alert_is_extreme_regardless_of_weather(self):
