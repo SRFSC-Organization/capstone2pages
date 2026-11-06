@@ -35,6 +35,7 @@ hide: true
         <li data-type="Clearing Day">Clearing day</li>
         <li data-type="Block Meeting">Block meeting</li>
         <li data-type="Fire Safety Expo">Fire safety expo</li>
+        <li data-type="Board Meeting">Board meeting</li>
         <li data-type="Hazard">Reported hazard</li>
         <li data-type="Office">SRFSC office</li>
       </ul>
