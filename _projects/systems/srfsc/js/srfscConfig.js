@@ -1,14 +1,10 @@
 // ============================================
 // srfscConfig.js
-// RESPONSIBILITY: Where the SRFSC backend (srfsc_backend/ in this repo) lives.
+// RESPONSIBILITY: Where the SRFSC council API (events, volunteers, hazard reports, map) lives.
+// It is served by SRFSC-Backend, the same server as member accounts, so it shares the
+// address set by `srfsc_account_api_url` in _config.yml (localhost:8587 when developing).
 // ============================================
+import { srfscAccountURI } from '../../api/config.js';
 
-// Set this to the HTTPS URL where srfsc_backend is deployed (see srfsc_backend/README.md).
-// While empty, deployed pages skip the backend and run in offline mode.
-export const SRFSC_PRODUCTION_API = '';
-
-const LOCAL_API = 'http://localhost:8599';
-const isLocalSite = ['localhost', '127.0.0.1'].includes(location.hostname);
-
-/** Base URL for /api/srfsc, or '' when no backend is configured for this site. */
-export const SRFSC_API_ORIGIN = isLocalSite ? LOCAL_API : SRFSC_PRODUCTION_API;
+/** Base URL for /api/srfsc, or '' when no backend is configured for this site (offline mode). */
+export const SRFSC_API_ORIGIN = srfscAccountURI || '';

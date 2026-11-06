@@ -99,7 +99,7 @@ async function unlockAdmin() {
     } else if (error.status === 401 || error.status === 403) {
       gateMessage.textContent = getAdminKey()
         ? `That key didn't work: ${error.message}`
-        : 'This page is for council admins. Enter the council admin key to manage reports, volunteers, events, and updates.';
+        : 'This page is for council admins. Sign in with your council admin account, or enter the council admin key, to manage reports, volunteers, events, and updates.';
       setAdminKey('');
     } else {
       gateMessage.textContent = error.message;

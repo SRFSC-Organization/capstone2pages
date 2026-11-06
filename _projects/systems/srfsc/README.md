@@ -3,7 +3,7 @@
 | Feature | Local service | Production configuration |
 | --- | --- | --- |
 | Member sign-in, profile, interest quiz | Sibling `SRFSC-Backend` on `http://localhost:8587` | `srfsc_account_api_url` in `_config.yml` |
-| Council events, reports, volunteer forms | `srfsc_backend/` on `http://localhost:8599` | `SRFSC_PRODUCTION_API` in `js/srfscConfig.js` |
+| Council events, calendar, map, hazard reports, volunteer forms, fire weather | The same `SRFSC-Backend` (`/api/srfsc/...`) | The same `srfsc_account_api_url` |
 
 The shared Open Coding Society account service currently returns 404 for SRFSC
 profile and quiz routes. Member requests must use the deployed SRFSC backend.

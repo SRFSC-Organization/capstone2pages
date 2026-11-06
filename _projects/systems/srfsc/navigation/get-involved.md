@@ -47,10 +47,10 @@ hide: true
           <label class="srfsc-field">I'd like to help with
             <select name="interest" required aria-label="Area of interest">
               <option value="" disabled selected hidden>Choose an interest</option>
-              <option value="clearing">Clearing Day</option>
-              <option value="block">Block Meeting Host</option>
-              <option value="board">Board Leadership</option>
-              <option value="outreach">Events &amp; Outreach</option>
+              <option>Clearing Day</option>
+              <option>Block Meeting Host</option>
+              <option>Board Leadership</option>
+              <option>Events &amp; Outreach</option>
             </select>
           </label>
           <label class="srfsc-field"><span>Street <span class="srfsc-field__optional">(optional)</span></span>

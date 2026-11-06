@@ -82,7 +82,7 @@ Split logic into clear layers:
 
 ### Backend Boundary
 
-* **SRFSC accounts:** Login, profiles, and the interest quiz use the sibling `SRFSC-Backend` repository (local port 8587). Set the production origin explicitly with `srfsc_account_api_url` in `_config.yml`; never fall back to the shared OCS service, which lacks the SRFSC routes. Events and reports still use `srfsc_backend/` (8599). Verify credentialed CORS in nginx/Flask and the authentication cookie domain when deploying.
+* **SRFSC accounts:** Login, profiles, and the interest quiz use the sibling `SRFSC-Backend` repository (local port 8587). Set the production origin explicitly with `srfsc_account_api_url` in `_config.yml`; never fall back to the shared OCS service, which lacks the SRFSC routes. Events, the calendar and map, hazard reports, and volunteer forms are served by the same `SRFSC-Backend` (`/api/srfsc/...`); the old in-repo `srfsc_backend/` service was retired. Verify credentialed CORS in nginx/Flask and the authentication cookie domain when deploying.
 
 * The backend service lives under [node_backend/README.md](node_backend/README.md) and is separate from the site build pipeline; read it before making backend changes.
 

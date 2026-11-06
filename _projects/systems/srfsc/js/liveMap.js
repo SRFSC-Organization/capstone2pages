@@ -10,7 +10,7 @@ import { loadLeaflet } from './leafletLoader.js';
 
 const CENTER = [32.915, -117.095];
 const ZOOM = 13;
-// Same box the backend accepts pins in (srfsc_backend/srfsc/models.py SCRIPPS_RANCH_BOUNDS).
+// Same box the backend accepts pins in (SRFSC-Backend model/srfsc_council.py SCRIPPS_RANCH_BOUNDS).
 const BOUNDS = [[32.88, -117.14], [32.96, -117.04]];
 const COUNCIL_OFFICE = { position: [32.9048, -117.1137], label: 'SRFSC office', address: '9903 Businesspark Ave #102' };
 const REFRESH_MS = 60 * 1000;

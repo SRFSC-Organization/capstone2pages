@@ -40,7 +40,6 @@ exclude:
   - _docx
   - _projects
   - venv
-  - srfsc_backend
 # Note: / auto-excluded by Jekyll (underscore prefix)
 
 
