@@ -1,6 +1,6 @@
-<!-- OpenCS bar: a slim strip above the page with a button that opens a left drawer holding the
-     same OpenCS nav links the minima header shows. Used in place of the full site header on pages
-     where the page's own nav is the main header (e.g. /capstone/srfsc/). -->
+<!-- OpenCS bar: a slim strip above the SRFSC nav with a button that opens a left drawer holding the
+     same OpenCS nav links the minima header shows. Included by srfsc-nav.html; the minima header
+     itself is hidden by SRFSC SCSS, so no shared OCS layout file needs to change. -->
 <input type="checkbox" id="opencs-drawer-toggle" class="opencs-drawer-toggle" hidden />
 <div class="opencs-bar" role="region" aria-label="Open Coding Society">
   <div class="opencs-bar__inner">
@@ -32,6 +32,6 @@
         </a>
       {%- endif -%}
     {%- endfor -%}
-    <a id="loginArea" class="opencs-drawer__link" href="{{ site.baseurl }}/login">Login</a>
+    <a class="opencs-drawer__link" href="{{ site.baseurl }}/login">Login</a>
   </nav>
 </aside>

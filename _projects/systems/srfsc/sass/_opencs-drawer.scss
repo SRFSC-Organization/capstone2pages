@@ -1,6 +1,6 @@
-// OpenCS top strip + off-canvas drawer. Lives at the document root (not inside .srfsc-app) so the
-// drawer stays fixed to the viewport while the SRFSC page scrolls. The
-// checkbox#opencs-drawer-toggle in opencs_drawer.html drives open/close state in pure CSS.
+// OpenCS top strip + off-canvas drawer (navigation/opencs-drawer.html, included by srfsc-nav.html).
+// Rules sit outside the .srfsc-app scope; no SRFSC ancestor sets transform or filter, so the
+// drawer stays fixed to the viewport. checkbox#opencs-drawer-toggle drives open/close in pure CSS.
 .opencs-drawer-toggle { display: none; }
 
 // Slim full-width OpenCS strip above the SRFSC page. It scrolls away so the SRFSC nav
@@ -46,6 +46,9 @@
 .opencs-drawer-button__mark {
   display: inline-flex;
   color: $srfsc-amber;
+
+  // Clicks land on the label, not the SVG (the shared analytics tracker cannot read SVG class names).
+  svg { pointer-events: none; }
 }
 
 .opencs-drawer-backdrop {

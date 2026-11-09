@@ -7,6 +7,7 @@
 import { fetchMapPins } from './srfscApi.js';
 import { createElement, formatDate } from './srfscDom.js';
 import { loadLeaflet } from './leafletLoader.js';
+import { DEMO_EVENT_LABEL } from './srfscFallback.js';
 
 const CENTER = [32.915, -117.095];
 const ZOOM = 13;
@@ -27,7 +28,9 @@ const OFFICE_COLOR = '#e7e7e5';
 
 async function createMap(container, options = {}) {
   const L = await loadLeaflet();
-  const map = L.map(container, { maxBounds: BOUNDS, maxBoundsViscosity: 0.8, minZoom: 12, ...options })
+  // preferCanvas draws pins on a <canvas> instead of SVG: the shared OCS analytics tracker reads
+  // event.target.className as a string, which throws on SVG elements.
+  const map = L.map(container, { preferCanvas: true, maxBounds: BOUNDS, maxBoundsViscosity: 0.8, minZoom: 12, ...options })
     .setView(CENTER, ZOOM);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -71,8 +74,9 @@ export async function initLiveMap(container, status) {
       layer.clearLayers();
       events.forEach((event) => {
         pin(L, [event.latitude, event.longitude], EVENT_COLORS[event.event_type] || OFFICE_COLOR)
-          .bindPopup(popup(event.title, `${formatDate(event.event_date)} · ${event.event_type}`, event.location))
-          .bindTooltip(event.title)
+          .bindPopup(popup(event.title, `${formatDate(event.event_date)} · ${event.event_type}`, event.location,
+            event.is_demo && 'Sample event, not a real council date.'))
+          .bindTooltip(event.is_demo ? `${DEMO_EVENT_LABEL}: ${event.title}` : event.title)
           .addTo(layer);
       });
       hazards.forEach((hazard) => {

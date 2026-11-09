@@ -173,9 +173,8 @@
                 e.target.closest('.code-runner')?.querySelector('[data-action="run"]') === e.target ||
                 e.target.id?.includes('run') ||
                 e.target.id?.includes('execute') ||
-                // getAttribute: on SVG elements (map pins, icons) className is not a string.
-                (e.target.getAttribute?.('class') || '').includes('run') ||
-                (e.target.getAttribute?.('class') || '').includes('execute')) {
+                e.target.className?.includes('run') ||
+                e.target.className?.includes('execute')) {
                 analyticsState.codeExecutions++;
                 debug('Code execution button clicked');
             }
