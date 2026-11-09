@@ -5,6 +5,7 @@
 // ============================================
 import { fetchAllEvents } from './srfscApi.js';
 import { createElement } from './srfscDom.js';
+import { DEMO_EVENT_LABEL, DEMO_EVENTS_NOTICE } from './srfscFallback.js';
 
 const REFRESH_MS = 60 * 1000;
 const isoDay = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -22,9 +23,10 @@ export function initEventsCalendar(root) {
     const upcoming = event.event_date >= isoDay(today);
     const item = createElement(upcoming ? 'a' : 'span', 'srfsc-calendar__event', event.title);
     item.dataset.type = event.event_type;
-    item.title = `${event.title} · ${event.location}`;
+    item.title = `${event.is_demo ? `${DEMO_EVENT_LABEL}: ` : ''}${event.title} · ${event.location}`;
     if (upcoming) item.href = `#srfsc-event-${event.id}`;
     else item.classList.add('srfsc-calendar__event--past');
+    if (event.is_demo) item.classList.add('srfsc-calendar__event--demo');
     return item;
   }
 
@@ -53,7 +55,8 @@ export function initEventsCalendar(root) {
     grid.replaceChildren(...cells);
     const inMonth = events.filter((event) => event.event_date.startsWith(monthKey(shown)));
     if (status.dataset.offline !== 'true') {
-      status.textContent = inMonth.length ? `${inMonth.length} event${inMonth.length === 1 ? '' : 's'} this month` : 'No events this month.';
+      const count = inMonth.length ? `${inMonth.length} event${inMonth.length === 1 ? '' : 's'} this month.` : 'No events this month.';
+      status.textContent = inMonth.some((event) => event.is_demo) ? `${count} ${DEMO_EVENTS_NOTICE}` : count;
     }
   }
 

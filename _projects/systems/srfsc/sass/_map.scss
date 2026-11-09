@@ -75,6 +75,11 @@ $srfsc-pin-colors: (
     &[data-type="#{$type}"] { --srfsc-event-color: #{$color}; }
   }
   &--past { color: $srfsc-muted; }
+  // Sample (is_demo) events: dashed and italic so they never read as real council dates.
+  &--demo {
+    border-left-style: dashed;
+    font-style: italic;
+  }
   // Phones: a colored dot per event; the name stays for screen readers and as a tooltip.
   @media (max-width: 600px) {
     width: 0.6rem;

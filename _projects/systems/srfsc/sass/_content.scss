@@ -27,6 +27,24 @@
 .srfsc-event__month { color: $srfsc-gold; font-size: 0.8rem; font-weight: 500; }
 .srfsc-event__day { font-size: 1.5rem; font-weight: 600; }
 .srfsc-event__weekday { color: $srfsc-muted; font-size: 0.8rem; }
+.srfsc-event--demo { border: 1px dashed $srfsc-border; }
+
+.srfsc-event__sample {
+  display: inline-block;
+  margin-right: 0.4rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  background: rgba($srfsc-amber, 0.18);
+  color: $srfsc-gold;
+  font-size: 0.82rem;
+}
+
+.srfsc-demo-notice {
+  margin: 0 0 0.75rem;
+  color: $srfsc-gold;
+  font-size: 0.95rem;
+}
+
 .srfsc-event__type {
   display: inline-block;
   padding: 0.05rem 0.55rem;

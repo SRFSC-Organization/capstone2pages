@@ -4,7 +4,7 @@
 // ============================================
 import { fetchUpcomingEvents, rsvpToEvent } from './srfscApi.js';
 import { bindForm, createElement } from './srfscDom.js';
-import { OFFLINE_EVENTS_MESSAGE } from './srfscFallback.js';
+import { DEMO_EVENT_LABEL, DEMO_EVENTS_NOTICE, OFFLINE_EVENTS_MESSAGE } from './srfscFallback.js';
 
 const rsvpLabel = (count) => {
   if (!count) return 'Be the first to RSVP';
@@ -49,18 +49,23 @@ function buildRsvpForm(event, countLabel, onRsvp) {
 }
 
 function buildEventCard(event, onRsvp) {
-  const card = createElement('article', 'srfsc-event');
+  const card = createElement('article', event.is_demo ? 'srfsc-event srfsc-event--demo' : 'srfsc-event');
   card.id = `srfsc-event-${event.id}`;
-
   const body = createElement('div', 'srfsc-event__body');
-  const countLabel = createElement('span', 'srfsc-event__rsvps', rsvpLabel(event.rsvp_count));
+  if (event.is_demo) body.append(createElement('span', 'srfsc-event__sample', DEMO_EVENT_LABEL));
   body.append(
     createElement('span', 'srfsc-event__type', event.event_type),
     createElement('h3', 'srfsc-event__title', event.title),
     createElement('p', 'srfsc-event__location', event.location),
   );
   if (event.description) body.append(createElement('p', 'srfsc-event__desc', event.description));
+  // Sample events take no RSVPs (the backend refuses them too), so neighbors never sign up for a made-up date.
+  if (event.is_demo) {
+    card.append(buildDateBadge(event.event_date), body);
+    return card;
+  }
 
+  const countLabel = createElement('span', 'srfsc-event__rsvps', rsvpLabel(event.rsvp_count));
   const rsvpForm = buildRsvpForm(event, countLabel, onRsvp);
   const toggle = createElement('button', 'ocs__btn alert-yellow small', 'RSVP');
   toggle.type = 'button';
@@ -87,7 +92,9 @@ export async function loadEventsPanel(onRsvp) {
       container.replaceChildren(createElement('p', 'srfsc-empty', 'No upcoming events yet. Check back soon.'));
       return;
     }
-    container.replaceChildren(...events.map((event) => buildEventCard(event, onRsvp)));
+    const cards = events.map((event) => buildEventCard(event, onRsvp));
+    if (events.some((event) => event.is_demo)) cards.unshift(createElement('p', 'srfsc-demo-notice', DEMO_EVENTS_NOTICE));
+    container.replaceChildren(...cards);
     // Hub links target #srfsc-event-<id>; cards render after load, so scroll to the target by hand.
     if (location.hash.startsWith('#srfsc-event-')) {
       document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: 'center' });

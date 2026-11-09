@@ -9,6 +9,11 @@ export const COUNCIL_CONTACT = 'Call 858-201-3711 or email srfiresafecouncil@gma
 export const OFFLINE_EVENTS_MESSAGE =
   `The live event calendar is offline right now. Clearing days run monthly. ${COUNCIL_CONTACT} for the next date.`;
 
+// Shown wherever the backend's sample (is_demo) events appear, so nobody plans around them.
+export const DEMO_EVENT_LABEL = 'Sample';
+export const DEMO_EVENTS_NOTICE =
+  `Events marked "${DEMO_EVENT_LABEL}" are placeholders, not real council dates. ${COUNCIL_CONTACT} for the next one.`;
+
 export const OFFLINE_FORM_MESSAGE =
   `Online sign-ups are offline right now. ${COUNCIL_CONTACT} and we'll take it from there.`;
 
