@@ -22,6 +22,26 @@ github_username: open-coding-society
 github_repo: "pages"
 baseurl: ""
 srfsc_account_api_url: "https://srfsc-backend.onrender.com" # HTTPS origin serving SRFSC-Backend; configure before enabling deployed member login.
+
+# SRFSC toolbar: edit labels, destinations, and ordering here, then rebuild.
+# Paths below are relative to root; active matches each page's nav include key.
+srfsc_navigation:
+  root: /capstone/srfsc/app/
+  brand: SRFSC
+  tagline: Fire Safe Council
+  links:
+    - { title: "Calendar & Map", path: "events/", active: events }
+    - { title: Prepare, path: "prepare/", active: prepare }
+    - { title: Get Involved, path: "get-involved/", active: involved }
+    - { title: Report a Hazard, path: "report/", active: report }
+    - { title: Request Help, path: "request/", active: request }
+    - { title: About, path: "about/", active: about }
+  account: { title: Sign in, path: "login/", profile_path: "profile/", profile_title: My profile }
+  signup: { title: Sign up, path: "signup/" }
+  donate: { title: Donate, path: "get-involved/#donate" }
+  # Paste your SRFSC GitHub Projects board URL to show this toolbar link.
+  kanban: { title: Kanban, url: "" }
+
 future: true
 
 # Single source of truth for the Google OAuth client id -- assets/js/api/config.js's

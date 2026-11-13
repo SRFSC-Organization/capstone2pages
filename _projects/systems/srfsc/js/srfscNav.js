@@ -28,7 +28,7 @@ const account = document.querySelector('#srfsc-nav-account');
 if (account) {
   // Signed-out visitors (401) and an unreachable account service both keep the "Sign in" link.
   loadMemberProfile().then(() => {
-    account.textContent = 'My profile';
+    account.textContent = account.dataset.profileTitle;
     account.href = account.dataset.profileUrl;
     const signup = document.querySelector('#srfsc-nav-signup');
     if (signup) signup.hidden = true;

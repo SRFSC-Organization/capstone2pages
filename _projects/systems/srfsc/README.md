@@ -72,3 +72,14 @@ visitor is signed in.
 Frontend tests: `node --test tests/test_srfsc_member.mjs`.
 Backend tests, from its checkout:
 `venv/bin/python -B -m unittest testing.test_srfsc_profile -v`.
+
+## Configure the toolbar and Kanban
+
+Edit `srfsc_navigation` in the repository root `_config.yml`. `links` controls
+menu labels, destinations, and ordering; `active` matches the page's navigation
+include key. Account, signup, donate, and brand settings are in the same section.
+Paths are relative to `srfsc_navigation.root` and retain the site's `baseurl`.
+Set `srfsc_navigation.kanban.url` to your SRFSC GitHub Projects board URL to show
+its link. An empty URL hides it. This configures the link, not the board's columns
+or GitHub permissions. Rebuild and restart Jekyll after configuration changes.
+Edit the source navigation template here, rather than generated includes.
