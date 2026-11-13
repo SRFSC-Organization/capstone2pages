@@ -1,0 +1,75 @@
+# Config for the SRFSC capstone page (/capstone/srfsc/).
+# Read by _includes/srfsc-capstone.html. Edit here to change any text, link, or game round;
+# the include only arranges these values with shared ocs__ grammar.
+Title: "SRFSC Website Redesign"
+TeamName: "Scripps Ranch Fire Safe Council"
+Badge: "CSP Capstone 2026-2027"
+Tagline: "A homepage that makes the wildfire risk, the council's role, and the next step obvious in one glance."
+Team: ["Krish Kelageri", "Jasan Boprai", "Shourya Patel"]
+Callout: "A stronger homepage should feel calm, urgent, and clear at the same time: the message is important, the next step is obvious, and the local community feels included."
+
+# Top navigation. "href" starting with "#" stays on this page; "/" links are site-relative; others open in a new tab.
+Nav:
+  - { label: "Overview", href: "#overview" }
+  - { label: "Redesign", href: "#redesign" }
+  - { label: "Yard Walk game", href: "#game" }
+  - { label: "Visitor flow", href: "#flow" }
+  - { label: "Live redesign", href: "/capstone/srfsc/app/" }
+  - { label: "Original site", href: "https://www.srfsc.org/" }
+
+Stats:
+  - { value: "650+", label: "residential firebreaks" }
+  - { value: "340", label: "hazard trees removed" }
+  - { value: "12,000", label: "homes reached" }
+
+# Redesign findings. tone: accent highlights the cell; link is optional.
+Strengths:
+  - { title: "Clear Mission Messaging", text: "Visitors should understand the wildfire risk and the council's role before exploring the rest of the page.", tone: accent, link: { label: "View example", href: "/capstone/srfsc/app/#mission" } }
+  - { title: "Volunteer Path", text: "Action buttons are easy to find and connect users directly to volunteering and donations.", link: { label: "Join us", href: "/capstone/srfsc/app/#actions" } }
+  - { title: "Community Trust", text: "Local context, impact stories, and partner credibility make the council feel more established and reliable.", tone: accent, link: { label: "Updates", href: "/capstone/srfsc/app/#updates" } }
+  - { title: "Program Clarity", text: "Grouping fuel reduction, home hardening, and education into clear sections reduces friction and confusion.", link: { label: "Program view", href: "/capstone/srfsc/app/about/#programs" } }
+
+Opportunities:
+  - { title: "Priority First", text: "Lead with wildfire preparedness, hazard reduction, and neighborhood action.", tone: accent }
+  - { title: "Shared Visibility", text: "Keep local news, volunteering, and donations in a single clear path." }
+  - { title: "Clearer Identity", text: "Use a stronger brand palette and cleaner structure to feel current and trustworthy.", tone: accent }
+
+Emphasis:
+  - { title: "Urgency", text: "Use a direct wildfire-risk message early so visitors understand why this matters immediately.", tone: accent }
+  - { title: "Action", text: "Volunteer, donate, and join events should be visible in one glance instead of buried in navigation." }
+  - { title: "Trust", text: "Neighborhood impact, local partnerships, and clear communication make the council feel credible and active.", tone: accent }
+
+# Visitor flow, shown as four numbered steps (the standard grid fits up to 4 columns).
+Flow:
+  - "Visitor lands on the page"
+  - "Reads the mission and local risk"
+  - "Sees the call-to-action buttons"
+  - "Volunteers, donates, or joins a program"
+
+# Yard Walk game. Each round pairs one hazard with its fix; ids must be unique.
+# Zones follow CAL FIRE defensible space guidance, matching the checklist in the live redesign.
+Game:
+  Title: "Yard Walk: fix the fire hazards"
+  Intro: "Walk the yard with a council volunteer. Drag each hazard onto its fix, or select a hazard and then its fix. Every wrong match costs 10 points."
+  # Reference table shown under the board (no answers given away).
+  Zones:
+    - { zone: "Zone 0", distance: "0-5 ft", goal: "Ember-resistant: nothing that burns touches the house" }
+    - { zone: "Zone 1", distance: "5-30 ft", goal: "Lean, clean, and green: trimmed, spaced plants" }
+    - { zone: "Zone 2", distance: "30-100 ft", goal: "Reduce fuel: short grass and no ladder fuels" }
+  StartingScore: 100
+  Penalty: 10
+  Rounds:
+    - { id: "gutters", hazard: "Dry leaves packed in the gutters", fix: "Clear the roof and gutters", zone: "Zone 0", tip: "Embers land on roofs first. Clean gutters remove the easiest fuel." }
+    - { id: "firewood", hazard: "Firewood stacked against the wall", fix: "Move firewood 30 ft from the house", zone: "Zone 0", tip: "Nothing that burns should sit within 5 ft of the house." }
+    - { id: "vents", hazard: "Open attic and crawlspace vents", fix: "Cover vents with 1/8-inch metal mesh", zone: "Zone 0", tip: "Fine mesh keeps embers from blowing inside the house." }
+    - { id: "branches", hazard: "Tree branches hanging over the roof", fix: "Trim branches 10 ft from roof and chimney", zone: "Zone 1", tip: "Branch clearance stops flames from reaching the roof." }
+    - { id: "ladder", hazard: "Shrubs growing under a tall pine", fix: "Remove ladder fuels below the canopy", zone: "Zone 2", tip: "Ladder fuels let a ground fire climb into the treetops." }
+    - { id: "grass", hazard: "Knee-high dry grass on the slope", fix: "Mow annual grass to 4 inches or less", zone: "Zone 2", tip: "Short grass keeps flames low and slow near the canyon." }
+  # Ratings are checked top to bottom; the first with min at or below the final score wins.
+  Ratings:
+    - { min: 90, label: "Firewise champion", tone: "good", text: "Your yard is ready for fire season. Share the checklist with a neighbor." }
+    - { min: 60, label: "Getting there", tone: "warn", text: "Most hazards are handled. Review the Zone 0 tips, then try again." }
+    - { min: 0, label: "High risk", tone: "bad", text: "Join a Clearing Day to learn these fixes with a volunteer." }
+  Actions:
+    - { label: "Try the full checklist", href: "/capstone/srfsc/app/prepare/" }
+    - { label: "Join a Clearing Day", href: "/capstone/srfsc/app/events/" }
