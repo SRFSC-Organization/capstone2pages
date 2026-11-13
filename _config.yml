@@ -27,6 +27,9 @@ srfsc_account_api_url: "https://srfsc-backend.onrender.com" # HTTPS origin servi
 # Paths below are relative to root; active matches each page's nav include key.
 srfsc_navigation:
   root: /capstone/srfsc/app/
+  # sidebar: council nav is a left sidebar under the OCS header (phones fold it into a Menu bar).
+  # top: council nav is a bar across the top of the page, under the OCS header.
+  placement: sidebar
   brand: SRFSC
   tagline: Fire Safe Council
   links:

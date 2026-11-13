@@ -46,9 +46,18 @@ class SrfscNavigationTest
     assert_includes html, 'href="https://github.com/orgs/example/projects/1" target="_blank" rel="noopener noreferrer">Kanban</a>'
     refute_includes html, 'Calendar &amp; Map'
   end
+
+  def test_placement_switches_between_sidebar_and_top_bar
+    assert_includes render, '<nav class="srfsc-nav srfsc-nav--sidebar"'
+    @config['srfsc_navigation']['placement'] = 'top'
+    html = render
+    assert_includes html, '<nav class="srfsc-nav" aria-label'
+    refute_includes html, 'srfsc-nav--sidebar'
+  end
 end
 
-%w[test_links_keep_baseurl_and_active_state test_config_changes_labels_destinations_and_kanban].each do |name|
+%w[test_links_keep_baseurl_and_active_state test_config_changes_labels_destinations_and_kanban
+   test_placement_switches_between_sidebar_and_top_bar].each do |name|
   test = SrfscNavigationTest.new
   test.setup
   test.public_send(name)

@@ -79,6 +79,9 @@ Edit `srfsc_navigation` in the repository root `_config.yml`. `links` controls
 menu labels, destinations, and ordering; `active` matches the page's navigation
 include key. Account, signup, donate, and brand settings are in the same section.
 Paths are relative to `srfsc_navigation.root` and retain the site's `baseurl`.
+`placement` chooses where the council nav sits under the OCS site header:
+`sidebar` (a sticky left sidebar on desktop that folds into a Menu bar on
+phones) or `top` (a bar across the top of the page).
 Set `srfsc_navigation.kanban.url` to your SRFSC GitHub Projects board URL to show
 its link. An empty URL hides it. This configures the link, not the board's columns
 or GitHub permissions. Rebuild and restart Jekyll after configuration changes.

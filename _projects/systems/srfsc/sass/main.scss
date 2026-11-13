@@ -6,17 +6,11 @@
 
 @import "tokens";
 
-// Root-level chrome shared by every SRFSC page (lives OUTSIDE .srfsc-app so position:fixed stays viewport-anchored).
-@import "opencs-drawer";
-
 // Calm solid background on every SRFSC page; photos stay in the banners and hub cards.
 // :has() limits it to pages that contain the app.
+// The OCS site header stays on top; the council navigation sits below it (see _chrome.scss).
 body:has(.srfsc-app) {
   background: $srfsc-bg;
-
-  // The council navigation serves as the header on SRFSC pages.
-  .site-header { display: none; }
-  .page-content { padding-top: 0; }
 }
 
 .srfsc-app {

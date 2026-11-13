@@ -1,11 +1,11 @@
-<!-- SRFSC site navigation. Pass active="home|events|involved|report|request|prepare|community|about|login|signup|profile|council" to highlight a link. -->
+<!-- SRFSC site navigation, configured by srfsc_navigation in _config.yml (placement: sidebar|top). Pass active="home|events|involved|report|request|prepare|community|about|login|signup|profile|council" to highlight a link. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 {%- assign navigation = site.srfsc_navigation -%}
 {%- assign srfsc_root = navigation.root | relative_url -%}
 {%- assign srfsc_account_pages = "login,profile,council" | split: "," -%}
-<nav class="srfsc-nav" aria-label="Scripps Ranch Fire Safe Council">
+<nav class="srfsc-nav{% if navigation.placement == "sidebar" %} srfsc-nav--sidebar{% endif %}" aria-label="Scripps Ranch Fire Safe Council">
   <a class="srfsc-nav__brand" href="{{ srfsc_root }}" {% if include.active == "home" %}aria-current="page"{% endif %}>
     <span class="srfsc-nav__mark" aria-hidden="true">▲</span>
     <span class="srfsc-nav__name">{{ navigation.brand | escape }}<span class="srfsc-nav__tagline">{{ navigation.tagline | escape }}</span></span>
