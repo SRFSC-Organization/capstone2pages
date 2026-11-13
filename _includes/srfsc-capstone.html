@@ -1,0 +1,112 @@
+{% assign data = site.data.srfsc_capstone %}
+{% assign game = data.Game %}
+{% comment %}
+  Capstone page body for /capstone/srfsc/.
+  Every value comes from _data/srfsc_capstone.yml. Built only from shared ocs__ grammar
+  (_sass/open-coding/elements): no page-specific classes or styles.
+  The Yard Walk game uses the ocs__dnd drag-and-drop grammar; behavior lives in
+  assets/js/capstone/srfsc/hazardMatchGame.js and rules in hazardMatchRules.js.
+{% endcomment %}
+<!-- markdownlint-disable MD033 -->
+<div class="ocs__container">
+
+<nav class="ocs__links ocs__links--wide ocs__capstone-nav" aria-label="SRFSC capstone navigation">
+{% for link in data.Nav %}{% assign first_char = link.href | slice: 0 %}
+<a class="ocs__btn pill{% if forloop.first %} accent fill{% endif %}"{% if forloop.first %} aria-current="page"{% endif %}
+  {% if first_char == "/" %}href="{{ link.href | relative_url }}"{% elsif first_char == "#" %}href="{{ link.href }}"{% else %}href="{{ link.href }}" target="_blank" rel="noopener noreferrer"{% endif %}>{{ link.label | escape }}</a>
+{% endfor %}
+</nav>
+
+<div class="ocs__card" id="overview">
+<div class="ocs__badge">{{ data.Badge | escape }}</div>
+<h2 class="ocs__section-title">{{ data.TeamName | escape }}</h2>
+<p class="ocs__lead">{{ data.Tagline | escape }}</p>
+<div class="ocs__stats">
+{% for stat in data.Stats %}<div class="ocs__stat"><span class="ocs__stat-value">{{ stat.value | escape }}</span><span class="ocs__stat-label">{{ stat.label | escape }}</span></div>
+{% endfor %}</div>
+<div class="ocs__split">
+<div class="ocs__visual"><div class="ocs__team"><span class="ocs__team-label">Team</span><span class="ocs__team-name">{{ data.Team | join: ", " | escape }}</span></div></div>
+<div class="ocs__visual"><div class="ocs__team"><span class="ocs__team-label">Built with</span><span class="ocs__team-name"><span class="ocs__status-pill">Jekyll</span> <span class="ocs__status-pill">OCS grammar</span> <span class="ocs__status-pill">Flask</span></span></div></div>
+</div>
+<div class="ocs__callout">{{ data.Callout | escape }}</div>
+</div>
+
+<div class="ocs__card" id="redesign">
+<h2 class="ocs__section-title">Redesign findings</h2>
+<div class="ocs__grid ocs__grid--standard cols-2">
+<div class="ocs__grid-cell ocs__grid-cell--header">Strengths vs improvement</div>
+{% for item in data.Strengths %}<div class="ocs__grid-cell{% if item.tone == 'accent' %} ocs__grid-cell--accent{% endif %}">
+<strong>{{ item.title | escape }}</strong>
+<p>{{ item.text | escape }}</p>
+{% if item.link %}<a class="ocs__btn small {% if item.tone == 'accent' %}alert-green{% else %}alert-yellow{% endif %} fill" href="{{ item.link.href | relative_url }}">{{ item.link.label | escape }}</a>{% endif %}
+</div>
+{% endfor %}</div>
+<div class="ocs__grid ocs__grid--standard cols-3">
+<div class="ocs__grid-cell ocs__grid-cell--header">Key opportunities</div>
+{% for item in data.Opportunities %}<div class="ocs__grid-cell{% if item.tone == 'accent' %} ocs__grid-cell--accent{% endif %}"><strong>{{ item.title | escape }}</strong><p>{{ item.text | escape }}</p></div>
+{% endfor %}</div>
+<div class="ocs__grid ocs__grid--standard cols-3">
+<div class="ocs__grid-cell ocs__grid-cell--header">What the page should emphasize</div>
+{% for item in data.Emphasis %}<div class="ocs__grid-cell{% if item.tone == 'accent' %} ocs__grid-cell--accent{% endif %}"><strong>{{ item.title | escape }}</strong><p>{{ item.text | escape }}</p></div>
+{% endfor %}</div>
+</div>
+
+<div class="ocs__card" id="game">
+<h2 class="ocs__section-title">{{ game.Title | escape }}</h2>
+<p class="ocs__lead">{{ game.Intro | escape }}</p>
+<div class="ocs__dnd" data-hook="srfsc-yard-walk" data-starting-score="{{ game.StartingScore }}" data-penalty="{{ game.Penalty }}">
+<script type="application/json" data-hook="ratings">{{ game.Ratings | jsonify }}</script>
+<div class="ocs__dnd-header">
+<div>
+<p class="ocs__dnd-status" role="status" aria-live="polite" data-hook="status">Pick a hazard, then pick its fix.</p>
+<p class="ocs__dnd-progress" data-hook="progress">0 of {{ game.Rounds | size }} fixed · Score {{ game.StartingScore }}</p>
+</div>
+<button class="ocs__dnd-reset" type="button" data-hook="reset">Reset</button>
+</div>
+<div class="ocs__dnd-layout">
+<div class="ocs__dnd-panel">
+<h3 class="ocs__dnd-panel-title">Hazards found</h3>
+{% for round in game.Rounds %}<button class="ocs__drag-btn" type="button" draggable="true" aria-pressed="false" data-round="{{ round.id | escape }}">{{ round.hazard | escape }}</button>
+{% endfor %}</div>
+<div class="ocs__dnd-panel">
+<h3 class="ocs__dnd-panel-title">Fixes</h3>
+{% assign fixes = game.Rounds | sort: "fix" %}{% for round in fixes %}<button class="ocs__drop-btn" type="button" data-round="{{ round.id | escape }}" data-tip="{{ round.tip | escape }}">{{ round.fix | escape }} <span class="ocs__status-pill">{{ round.zone | escape }}</span></button>
+{% endfor %}</div>
+</div>
+</div>
+<div class="ocs__table-wrap">
+<table class="ocs__table">
+<thead><tr><th>Zone</th><th>Distance from the house</th><th>Goal</th></tr></thead>
+<tbody>
+{% for row in game.Zones %}<tr><td>{{ row.zone | escape }}</td><td>{{ row.distance | escape }}</td><td>{{ row.goal | escape }}</td></tr>
+{% endfor %}</tbody>
+</table>
+</div>
+<div class="ocs__callout" data-hook="result" hidden>
+<h3 class="ocs__section-title"><span data-hook="rating-label"></span> <span class="ocs__status-pill" data-hook="rating-score"></span></h3>
+<p data-hook="rating-text"></p>
+<div class="ocs__links">
+{% for action in game.Actions %}<a class="ocs__btn medium{% if forloop.first %} alert-green fill{% endif %}" href="{{ action.href | relative_url }}">{{ action.label | escape }}</a>
+{% endfor %}</div>
+</div>
+</div>
+
+<div class="ocs__card" id="flow">
+<h2 class="ocs__section-title">Visitor flow</h2>
+<div class="ocs__grid ocs__grid--standard cols-4">
+{% for step in data.Flow %}<div class="ocs__grid-cell"><strong>{{ forloop.index }}</strong><br>{{ step | escape }}</div>
+{% endfor %}</div>
+</div>
+
+<div class="ocs__card">
+<h2 class="ocs__section-title">Powered by OCS grammar</h2>
+<div class="ocs__links">
+<a class="ocs__btn medium alert-green fill" href="{{ '/capstone/srfsc/app/' | relative_url }}">Try the interactive redesign</a>
+<a class="ocs__btn medium" href="{{ '/navigation/sass/buttons/' | relative_url }}">Buttons</a>
+<a class="ocs__btn medium" href="{{ '/navigation/sass/grids/' | relative_url }}">Grids</a>
+</div>
+</div>
+
+</div>
+<script type="module" src="{{ '/assets/js/capstone/srfsc/hazardMatchGame.js' | relative_url }}"></script>
+<!-- markdownlint-enable MD033 -->
