@@ -82,7 +82,8 @@ Split logic into clear layers:
 
 ### Backend Boundary
 
-* **SRFSC accounts:** Login, profiles, and the interest quiz use the sibling `SRFSC-Backend` repository (local port 8587). Set the production origin explicitly with `srfsc_account_api_url` in `_config.yml`; never fall back to the shared OCS service, which lacks the SRFSC routes. Events, the calendar and map, hazard reports, and volunteer forms are served by the same `SRFSC-Backend` (`/api/srfsc/...`); the old in-repo `srfsc_backend/` service was retired. Verify credentialed CORS in nginx/Flask and the authentication cookie domain when deploying.
+* **SRFSC accounts:** Login, profiles, and the interest quiz use the sibling `SRFSC-Backend` repository (local port 8490; production `https://srfsc-api.opencodingsociety.com`; Socket.IO on 8491). Set the production origin explicitly with `srfsc_account_api_url` in `_config.yml`; never fall back to the shared OCS service, which lacks the SRFSC routes. Events, the calendar and map, hazard reports, and volunteer forms are served by the same `SRFSC-Backend` (`/api/srfsc/...`); the old in-repo `srfsc_backend/` service was retired. Verify credentialed CORS in nginx/Flask and the authentication cookie domain when deploying.
+* **Site domain:** This repository is published at the root of `srfsc.opencodingsociety.com`. The GitHub Pages custom domain is set in the repo's Settings → Pages; the `CNAME` file has no effect with Actions deploys. The deploy workflow therefore uses an empty `baseurl` for this repository, and the home page `index.md` redirects to `/capstone/srfsc/app/`.
 
 * The backend service lives under [node_backend/README.md](node_backend/README.md) and is separate from the site build pipeline; read it before making backend changes.
 

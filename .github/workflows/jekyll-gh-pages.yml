@@ -95,6 +95,8 @@ jobs:
             BASEURL=""
           elif [[ "${{ github.repository }}" = "Open-Coding-Society/pages" ]]; then
             BASEURL=""
+          elif [[ "${{ github.repository }}" = "SRFSC-Organization/capstone2pages" ]]; then
+            BASEURL=""  # served at the root of srfsc.opencodingsociety.com
           else
             BASEURL="/$NAME"
           fi
