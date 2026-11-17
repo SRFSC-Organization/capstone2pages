@@ -3,6 +3,8 @@ layout: opencs
 title: Scripps Ranch Fire Safe Council
 description: SRFSC community dashboard — live fire weather, neighborhood impact, and a hub for events, volunteering, hazard reports, home preparation, and community updates.
 permalink: /
+# Capstone category keeps the full-width capstone layout now that the URL no longer contains /capstone/.
+categories: [Capstone]
 author: Krish Kelageri, Jasan Boprai, Shourya Patel
 ---
 
