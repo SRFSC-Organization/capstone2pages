@@ -40,16 +40,6 @@ author: Krish Kelageri, Jasan Boprai, Shourya Patel
     </section>
   </section>
 
-  <!-- Trust at a glance: historic impact (static, from srfiresafe.org) next to live activity -->
-  <section class="srfsc-kpis" aria-label="Community impact">
-    <div class="srfsc-kpi"><span class="srfsc-kpi__value">12,000</span><span class="srfsc-kpi__label">Homes protected</span></div>
-    <div class="srfsc-kpi"><span class="srfsc-kpi__value">650+</span><span class="srfsc-kpi__label">Residential firebreaks</span></div>
-    <div class="srfsc-kpi"><span class="srfsc-kpi__value">340</span><span class="srfsc-kpi__label">Hazard trees removed</span></div>
-    <div class="srfsc-kpi srfsc-kpi--live"><span class="srfsc-kpi__value" data-live-stat="volunteers">–</span><span class="srfsc-kpi__label">New volunteers</span></div>
-    <div class="srfsc-kpi srfsc-kpi--live"><span class="srfsc-kpi__value" data-live-stat="event_rsvps">–</span><span class="srfsc-kpi__label">Event RSVPs</span></div>
-    <div class="srfsc-kpi srfsc-kpi--live"><span class="srfsc-kpi__value" data-live-stat="open_reports">–</span><span class="srfsc-kpi__label">Hazards being handled</span></div>
-  </section>
-
   <!-- Hub: every section of the site, each with its live status (ideation: Program Clarity, Shared Visibility) -->
   <section class="srfsc-hub" aria-label="Explore SRFSC">
     <a class="srfsc-hub__card srfsc-hub__card--events" href="{{ srfsc_root }}events/">
