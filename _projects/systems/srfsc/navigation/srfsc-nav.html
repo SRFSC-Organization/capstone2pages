@@ -6,7 +6,7 @@
 {%- assign srfsc_root = navigation.root | relative_url -%}
 {%- assign srfsc_account_pages = "login,profile,council" | split: "," -%}
 <nav class="srfsc-nav{% if navigation.placement == "sidebar" %} srfsc-nav--sidebar{% endif %}" aria-label="Scripps Ranch Fire Safe Council">
-  <a class="srfsc-nav__brand" href="{{ srfsc_root }}" {% if include.active == "home" %}aria-current="page"{% endif %}>
+  <a class="srfsc-nav__brand" href="{{ "/" | relative_url }}" {% if include.active == "home" %}aria-current="page"{% endif %}>
     <span class="srfsc-nav__mark" aria-hidden="true">▲</span>
     <span class="srfsc-nav__name">{{ navigation.brand | escape }}<span class="srfsc-nav__tagline">{{ navigation.tagline | escape }}</span></span>
   </a>

@@ -85,7 +85,7 @@ while preserving all critical instructions. The agent must still communicate wit
 ### 后端边界
 
 * **SRFSC 账号服务：** 登录/个人资料/兴趣问卷使用兄弟仓库 `SRFSC-Backend`（本地 8490，生产 `https://srfsc-api.opencodingsociety.com`，Socket.IO 8491）；生产地址由 `_config.yml` 的 `srfsc_account_api_url` 显式配置，禁止回退到没有 SRFSC 路由的共享 OCS 服务。活动、日历与地图、隐患报告和志愿者表单也由同一个 `SRFSC-Backend`（`/api/srfsc/...`）提供，旧的仓库内 `srfsc_backend/` 服务已停用；部署需同时验证 nginx/Flask 凭据 CORS 与认证 cookie 域。
-* **站点域名：** 本仓库发布在 `srfsc.opencodingsociety.com` 根路径（GitHub Pages 自定义域名在仓库 Settings → Pages 中设置；`CNAME` 文件在 Actions 部署下不生效）。因此部署工作流对本仓库使用空 `baseurl`，首页 `index.md` 跳转到 `/capstone/srfsc/app/`。
+* **站点域名：** 本仓库发布在 `srfsc.opencodingsociety.com` 根路径（GitHub Pages 自定义域名在仓库 Settings → Pages 中设置；`CNAME` 文件在 Actions 部署下不生效）。因此部署工作流对本仓库使用空 `baseurl`，SRFSC 应用首页（`_projects/systems/srfsc/index.md`）的 permalink 为 `/`；其子页面仍在 `/capstone/srfsc/app/...` 下（避免与模板的 `/login`、`/signup`、`/profile` 冲突），根目录 `index.md` 让旧的 `/capstone/srfsc/app/` 链接跳转到首页。
 
 * 后端服务位于 [node_backend/README.md](node_backend/README.md)，与站点构建流程分离；改动前先阅读该文档。
 

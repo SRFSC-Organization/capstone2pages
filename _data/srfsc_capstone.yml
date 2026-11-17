@@ -14,7 +14,7 @@ Nav:
   - { label: "Redesign", href: "#redesign" }
   - { label: "Yard Walk game", href: "#game" }
   - { label: "Visitor flow", href: "#flow" }
-  - { label: "Live redesign", href: "/capstone/srfsc/app/" }
+  - { label: "Live redesign", href: "/" }
   - { label: "Original site", href: "https://www.srfsc.org/" }
 
 Stats:
