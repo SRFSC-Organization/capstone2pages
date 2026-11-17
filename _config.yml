@@ -27,9 +27,11 @@ srfsc_account_api_url: "https://srfsc-api.opencodingsociety.com" # HTTPS origin 
 # Paths below are relative to root; active matches each page's nav include key.
 srfsc_navigation:
   root: /capstone/srfsc/app/
+  # header: council links replace the OCS links (Blog, Courses, Capstone, Search) in the site's top bar,
+  #         and its Login button opens the SRFSC sign-in page; no separate council nav is drawn.
   # sidebar: council nav is a left sidebar under the OCS header (phones fold it into a Menu bar).
   # top: council nav is a bar across the top of the page, under the OCS header.
-  placement: sidebar
+  placement: header
   brand: SRFSC
   tagline: Fire Safe Council
   links:
