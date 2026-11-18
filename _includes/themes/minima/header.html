@@ -21,19 +21,18 @@
 
                 <div class="trigger">
                     {%- assign srfsc_navigation = site.srfsc_navigation -%}
-                    {%- if srfsc_navigation.placement == "header" -%}
+                    {%- if srfsc_navigation.header_links -%}
                     {%- comment -%}
-                    SRFSC site: council links (from srfsc_navigation in _config.yml) replace the OCS
-                    nav_pages, and sign-in opens the SRFSC login, not the OCS one. srfscNav.js swaps
-                    "Sign in" for "My profile" and hides "Sign up" once the member has a session.
+                    SRFSC site: a few council links (srfsc_navigation.header_links in _config.yml) replace
+                    the OCS nav_pages, and sign-in opens the SRFSC login, not the OCS one. The full list
+                    stays in the council sidebar. srfscNav.js swaps "Sign in" for "My profile" once the
+                    member has a session.
                     {%- endcomment -%}
                     {%- assign srfsc_root = srfsc_navigation.root | relative_url -%}
-                    {%- for link in srfsc_navigation.links -%}
+                    {%- for link in srfsc_navigation.header_links -%}
                     {%- assign link_url = srfsc_root | append: link.path -%}
                     <a class="page-link" href="{{ link_url | escape }}" {% if page.url == link_url %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>
                     {%- endfor -%}
-                    <a class="page-link" href="{{ srfsc_root }}{{ srfsc_navigation.donate.path | escape }}">{{ srfsc_navigation.donate.title | escape }}</a>
-                    <a class="page-link" id="srfsc-nav-signup" href="{{ srfsc_root }}{{ srfsc_navigation.signup.path | escape }}">{{ srfsc_navigation.signup.title | escape }}</a>
                     <a class="page-link" id="srfsc-nav-account" href="{{ srfsc_root }}{{ srfsc_navigation.account.path | escape }}" data-profile-title="{{ srfsc_navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ srfsc_navigation.account.profile_path | escape }}">{{ srfsc_navigation.account.title | escape }}</a>
                     {%- else -%}
                     {%- for path in site.minima.nav_pages -%}
@@ -52,7 +51,7 @@
                     {%- endif -%}
                 </div>
 
-                {%- unless srfsc_navigation.placement == "header" %}
+                {%- unless srfsc_navigation.header_links %}
                 <a id="dmBell" class="dm-bell" href="{{ site.baseurl }}/dm" title="Direct messages" aria-label="Direct messages" hidden>
                     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
                         <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
@@ -65,7 +64,7 @@
         </div>
     </header>
 
-    {%- unless site.srfsc_navigation.placement == "header" %}
+    {%- unless site.srfsc_navigation.header_links %}
     <!-- OCS account scripts fill #loginArea and #dmBell, which the SRFSC header does not draw. -->
     <script type="module" src="{{ site.baseurl }}/assets/js/api/login.js"></script>
     <script type="module" src="{{ site.baseurl }}/assets/js/api/dm-notifications.js"></script>

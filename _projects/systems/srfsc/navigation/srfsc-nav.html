@@ -25,7 +25,10 @@
       {% endif %}
     </ul>
     <div class="srfsc-nav__actions">
+      {%- comment -%} With header_links, "Sign in" lives in the site header (one #srfsc-nav-account per page). {%- endcomment -%}
+      {%- unless navigation.header_links %}
       <a class="srfsc-nav__account" id="srfsc-nav-account" href="{{ srfsc_root }}{{ navigation.account.path | escape }}" data-profile-title="{{ navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ navigation.account.profile_path | escape }}" {% if srfsc_account_pages contains include.active %}aria-current="page"{% endif %}>{{ navigation.account.title | escape }}</a>
+      {%- endunless %}
       <a class="srfsc-nav__account" id="srfsc-nav-signup" href="{{ srfsc_root }}{{ navigation.signup.path | escape }}" {% if include.active == "signup" %}aria-current="page"{% endif %}>{{ navigation.signup.title | escape }}</a>
       <a class="ocs__btn alert-ember fill small srfsc-nav__cta" href="{{ srfsc_root }}{{ navigation.donate.path | escape }}">{{ navigation.donate.title | escape }}</a>
     </div>
