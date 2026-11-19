@@ -57,6 +57,10 @@ srfsc_navigation:
   account: { title: Sign in, path: "login/", profile_path: "profile/", profile_title: My profile }
   signup: { title: Sign up, path: "signup/" }
   donate: { title: Donate, path: "get-involved/#donate" }
+  # Section sidebar: a small "On this page" list beside each SRFSC page, one pill per panel
+  # heading (h2.srfsc-panel__title). Pages with fewer than two sections show none.
+  # Set enabled: false to turn it off everywhere.
+  sections: { enabled: true, title: On this page }
   # Paste your SRFSC GitHub Projects board URL to show this toolbar link.
   kanban: { title: Kanban, url: "" }
 

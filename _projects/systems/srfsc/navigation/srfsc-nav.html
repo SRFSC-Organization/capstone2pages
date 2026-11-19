@@ -39,4 +39,12 @@
   </div>
 </nav>
 {%- endunless %}
+{%- if navigation.sections.enabled %}
+{%- comment -%} Section sidebar: srfscSections.js fills it from the page's panel headings and shows it. {%- endcomment %}
+<nav class="srfsc-sections" aria-label="{{ navigation.sections.title | escape }}" data-srfsc-sections hidden>
+  <p class="ocs__section-title srfsc-sections__title">{{ navigation.sections.title | escape }}</p>
+  <div class="ocs__links srfsc-sections__links"></div>
+</nav>
+<script type="module" src="{{ site.baseurl }}/assets/js/projects/srfsc/srfscSections.js"></script>
+{%- endif %}
 <script type="module" src="{{ site.baseurl }}/assets/js/projects/srfsc/srfscNav.js"></script>

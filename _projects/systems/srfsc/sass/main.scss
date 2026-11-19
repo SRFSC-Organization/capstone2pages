@@ -12,6 +12,12 @@
 body:has(.srfsc-app) {
   background: $srfsc-bg;
 }
+// Section sidebar links glide to their section, unless the visitor asked for reduced motion.
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.srfsc-sections:not([hidden])) {
+    scroll-behavior: smooth;
+  }
+}
 // srfsc_navigation.replace_site_header: the council bar is the page's only top bar.
 body:has(.srfsc-nav--replaces-header) .site-header {
   display: none;

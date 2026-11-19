@@ -139,6 +139,56 @@
   }
 }
 
+// Section sidebar ("On this page", filled by srfscSections.js). Links are OCS grammar
+// (ocs__links of ocs__btn small pill; the section on screen adds accent fill).
+.srfsc-sections__title { margin: 0 0 0.6rem; color: $srfsc-muted; font-size: 0.72rem; }
+.srfsc-sections__links { gap: 0.35rem; }
+.srfsc-sections__target { scroll-margin-top: 6rem; }
+
+// Desktop: a narrow sticky column left of the page content. The council bar and the photo
+// banner keep the full width; everything after them takes the content column.
+@media (min-width: 1001px) {
+  &:has(> .srfsc-sections:not([hidden])):not(:has(> .srfsc-nav--sidebar)) {
+    display: grid;
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    column-gap: 1.5rem;
+    align-items: start;
+
+    // Rows are pinned because the sidebar comes before the banner in the page:
+    // bar on row 1, banner on row 2, sidebar from row 3 down beside the content.
+    > * { grid-column: 2; }
+    > .srfsc-nav { grid-column: 1 / -1; grid-row: 1; }
+    > .srfsc-banner, > .srfsc-hero { grid-column: 1 / -1; grid-row: 2; }
+    > .srfsc-sections { grid-column: 1; grid-row: 3 / span 50; } // more rows than any SRFSC page has blocks
+  }
+
+  .srfsc-sections {
+    position: sticky;
+    top: 5.5rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    padding-top: 0.25rem;
+  }
+  .srfsc-sections__links {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    .ocs__btn { justify-content: flex-start; text-align: left; white-space: normal; height: auto; }
+  }
+}
+
+// Tablet/phone: one row of pills under the banner that scrolls sideways.
+@media (max-width: 1000px) {
+  .srfsc-sections { margin: 0 0 1rem; }
+  .srfsc-sections__title { display: none; }
+  .srfsc-sections__links {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    .ocs__btn { flex-shrink: 0; white-space: nowrap; }
+  }
+}
+
 // Sub-page photo banner; the photo comes from the modifier class.
 .srfsc-banner {
   border-radius: $srfsc-radius;

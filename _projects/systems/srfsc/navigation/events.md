@@ -14,7 +14,7 @@ hide: true
   <div class="srfsc-columns srfsc-columns--calendar-map">
     <section class="srfsc-panel srfsc-calendar" id="srfsc-calendar" aria-labelledby="srfsc-calendar-heading">
       <header class="srfsc-calendar__header">
-        <h2 class="srfsc-panel__title" id="srfsc-calendar-heading" data-calendar-title>Calendar</h2>
+        <h2 class="srfsc-panel__title" id="srfsc-calendar-heading" data-calendar-title data-section-label="Calendar">Calendar</h2>
         <div class="srfsc-calendar__nav">
           <button type="button" class="ocs__btn small" data-calendar-prev aria-label="Previous month">&lsaquo;</button>
           <button type="button" class="ocs__btn small" data-calendar-today>Today</button>

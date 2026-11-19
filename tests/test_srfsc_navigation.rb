@@ -61,6 +61,13 @@ class SrfscNavigationTest
     assert_includes html, 'id="srfsc-nav-account"'
   end
 
+  def test_section_sidebar_follows_config
+    assert_includes render, 'data-srfsc-sections hidden'
+    assert_includes render, 'aria-label="On this page"'
+    @config['srfsc_navigation']['sections']['enabled'] = false
+    refute_includes render, 'data-srfsc-sections'
+  end
+
   def test_placement_switches_between_sidebar_and_top_bar
     assert_includes render, '<nav class="srfsc-nav srfsc-nav--sidebar"'
     @config['srfsc_navigation']['placement'] = 'top'
@@ -73,7 +80,8 @@ class SrfscNavigationTest
 end
 
 %w[test_links_keep_baseurl_and_active_state test_config_changes_labels_destinations_and_kanban
-   test_placement_switches_between_sidebar_and_top_bar test_top_bar_can_replace_site_header].each do |name|
+   test_placement_switches_between_sidebar_and_top_bar test_top_bar_can_replace_site_header
+   test_section_sidebar_follows_config].each do |name|
   test = SrfscNavigationTest.new
   test.setup
   test.public_send(name)
