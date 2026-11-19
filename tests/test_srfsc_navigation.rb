@@ -24,6 +24,7 @@ class SrfscNavigationTest
     # Tests cover the standalone council nav (sidebar, Sign in inside it), not the live setting.
     @config['srfsc_navigation']['placement'] = 'sidebar'
     @config['srfsc_navigation'].delete('header_links')
+    @config['srfsc_navigation'].delete('replace_site_header')
     @template = Liquid::Template.parse(File.read(File.join(@root,
       '_projects/systems/srfsc/navigation/srfsc-nav.html')), error_mode: :strict)
   end
@@ -50,6 +51,16 @@ class SrfscNavigationTest
     refute_includes html, 'Calendar &amp; Map'
   end
 
+  def test_top_bar_can_replace_site_header
+    @config['srfsc_navigation']['placement'] = 'top'
+    @config['srfsc_navigation']['header_links'] = [{'title' => 'About', 'path' => 'about/'}]
+    refute_includes render, 'id="srfsc-nav-account"'
+    @config['srfsc_navigation']['replace_site_header'] = true
+    html = render
+    assert_includes html, 'srfsc-nav--replaces-header'
+    assert_includes html, 'id="srfsc-nav-account"'
+  end
+
   def test_placement_switches_between_sidebar_and_top_bar
     assert_includes render, '<nav class="srfsc-nav srfsc-nav--sidebar"'
     @config['srfsc_navigation']['placement'] = 'top'
@@ -62,7 +73,7 @@ class SrfscNavigationTest
 end
 
 %w[test_links_keep_baseurl_and_active_state test_config_changes_labels_destinations_and_kanban
-   test_placement_switches_between_sidebar_and_top_bar].each do |name|
+   test_placement_switches_between_sidebar_and_top_bar test_top_bar_can_replace_site_header].each do |name|
   test = SrfscNavigationTest.new
   test.setup
   test.public_send(name)

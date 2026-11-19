@@ -57,6 +57,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid $srfsc-gold; outline-
     color: $srfsc-bg;
     &:hover, &:focus-visible { background: lighten($srfsc-amber, 8%); color: $srfsc-bg; }
   }
+
+  // OCS pill grammar (ocs__btn pill, current item adds accent fill), in council colors.
+  // The shared `.ocs__btn.pill:not(.accent)` rule sets its text color with !important,
+  // so these colors need !important too to win inside the app.
+  &.pill { border-radius: 999px; }
+  &.pill:not(.accent):not(.fill) {
+    background: rgba($srfsc-text, 0.04);
+    border: 1px solid $srfsc-border;
+    color: $srfsc-muted !important;
+    &:hover, &:focus-visible { background: $srfsc-raised; border-color: rgba($srfsc-text, 0.25); color: $srfsc-text !important; }
+  }
+  &.pill.fill:not(.accent) { color: #fff !important; }
+  &.pill.alert-yellow.fill { color: $srfsc-bg !important; }
+  &.accent.fill {
+    background: rgba($srfsc-ember, 0.16);
+    border: 1px solid rgba($srfsc-ember, 0.7);
+    color: $srfsc-text;
+    &:hover, &:focus-visible { background: rgba($srfsc-ember, 0.26); border-color: $srfsc-ember; color: $srfsc-text; }
+  }
 }
 // Mono accent: small uppercase labels keep the OpenCS code-font character.
 .srfsc-eyebrow-font { font-weight: 500; }

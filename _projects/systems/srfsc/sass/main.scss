@@ -8,9 +8,13 @@
 
 // Calm solid background on every SRFSC page; photos stay in the banners and hub cards.
 // :has() limits it to pages that contain the app.
-// The OCS site header stays on top; the council navigation sits below it (see _chrome.scss).
+// The OCS site header stays on top, unless the council bar replaces it (see below and _chrome.scss).
 body:has(.srfsc-app) {
   background: $srfsc-bg;
+}
+// srfsc_navigation.replace_site_header: the council bar is the page's only top bar.
+body:has(.srfsc-nav--replaces-header) .site-header {
+  display: none;
 }
 
 .srfsc-app {

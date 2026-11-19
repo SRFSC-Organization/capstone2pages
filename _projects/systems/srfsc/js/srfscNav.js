@@ -24,12 +24,15 @@ if (nav && toggle) {
   });
 }
 
-const account = document.querySelector('#srfsc-nav-account');
-if (account) {
+// The site header and the council bar may each carry an account link; update whichever exist.
+const accounts = document.querySelectorAll('[data-profile-url]');
+if (accounts.length) {
   // Signed-out visitors (401) and an unreachable account service both keep the "Sign in" link.
   loadMemberProfile().then(() => {
-    account.textContent = account.dataset.profileTitle;
-    account.href = account.dataset.profileUrl;
+    accounts.forEach((account) => {
+      account.textContent = account.dataset.profileTitle;
+      account.href = account.dataset.profileUrl;
+    });
     const signup = document.querySelector('#srfsc-nav-signup');
     if (signup) signup.hidden = true;
   }).catch(() => {});

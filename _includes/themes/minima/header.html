@@ -33,7 +33,7 @@
                     {%- assign link_url = srfsc_root | append: link.path -%}
                     <a class="page-link" href="{{ link_url | escape }}" {% if page.url == link_url %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>
                     {%- endfor -%}
-                    <a class="page-link" id="srfsc-nav-account" href="{{ srfsc_root }}{{ srfsc_navigation.account.path | escape }}" data-profile-title="{{ srfsc_navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ srfsc_navigation.account.profile_path | escape }}">{{ srfsc_navigation.account.title | escape }}</a>
+                    <a class="page-link" id="srfsc-header-account" href="{{ srfsc_root }}{{ srfsc_navigation.account.path | escape }}" data-profile-title="{{ srfsc_navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ srfsc_navigation.account.profile_path | escape }}">{{ srfsc_navigation.account.title | escape }}</a>
                     {%- else -%}
                     {%- for path in site.minima.nav_pages -%}
                     {%- assign my_page = site.pages | where: "path", path | first -%}

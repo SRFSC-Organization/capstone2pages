@@ -5,9 +5,11 @@
 {%- assign navigation = site.srfsc_navigation -%}
 {%- assign srfsc_root = navigation.root | relative_url -%}
 {%- assign srfsc_account_pages = "login,profile,council" | split: "," -%}
+{%- assign replaces_header = false -%}
+{%- if navigation.placement == "top" and navigation.replace_site_header -%}{%- assign replaces_header = true -%}{%- endif -%}
 {%- comment -%} placement: header draws these links in the site header (themes/minima/header.html) instead. {%- endcomment -%}
 {%- unless navigation.placement == "header" %}
-<nav class="srfsc-nav{% if navigation.placement == "sidebar" %} srfsc-nav--sidebar{% endif %}" aria-label="Scripps Ranch Fire Safe Council">
+<nav class="srfsc-nav{% if navigation.placement == "sidebar" %} srfsc-nav--sidebar{% endif %}{% if replaces_header %} srfsc-nav--replaces-header{% endif %}" aria-label="Scripps Ranch Fire Safe Council">
   <a class="srfsc-nav__brand" href="{{ "/" | relative_url }}" {% if include.active == "home" %}aria-current="page"{% endif %}>
     <span class="srfsc-nav__mark" aria-hidden="true">▲</span>
     <span class="srfsc-nav__name">{{ navigation.brand | escape }}<span class="srfsc-nav__tagline">{{ navigation.tagline | escape }}</span></span>
@@ -16,21 +18,23 @@
     <span class="srfsc-nav__toggle-bars" aria-hidden="true"></span>Menu
   </button>
   <div class="srfsc-nav__menu" id="srfsc-nav-menu">
-    <ul class="srfsc-nav__links">
-      {% for link in navigation.links %}
-      <li><a href="{{ srfsc_root }}{{ link.path | escape }}" {% if include.active == link.active %}aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
-      {% endfor %}
-      {% if navigation.kanban.url and navigation.kanban.url != empty %}
-      <li><a href="{{ navigation.kanban.url | escape }}" target="_blank" rel="noopener noreferrer">{{ navigation.kanban.title | escape }}</a></li>
-      {% endif %}
-    </ul>
-    <div class="srfsc-nav__actions">
-      {%- comment -%} With header_links, "Sign in" lives in the site header (one #srfsc-nav-account per page). {%- endcomment -%}
-      {%- unless navigation.header_links %}
-      <a class="srfsc-nav__account" id="srfsc-nav-account" href="{{ srfsc_root }}{{ navigation.account.path | escape }}" data-profile-title="{{ navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ navigation.account.profile_path | escape }}" {% if srfsc_account_pages contains include.active %}aria-current="page"{% endif %}>{{ navigation.account.title | escape }}</a>
-      {%- endunless %}
-      <a class="srfsc-nav__account" id="srfsc-nav-signup" href="{{ srfsc_root }}{{ navigation.signup.path | escape }}" {% if include.active == "signup" %}aria-current="page"{% endif %}>{{ navigation.signup.title | escape }}</a>
-      <a class="ocs__btn alert-ember fill small srfsc-nav__cta" href="{{ srfsc_root }}{{ navigation.donate.path | escape }}">{{ navigation.donate.title | escape }}</a>
+    {%- comment -%} OCS button grammar: links are an ocs__links group of ocs__btn pill; the current page adds accent fill. {%- endcomment %}
+    <div class="ocs__links srfsc-nav__links">
+      {%- for link in navigation.links %}
+      <a class="ocs__btn small pill{% if include.active == link.active %} accent fill{% endif %}" href="{{ srfsc_root }}{{ link.path | escape }}" {% if include.active == link.active %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+      {%- endfor %}
+      {%- if navigation.kanban.url and navigation.kanban.url != empty %}
+      <a class="ocs__btn small pill" href="{{ navigation.kanban.url | escape }}" target="_blank" rel="noopener noreferrer">{{ navigation.kanban.title | escape }}</a>
+      {%- endif %}
+    </div>
+    <div class="ocs__links srfsc-nav__actions">
+      {%- comment -%} With header_links, "Sign in" lives in the site header, unless this bar replaces that header. {%- endcomment -%}
+      {%- if replaces_header or navigation.header_links == nil %}
+      {%- assign account_current = false -%}{%- if srfsc_account_pages contains include.active -%}{%- assign account_current = true -%}{%- endif %}
+      <a class="ocs__btn small pill{% if account_current %} accent fill{% endif %}" id="srfsc-nav-account" href="{{ srfsc_root }}{{ navigation.account.path | escape }}" data-profile-title="{{ navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ navigation.account.profile_path | escape }}" {% if account_current %}aria-current="page"{% endif %}>{{ navigation.account.title | escape }}</a>
+      {%- endif %}
+      <a class="ocs__btn small pill{% if include.active == "signup" %} accent fill{% endif %}" id="srfsc-nav-signup" href="{{ srfsc_root }}{{ navigation.signup.path | escape }}" {% if include.active == "signup" %}aria-current="page"{% endif %}>{{ navigation.signup.title | escape }}</a>
+      <a class="ocs__btn small pill alert-ember fill" href="{{ srfsc_root }}{{ navigation.donate.path | escape }}">{{ navigation.donate.title | escape }}</a>
     </div>
   </div>
 </nav>

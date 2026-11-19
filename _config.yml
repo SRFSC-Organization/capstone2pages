@@ -30,9 +30,12 @@ srfsc_navigation:
   # header: the council links are drawn in the site's top bar (header_links below); no sidebar.
   # sidebar: council nav is a left sidebar under the site header (phones fold it into a Menu bar).
   # top: council nav is a bar across the top of the page, under the site header.
-  placement: header
-  # Top bar: these links plus "Sign in" (the account link below) replace the OCS links
-  # (Blog, Courses, Capstone, Search) and the OCS Login.
+  placement: top
+  # true: on SRFSC pages the council bar (logo, links, Sign in, Donate) replaces the OCS site
+  # header entirely, so there is one styled top bar. Pages outside SRFSC keep the site header.
+  replace_site_header: true
+  # Site header links (used on pages that still draw the OCS site header). These links plus
+  # "Sign in" replace the OCS links (Blog, Courses, Capstone, Search) and the OCS Login.
   # Remove header_links to bring the OCS top bar back.
   header_links:
     - { title: "Calendar & Map", path: "events/" }
