@@ -81,6 +81,15 @@ class SrfscNavigationTest
     assert_includes html, '>Login</a>'
     refute_includes html, '>Blog</a>'
     refute_includes html, 'assets/js/api/login.js'
+    # SRFSC brand replaces the OCS logo: text mark by default, logo image once one is configured.
+    config['srfsc_navigation']['logo'] = ''
+    html = header.render!({'site' => config, 'page' => {}}, registers: {baseurl: ''})
+    assert_includes html, 'class="srfsc-brand__name">SRFSC</span>'
+    refute_includes html, '/images/logo.png'
+    config['srfsc_navigation']['logo'] = '/images/srfsc/logo.png'
+    html = header.render!({'site' => config, 'page' => {}}, registers: {baseurl: ''})
+    assert_includes html, 'src="/images/srfsc/logo.png" alt="SRFSC logo"'
+    refute_includes html, 'srfsc-brand__name'
   end
 
   def test_placement_switches_between_sidebar_and_top_bar

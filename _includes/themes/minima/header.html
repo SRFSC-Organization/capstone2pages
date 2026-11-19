@@ -3,8 +3,16 @@
             {%- assign default_paths = site.pages | map: "path" -%}
             {%- assign page_paths = site.minima.nav_pages | default: default_paths -%}
             {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
+            {%- assign srfsc_brand = site.srfsc_navigation -%}
             <a class="site-title" rel="author" href="{{ '/' | relative_url }}" data-value="{{ site.title | escape }}">
+                {%- if srfsc_brand.header_links and srfsc_brand.logo != empty and srfsc_brand.logo %}
+                <img id="site-logo" src="{{ srfsc_brand.logo | relative_url }}" alt="{{ srfsc_brand.brand | escape }} logo">
+                {%- elsif srfsc_brand.header_links %}
+                {%- comment -%} SRFSC site without a logo image yet: the council's text mark replaces the OCS logo. {%- endcomment %}
+                <span class="srfsc-brand" aria-label="{{ srfsc_brand.brand | escape }} {{ srfsc_brand.tagline | escape }}"><span class="srfsc-brand__mark" aria-hidden="true">▲</span><span class="srfsc-brand__text"><span class="srfsc-brand__name">{{ srfsc_brand.brand | escape }}</span><span class="srfsc-brand__tagline">{{ srfsc_brand.tagline | escape }}</span></span></span>
+                {%- else %}
                 <img id="site-logo" src="{{ site.baseurl }}/images/logo.png" alt="Logo">
+                {%- endif %}
             </a>
 
             {%- if titles_size > 0 -%}

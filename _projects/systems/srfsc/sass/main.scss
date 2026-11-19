@@ -18,6 +18,33 @@ body:has(.srfsc-app) {
     scroll-behavior: smooth;
   }
 }
+// Site header logo slot when srfsc_navigation.logo is empty (themes/minima/header.html):
+// the council's text mark in place of the OCS logo, in the header's own text color.
+.site-title .srfsc-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  vertical-align: middle;
+}
+.srfsc-brand__mark {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  background: $srfsc-ember-strong;
+  color: #fff;
+  font-size: 0.85rem;
+}
+.srfsc-brand__text { display: flex; flex-direction: column; }
+.srfsc-brand__name { font-size: 1.1rem; line-height: 1.1; }
+.srfsc-brand__tagline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.75;
+  @media (max-width: 420px) { display: none; }
+}
+
 // srfsc_navigation.replace_site_header: the council bar is the page's only top bar.
 body:has(.srfsc-nav--replaces-header) .site-header {
   display: none;

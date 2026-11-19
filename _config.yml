@@ -27,10 +27,14 @@ srfsc_account_api_url: "https://srfsc-api.opencodingsociety.com" # HTTPS origin 
 # Paths below are relative to root; active matches each page's nav include key.
 srfsc_navigation:
   root: /capstone/srfsc/app/
-  # header: the council links are drawn in the site's top bar (header_links below); no sidebar.
+  # header: the council links are drawn only in the site's top bar (header_links below); the
+  #         left sidebar is just the page's own "On this page" list (sections, below).
   # sidebar: council nav is a left sidebar under the site header (phones fold it into a Menu bar).
   # top: council nav is a bar across the top of the page, under the site header.
-  placement: sidebar
+  placement: header
+  # Top-left logo in the site header: path to an SRFSC logo image (e.g. /images/srfsc/logo.png).
+  # Leave empty to show the text mark (▲ brand + tagline below) instead of the OCS logo.
+  logo: ""
   # true: on SRFSC pages the council bar (logo, links, Sign in, Donate) replaces the OCS site
   # header entirely, so there is one styled top bar. Pages outside SRFSC keep the site header.
   # Only used with placement: top.
