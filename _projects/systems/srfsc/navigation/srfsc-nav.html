@@ -7,6 +7,15 @@
 {%- assign srfsc_account_pages = "login,profile,council" | split: "," -%}
 {%- assign replaces_header = false -%}
 {%- if navigation.placement == "top" and navigation.replace_site_header -%}{%- assign replaces_header = true -%}{%- endif -%}
+{%- comment -%} Section sidebar: srfscSections.js fills it from the page's panel headings and shows it. {%- endcomment -%}
+{%- capture section_sidebar -%}
+{%- if navigation.sections.enabled %}
+<nav class="srfsc-sections" aria-label="{{ navigation.sections.title | escape }}" data-srfsc-sections hidden>
+  <p class="ocs__section-title srfsc-sections__title">{{ navigation.sections.title | escape }}</p>
+  <div class="ocs__links srfsc-sections__links"></div>
+</nav>
+{%- endif -%}
+{%- endcapture -%}
 {%- comment -%} placement: header draws these links in the site header (themes/minima/header.html) instead. {%- endcomment -%}
 {%- unless navigation.placement == "header" %}
 <nav class="srfsc-nav{% if navigation.placement == "sidebar" %} srfsc-nav--sidebar{% endif %}{% if replaces_header %} srfsc-nav--replaces-header{% endif %}" aria-label="Scripps Ranch Fire Safe Council">
@@ -36,15 +45,13 @@
       <a class="ocs__btn small pill{% if include.active == "signup" %} accent fill{% endif %}" id="srfsc-nav-signup" href="{{ srfsc_root }}{{ navigation.signup.path | escape }}" {% if include.active == "signup" %}aria-current="page"{% endif %}>{{ navigation.signup.title | escape }}</a>
       <a class="ocs__btn small pill alert-ember fill" href="{{ srfsc_root }}{{ navigation.donate.path | escape }}">{{ navigation.donate.title | escape }}</a>
     </div>
+    {%- comment -%} In the sidebar, "On this page" sits under the council links in the same column. {%- endcomment -%}
+    {%- if navigation.placement == "sidebar" %}{{ section_sidebar }}{% endif %}
   </div>
 </nav>
 {%- endunless %}
+{%- unless navigation.placement == "sidebar" %}{{ section_sidebar }}{% endunless %}
 {%- if navigation.sections.enabled %}
-{%- comment -%} Section sidebar: srfscSections.js fills it from the page's panel headings and shows it. {%- endcomment %}
-<nav class="srfsc-sections" aria-label="{{ navigation.sections.title | escape }}" data-srfsc-sections hidden>
-  <p class="ocs__section-title srfsc-sections__title">{{ navigation.sections.title | escape }}</p>
-  <div class="ocs__links srfsc-sections__links"></div>
-</nav>
 <script type="module" src="{{ site.baseurl }}/assets/js/projects/srfsc/srfscSections.js"></script>
 {%- endif %}
 <script type="module" src="{{ site.baseurl }}/assets/js/projects/srfsc/srfscNav.js"></script>

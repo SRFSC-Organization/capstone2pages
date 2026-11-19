@@ -30,21 +30,19 @@ srfsc_navigation:
   # header: the council links are drawn in the site's top bar (header_links below); no sidebar.
   # sidebar: council nav is a left sidebar under the site header (phones fold it into a Menu bar).
   # top: council nav is a bar across the top of the page, under the site header.
-  placement: top
+  placement: sidebar
   # true: on SRFSC pages the council bar (logo, links, Sign in, Donate) replaces the OCS site
   # header entirely, so there is one styled top bar. Pages outside SRFSC keep the site header.
-  replace_site_header: true
-  # Site header links (used on pages that still draw the OCS site header). These links plus
-  # "Sign in" replace the OCS links (Blog, Courses, Capstone, Search) and the OCS Login.
-  # Remove header_links to bring the OCS top bar back.
+  # Only used with placement: top.
+  replace_site_header: false
+  # Site header (OCS top bar, OCS look): these links plus the Login button replace the OCS links
+  # (Blog, Courses, Capstone, Search). Keep it to about four so the bar stays on one line; the
+  # full list lives in the sidebar. Remove header_links to bring the OCS top bar back.
   header_links:
     - { title: "Calendar & Map", path: "events/" }
     - { title: Prepare, path: "prepare/" }
     - { title: Get Involved, path: "get-involved/" }
     - { title: Report a Hazard, path: "report/" }
-    - { title: Request Help, path: "request/" }
-    - { title: About, path: "about/" }
-    - { title: Donate, path: "get-involved/#donate" }
   brand: SRFSC
   tagline: Fire Safe Council
   links:
@@ -54,7 +52,8 @@ srfsc_navigation:
     - { title: Report a Hazard, path: "report/", active: report }
     - { title: Request Help, path: "request/", active: request }
     - { title: About, path: "about/", active: about }
-  account: { title: Sign in, path: "login/", profile_path: "profile/", profile_title: My profile }
+  # header_title: label of the OCS-styled Login button in the site header (opens the SRFSC login).
+  account: { title: Sign in, header_title: Login, path: "login/", profile_path: "profile/", profile_title: My profile }
   signup: { title: Sign up, path: "signup/" }
   donate: { title: Donate, path: "get-involved/#donate" }
   # Section sidebar: a small "On this page" list beside each SRFSC page, one pill per panel

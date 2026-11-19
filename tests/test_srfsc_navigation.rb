@@ -68,6 +68,21 @@ class SrfscNavigationTest
     refute_includes render, 'data-srfsc-sections'
   end
 
+  def test_site_header_shows_header_links_and_srfsc_login
+    header = Liquid::Template.parse(File.read(File.join(@root, '_includes/themes/minima/header.html')))
+    config = YAML.load_file(File.join(@root, '_config.yml'))
+    config['pages'] = [{'title' => 'Blog', 'path' => 'navigation/blog.md', 'url' => '/blog'}]
+    html = header.render!({'site' => config, 'page' => {'url' => '/capstone/srfsc/app/events/'}},
+      registers: {baseurl: ''})
+    links = config['srfsc_navigation']['header_links']
+    raise "Top bar has #{links.size} links; keep it to 4 plus Login" if links.size > 4
+    assert_includes html, 'href="/capstone/srfsc/app/events/" aria-current="page">Calendar &amp; Map</a>'
+    assert_includes html, 'id="loginArea" href="/capstone/srfsc/app/login/"'
+    assert_includes html, '>Login</a>'
+    refute_includes html, '>Blog</a>'
+    refute_includes html, 'assets/js/api/login.js'
+  end
+
   def test_placement_switches_between_sidebar_and_top_bar
     assert_includes render, '<nav class="srfsc-nav srfsc-nav--sidebar"'
     @config['srfsc_navigation']['placement'] = 'top'
@@ -81,7 +96,7 @@ end
 
 %w[test_links_keep_baseurl_and_active_state test_config_changes_labels_destinations_and_kanban
    test_placement_switches_between_sidebar_and_top_bar test_top_bar_can_replace_site_header
-   test_section_sidebar_follows_config].each do |name|
+   test_section_sidebar_follows_config test_site_header_shows_header_links_and_srfsc_login].each do |name|
   test = SrfscNavigationTest.new
   test.setup
   test.public_send(name)

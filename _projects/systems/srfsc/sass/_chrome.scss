@@ -136,6 +136,9 @@
     .srfsc-nav__menu { flex-direction: column; align-items: stretch; gap: 1rem; }
     .srfsc-nav__links { flex-direction: column; flex-wrap: nowrap; align-items: stretch; .ocs__btn { justify-content: flex-start; } }
     .srfsc-nav__actions { flex-direction: column; align-items: stretch; border-top: 1px solid $srfsc-border; padding-top: 0.75rem; }
+    // "On this page" shares the sidebar column under the council links; the sidebar
+    // itself is sticky and scrolls, so the list stays in normal flow here.
+    .srfsc-sections { position: static; max-height: none; overflow: visible; border-top: 1px solid $srfsc-border; padding-top: 0.75rem; }
   }
 }
 
