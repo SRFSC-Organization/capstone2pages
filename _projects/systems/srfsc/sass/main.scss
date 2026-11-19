@@ -20,11 +20,15 @@ body:has(.srfsc-app) {
 }
 // Site header logo slot when srfsc_navigation.logo is empty (themes/minima/header.html):
 // the council's text mark in place of the OCS logo, in the header's own text color.
+// line-height: the OCS .site-title sets 54px, which pushed the ▲ to the bottom of its square
+// and spread the name and tagline apart; the council font keeps the mark's text in one style.
 .site-title .srfsc-brand {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
   vertical-align: middle;
+  font-family: $srfsc-font-sans;
+  line-height: 1;
 }
 .srfsc-brand__mark {
   display: inline-grid;
@@ -35,8 +39,9 @@ body:has(.srfsc-app) {
   background: $srfsc-ember-strong;
   color: #fff;
   font-size: 0.85rem;
+  line-height: 1;
 }
-.srfsc-brand__text { display: flex; flex-direction: column; }
+.srfsc-brand__text { display: flex; flex-direction: column; gap: 0.15rem; }
 .srfsc-brand__name { font-size: 1.1rem; line-height: 1.1; }
 .srfsc-brand__tagline {
   font-size: 0.75rem;

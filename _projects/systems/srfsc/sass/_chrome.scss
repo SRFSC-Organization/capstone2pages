@@ -157,18 +157,26 @@
     column-gap: 1.5rem;
     align-items: start;
 
-    // Rows are pinned because the sidebar comes before the banner in the page:
-    // bar on row 1, banner on row 2, sidebar from row 3 down beside the content.
+    // Rows are pinned because the sidebar comes before the banner in the page. Without a
+    // council bar (placement: header): banner on row 1, sidebar from row 2 down, and the
+    // content fills the right column from row 2 in page order (calendar and map, then events).
     > * { grid-column: 2; }
-    > .srfsc-nav { grid-column: 1 / -1; grid-row: 1; }
-    > .srfsc-banner, > .srfsc-hero { grid-column: 1 / -1; grid-row: 2; }
-    > .srfsc-sections { grid-column: 1; grid-row: 3 / span 50; } // more rows than any SRFSC page has blocks
+    > .srfsc-banner, > .srfsc-hero { grid-column: 1 / -1; grid-row: 1; }
+    > .srfsc-sections { grid-column: 1; grid-row: 2 / span 50; } // more rows than any SRFSC page has blocks
+
+    // With the council bar (placement: top) everything moves down one row.
+    &:has(> .srfsc-nav) {
+      > .srfsc-nav { grid-column: 1 / -1; grid-row: 1; }
+      > .srfsc-banner, > .srfsc-hero { grid-row: 2; }
+      > .srfsc-sections { grid-row: 3 / span 50; top: 5.5rem; max-height: calc(100vh - 7rem); }
+    }
   }
 
+  // The site header scrolls away, so the sidebar sticks near the top of the window.
   .srfsc-sections {
     position: sticky;
-    top: 5.5rem;
-    max-height: calc(100vh - 7rem);
+    top: 1.5rem;
+    max-height: calc(100vh - 3rem);
     overflow-y: auto;
     padding-top: 0.25rem;
   }
