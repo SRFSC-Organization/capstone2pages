@@ -27,17 +27,21 @@ srfsc_account_api_url: "https://srfsc-api.opencodingsociety.com" # HTTPS origin 
 # Paths below are relative to root; active matches each page's nav include key.
 srfsc_navigation:
   root: /capstone/srfsc/app/
-  # header: no council nav is drawn; the top bar (header_links below) is the only menu.
+  # header: the council links are drawn in the site's top bar (header_links below); no sidebar.
   # sidebar: council nav is a left sidebar under the site header (phones fold it into a Menu bar).
   # top: council nav is a bar across the top of the page, under the site header.
-  placement: sidebar
-  # Top bar: these few links plus "Sign in" (the account link below) replace the OCS links
-  # (Blog, Courses, Capstone, Search) and the OCS Login. The full list stays in the sidebar.
+  placement: header
+  # Top bar: these links plus "Sign in" (the account link below) replace the OCS links
+  # (Blog, Courses, Capstone, Search) and the OCS Login.
   # Remove header_links to bring the OCS top bar back.
   header_links:
     - { title: "Calendar & Map", path: "events/" }
-    - { title: Report a Hazard, path: "report/" }
+    - { title: Prepare, path: "prepare/" }
     - { title: Get Involved, path: "get-involved/" }
+    - { title: Report a Hazard, path: "report/" }
+    - { title: Request Help, path: "request/" }
+    - { title: About, path: "about/" }
+    - { title: Donate, path: "get-involved/#donate" }
   brand: SRFSC
   tagline: Fire Safe Council
   links:

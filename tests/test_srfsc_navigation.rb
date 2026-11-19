@@ -21,6 +21,9 @@ class SrfscNavigationTest
   def setup
     @root = File.expand_path('..', __dir__)
     @config = YAML.load_file(File.join(@root, '_config.yml'))
+    # Tests cover the standalone council nav (sidebar, Sign in inside it), not the live setting.
+    @config['srfsc_navigation']['placement'] = 'sidebar'
+    @config['srfsc_navigation'].delete('header_links')
     @template = Liquid::Template.parse(File.read(File.join(@root,
       '_projects/systems/srfsc/navigation/srfsc-nav.html')), error_mode: :strict)
   end
@@ -53,6 +56,8 @@ class SrfscNavigationTest
     html = render
     assert_includes html, '<nav class="srfsc-nav" aria-label'
     refute_includes html, 'srfsc-nav--sidebar'
+    @config['srfsc_navigation']['placement'] = 'header'
+    refute_includes render, '<nav class="srfsc-nav'
   end
 end
 
