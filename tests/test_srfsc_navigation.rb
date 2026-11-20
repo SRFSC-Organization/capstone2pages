@@ -79,6 +79,8 @@ class SrfscNavigationTest
     assert_includes html, 'href="/capstone/srfsc/app/events/" aria-current="page">Calendar &amp; Map</a>'
     assert_includes html, 'id="loginArea" href="/capstone/srfsc/app/login/"'
     assert_includes html, '>Login</a>'
+    # Signed in, srfscNav.js shows the member's name linking here: the settings page.
+    assert_includes html, 'data-profile-url="/capstone/srfsc/app/settings/"'
     refute_includes html, '>Blog</a>'
     refute_includes html, 'assets/js/api/login.js'
     # SRFSC brand replaces the OCS logo: text mark by default, logo image once one is configured.
@@ -90,6 +92,21 @@ class SrfscNavigationTest
     html = header.render!({'site' => config, 'page' => {}}, registers: {baseurl: ''})
     assert_includes html, 'src="/images/srfsc/logo.png" alt="SRFSC logo"'
     refute_includes html, 'srfsc-brand__name'
+  end
+
+  def test_settings_page_has_account_and_every_preference_control
+    page = File.read(File.join(@root, '_projects/systems/srfsc/navigation/settings.md'))
+    assert_includes page, 'permalink: /capstone/srfsc/app/settings/'
+    assert_includes page, 'id="srfsc-settings-display-name"'
+    assert_includes page, '{% include projects/srfsc/srfsc-preferences.html %}'
+    panel = File.read(File.join(@root, '_projects/systems/srfsc/navigation/srfsc-preferences.html'))
+    # preferences.js reads every one of these by id and fails if one is missing.
+    %w[pref-bg-color pref-text-color pref-accent-color pref-selection-color pref-font-family pref-font-size
+       font-size-label pref-button-style pref-language pref-tts-voice pref-tts-rate pref-tts-pitch pref-tts-volume
+       tts-rate-label tts-pitch-label tts-volume-label tts-test-btn tts-test-text save-preferences restore-styles
+       preferences-status preset-themes custom-themes new-theme-name save-theme-btn
+       pref-head-tracking-enabled].each { |id| assert_includes panel, %(id="#{id}") }
+    refute_includes panel, 'id="ai-theme-form"'
   end
 
   def test_placement_switches_between_sidebar_and_top_bar
@@ -105,7 +122,8 @@ end
 
 %w[test_links_keep_baseurl_and_active_state test_config_changes_labels_destinations_and_kanban
    test_placement_switches_between_sidebar_and_top_bar test_top_bar_can_replace_site_header
-   test_section_sidebar_follows_config test_site_header_shows_header_links_and_srfsc_login].each do |name|
+   test_section_sidebar_follows_config test_site_header_shows_header_links_and_srfsc_login
+   test_settings_page_has_account_and_every_preference_control].each do |name|
   test = SrfscNavigationTest.new
   test.setup
   test.public_send(name)

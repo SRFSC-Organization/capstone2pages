@@ -50,6 +50,24 @@ body:has(.srfsc-app) {
   @media (max-width: 420px) { display: none; }
 }
 
+// Signed-in account link (site header or council bar, srfscNav.js): initial in an ember circle, then the name.
+.srfsc-account--signed-in { display: inline-flex; align-items: center; gap: 0.45rem; max-width: 16rem; }
+.srfsc-account__avatar {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: $srfsc-ember-strong;
+  color: #fff;
+  font-family: $srfsc-font-sans;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.srfsc-account__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
 // srfsc_navigation.replace_site_header: the council bar is the page's only top bar.
 body:has(.srfsc-nav--replaces-header) .site-header {
   display: none;
@@ -73,4 +91,8 @@ body:has(.srfsc-nav--replaces-header) .site-header {
   @import "forms";
   @import "member";
   @import "map";
+  @import "preferences";
 }
+
+// Saved site theme (Settings → Preferences): council surfaces follow it. See _theme-bridge.scss.
+@import "theme-bridge";

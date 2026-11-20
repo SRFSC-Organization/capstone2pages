@@ -25,15 +25,33 @@ if (nav && toggle) {
 }
 
 // The site header and the council bar may each carry an account link; update whichever exist.
+// Signed in, each shows the member's initial and name (so they can see who is signed in) and
+// links to data-profile-url (the settings page from the header). Signed-out visitors (401) and
+// an unreachable account service keep the signed-out label.
+function showMember(account, profile) {
+  const name = (profile.name || '').trim() || account.dataset.profileTitle;
+  const avatar = document.createElement('span');
+  avatar.className = 'srfsc-account__avatar';
+  avatar.setAttribute('aria-hidden', 'true');
+  avatar.textContent = name.charAt(0).toUpperCase();
+  const label = document.createElement('span');
+  label.className = 'srfsc-account__name';
+  label.textContent = name;
+  account.replaceChildren(avatar, label);
+  account.href = account.dataset.profileUrl;
+  account.title = `Signed in as ${name}. Open your settings`;
+  account.setAttribute('aria-label', `Signed in as ${name}. Open your settings`);
+  account.classList.add('srfsc-account--signed-in');
+}
+
 const accounts = document.querySelectorAll('[data-profile-url]');
+const showEverywhere = (profile) => accounts.forEach((account) => showMember(account, profile));
 if (accounts.length) {
-  // Signed-out visitors (401) and an unreachable account service both keep the "Sign in" link.
-  loadMemberProfile().then(() => {
-    accounts.forEach((account) => {
-      account.textContent = account.dataset.profileTitle;
-      account.href = account.dataset.profileUrl;
-    });
+  loadMemberProfile().then((profile) => {
+    showEverywhere(profile);
     const signup = document.querySelector('#srfsc-nav-signup');
     if (signup) signup.hidden = true;
   }).catch(() => {});
+  // The settings page announces a saved name change so the header updates without a reload.
+  document.addEventListener('srfsc:member', (event) => showEverywhere(event.detail));
 }

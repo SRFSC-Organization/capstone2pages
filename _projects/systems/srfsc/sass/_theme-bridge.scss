@@ -1,0 +1,76 @@
+// =============================================================================
+// Theme bridge: SRFSC pages under a saved site theme (Settings → Preferences).
+//
+// When a visitor saves a theme, assets/js/user-preferences.js adds html.user-theme-active,
+// sets --pref-* / --panel / --ui-bg / --ui-border / --text-muted, and forces every heading,
+// paragraph, span and div to the theme's text color with !important. The council palette is
+// fixed (dark cards), so without this a light theme would put dark text on dark cards. Here the
+// council surfaces take the theme's colors instead. Photo areas (banners, the home hero and hub
+// cards) sit on a dark overlay, so they keep light text and their gold accents.
+// Imported at the top level by main.scss (selectors start at html, outside .srfsc-app).
+// =============================================================================
+
+html.user-theme-active .srfsc-app {
+  // Cards and panels: the theme's panel color.
+  .srfsc-panel,
+  .srfsc-nav,
+  .srfsc-zone-card,
+  .srfsc-role,
+  .srfsc-timeline__item,
+  .srfsc-event,
+  .srfsc-calendar__event,
+  .ocs__grid-cell,
+  .srfsc-alert,
+  .srfsc-council__row,
+  &.srfsc-settings .ocs__card {
+    background: var(--panel) !important;
+    border-color: var(--ui-border) !important;
+    box-shadow: none !important;
+  }
+
+  // Raised pieces inside a card (dates, tags, calendar days): one step off the panel.
+  .srfsc-event__date,
+  .srfsc-event__type,
+  .srfsc-program,
+  .srfsc-partners li,
+  .srfsc-calendar__day,
+  .srfsc-meter__track,
+  .ocs__prefs-step-num {
+    background: var(--ui-bg) !important;
+    border-color: var(--ui-border) !important;
+  }
+
+  // Lines and quiet text.
+  .srfsc-footer, .srfsc-footer__credits, .ocs__tabs-list, .srfsc-mini-list__item { border-color: var(--ui-border) !important; }
+  .srfsc-panel__meta, .srfsc-panel__note, .srfsc-field__hint, .srfsc-sections__title,
+  .srfsc-feed__body, .srfsc-mini-list__meta, .ocs__prefs-group-title, .ocs__label { color: var(--text-muted) !important; }
+
+  // Links and outlined buttons use the theme's accent; filled council buttons keep their colors.
+  a:not([class]), .srfsc-panel__more, .srfsc-panel__subtitle, .srfsc-mini-list__date { color: var(--pref-accent-color) !important; }
+  .ocs__btn:not(.fill):not(.pill) {
+    background: transparent !important;
+    border-color: var(--pref-accent-color) !important;
+    color: var(--pref-text-color) !important;
+  }
+  .ocs__btn.fill:not(.accent):not(.alert-yellow), .ocs__btn.fill:not(.accent):not(.alert-yellow) * { color: #fff !important; }
+  // Pills (section sidebar, filters): the council pill colors are light-on-dark, so follow the theme.
+  .ocs__btn.pill:not(.accent):not(.fill) {
+    background: var(--ui-bg) !important;
+    border-color: var(--ui-border) !important;
+    color: var(--pref-text-color) !important;
+    &:hover, &:focus-visible { border-color: var(--pref-accent-color) !important; }
+  }
+
+  // Photo areas: light text on the dark photo overlay, gold kickers and links.
+  .srfsc-banner, .srfsc-hero, .srfsc-hub__card {
+    &, h1, h2, h3, p, span, div, dt, dd, li { color: #f2f2f0 !important; }
+    .srfsc-hero__eyebrow, .srfsc-actions__link, .srfsc-hub__status { color: $srfsc-gold !important; }
+    .srfsc-weather__label, .srfsc-weather__source, .srfsc-weather dt { color: $srfsc-muted !important; }
+  }
+  @each $level, $tone in $srfsc-weather-levels {
+    .srfsc-weather[data-level="#{$level}"] .srfsc-weather__level { color: $tone !important; }
+  }
+}
+
+// The signed-in initial in the site header (outside .srfsc-app) stays white on its ember circle.
+html.user-theme-active .srfsc-account__avatar { color: #fff !important; }

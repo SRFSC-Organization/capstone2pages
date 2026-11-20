@@ -1,0 +1,257 @@
+<!--
+  SRFSC settings: preferences panel. Markup copied from Open-Coding-Society/pages
+  _layouts/dashboard-v2.html (commit 5755dc3), the Appearance / Language & voice / Head tracking
+  tabs. Element ids must stay as they are: preferences.js and preferences-layout.js find
+  everything by id. The dashboard's tab-content/block/hidden classes are dropped (a site-wide
+  .tab-content rule hides them); srfscSettings.js switches panels with the hidden attribute. Left out: "Create with AI" (it needs the OCS Spring server's /api/user/ai-theme).
+  Styles: _projects/systems/srfsc/sass/_preferences.scss. Wiring: srfscSettings.js.
+-->
+<div class="ocs__tabs srfsc-settings__tabs">
+  <div class="ocs__tabs-list" role="tablist" aria-label="Preferences">
+    <button type="button" role="tab" class="ocs__tabs-btn srfsc-settings__tab" data-tab="appearance" aria-selected="true">Appearance</button>
+    <button type="button" role="tab" class="ocs__tabs-btn srfsc-settings__tab" data-tab="voice" aria-selected="false">Language &amp; voice</button>
+    <button type="button" role="tab" class="ocs__tabs-btn srfsc-settings__tab" data-tab="tracking" aria-selected="false">Head tracking</button>
+  </div>
+</div>
+<div id="tab-content-preferences" class="ocs__prefs">
+
+                <!-- ===== Appearance ===== -->
+                <div id="tab-content-appearance" class="ocs__tabs-panel" role="tabpanel">
+                    <div class="ocs__prefs-layout">
+                        <div class="ocs__prefs-main">
+
+                            <!-- Step 1: pick a starting point -->
+                            <section class="ocs__card ocs__prefs-card">
+                                <div class="ocs__prefs-step">
+                                    <span class="ocs__prefs-step-num" aria-hidden="true">1</span>
+                                    <h3 class="ocs__dashboard-card-title">Pick a starting point</h3>
+                                </div>
+
+                                <div class="ocs__tabs">
+                                    <div class="ocs__tabs-list" role="tablist" aria-label="Theme source">
+                                        <button type="button" role="tab" class="ocs__tabs-btn ocs__prefs-segment" data-source="presets" aria-selected="true">Presets</button>
+                                        <button type="button" role="tab" class="ocs__tabs-btn ocs__prefs-segment" data-source="mine" aria-selected="false">My themes</button>
+                                    </div>
+                                </div>
+
+                                <div data-source-pane="presets">
+                                    <!-- data-mode="fill": clicking a preset fills step 2 instead of saving -->
+                                    <div class="ocs__grid ocs__grid--standard cols-4" id="preset-themes" data-mode="fill"></div>
+                                </div>
+
+                                <div data-source-pane="mine" hidden>
+                                    <div id="custom-themes" class="ocs__dashboard-column" data-mode="fill"></div>
+                                    <div class="ocs__prefs-save-theme">
+                                        <div class="ocs__prefs-grow">
+                                            <input id="new-theme-name" class="ocs__input ocs__dashboard-full-width" placeholder="Theme name" aria-label="Theme name" maxlength="30" />
+                                        </div>
+                                        <button id="save-theme-btn" type="button" class="ocs__btn small">Add to my themes</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Step 2: fine-tune -->
+                            <section class="ocs__card ocs__prefs-card">
+                                <div class="ocs__prefs-step">
+                                    <span class="ocs__prefs-step-num" aria-hidden="true">2</span>
+                                    <h3 class="ocs__dashboard-card-title">Fine-tune</h3>
+                                </div>
+
+                                <p class="ocs__prefs-group-title">Colors</p>
+                                <div class="ocs__prefs-colors">
+                                    <label class="ocs__prefs-color" for="pref-bg-color">
+                                        <span>Background</span>
+                                        <span class="ocs__prefs-color-row"><input type="color" id="pref-bg-color" value="#121212" /><code data-hex-for="pref-bg-color"></code></span>
+                                    </label>
+                                    <label class="ocs__prefs-color" for="pref-text-color">
+                                        <span>Text</span>
+                                        <span class="ocs__prefs-color-row"><input type="color" id="pref-text-color" value="#F0F0F0" /><code data-hex-for="pref-text-color"></code></span>
+                                    </label>
+                                    <label class="ocs__prefs-color" for="pref-accent-color">
+                                        <span>Accent</span>
+                                        <span class="ocs__prefs-color-row"><input type="color" id="pref-accent-color" value="#4CAFEF" /><code data-hex-for="pref-accent-color"></code></span>
+                                    </label>
+                                    <label class="ocs__prefs-color" for="pref-selection-color">
+                                        <span>Selection</span>
+                                        <span class="ocs__prefs-color-row"><input type="color" id="pref-selection-color" value="#4CAFEF" /><code data-hex-for="pref-selection-color"></code></span>
+                                    </label>
+                                </div>
+
+                                <p class="ocs__prefs-group-title">Text and buttons</p>
+                                <div class="ocs__prefs-fields">
+                                    <div>
+                                        <label for="pref-font-family" class="ocs__label">Font</label>
+                                        <select id="pref-font-family" class="ocs__input ocs__dashboard-full-width">
+                                            <option value="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial">Inter / System</option>
+                                            <option value="Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial">Roboto</option>
+                                            <option value="'Open Sans', Arial, sans-serif">Open Sans</option>
+                                            <option value="Lato, Arial, sans-serif">Lato</option>
+                                            <option value="Montserrat, Arial, sans-serif">Montserrat</option>
+                                            <option value="Georgia, 'Times New Roman', Times, serif">Georgia (Serif)</option>
+                                            <option value="'Source Code Pro', monospace">Source Code Pro</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="pref-font-size" class="ocs__label">Size: <span id="font-size-label">14</span>px</label>
+                                        <input type="range" id="pref-font-size" min="12" max="22" value="14" class="ocs__dashboard-full-width" />
+                                    </div>
+                                    <div>
+                                        <label for="pref-button-style" class="ocs__label">Button style</label>
+                                        <select id="pref-button-style" class="ocs__input ocs__dashboard-full-width">
+                                            <option value="default">Default</option>
+                                            <option value="rounded-all">Rounded</option>
+                                            <option value="square">Square</option>
+                                            <option value="pill">Pill</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Live preview + the one Save -->
+                        <aside class="ocs__card ocs__prefs-card ocs__prefs-aside" aria-label="Live preview">
+                            <h3 class="ocs__dashboard-card-title">Live preview</h3>
+                            <div id="prefs-preview" class="ocs__prefs-preview">
+                                <div class="ocs__prefs-preview-bar"></div>
+                                <div class="ocs__prefs-preview-body">
+                                    <h4>Unit 3: Loops</h4>
+                                    <p>A <span data-preview="selection">for loop</span> repeats a block of code. See the <span data-preview="link">lesson notes</span> before the quiz.</p>
+                                    <div class="ocs__prefs-preview-buttons">
+                                        <span data-preview="button">Run code</span>
+                                        <span data-preview="ghost">Next lesson</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ocs__prefs-checks">
+                                <div class="ocs__prefs-check"><span>Text is readable</span><strong id="prefs-check-text"></strong></div>
+                                <div class="ocs__prefs-check"><span>Links and buttons stand out</span><strong id="prefs-check-accent"></strong></div>
+                            </div>
+                            <div class="ocs__prefs-actions">
+                                <button id="save-preferences" type="button" class="ocs__btn accent fill medium ocs__prefs-grow">Save</button>
+                                <button id="restore-styles" type="button" class="ocs__btn medium">Reset</button>
+                            </div>
+                            <p id="preferences-status" class="ocs__text ocs__dashboard-fineprint" role="status" aria-live="polite"></p>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- ===== Language & voice ===== -->
+                <div id="tab-content-voice" class="ocs__tabs-panel" role="tabpanel" hidden>
+                    <!-- Language/Translation Section -->
+                    <div class="ocs__card">
+                        <div class="ocs__card-header">
+                            <h3 class="ocs__dashboard-card-title">🌐 Language Translation</h3>
+                        </div>
+                        <div class="ocs__dashboard-column">
+                            <div>
+                                <label class="ocs__label">Site Language</label>
+                                <select id="pref-language" class="ocs__input ocs__dashboard-full-width">
+                                    <option value="">Default (English - No Translation)</option>
+                                    <option value="es">🇪🇸 Spanish (Español)</option>
+                                    <option value="fr">🇫🇷 French (Français)</option>
+                                    <option value="de">🇩🇪 German (Deutsch)</option>
+                                    <option value="it">🇮🇹 Italian (Italiano)</option>
+                                    <option value="pt">🇵🇹 Portuguese (Português)</option>
+                                    <option value="ru">🇷🇺 Russian (Русский)</option>
+                                    <option value="zh-CN">🇨🇳 Chinese Simplified (简体中文)</option>
+                                    <option value="zh-TW">🇹🇼 Chinese Traditional (繁體中文)</option>
+                                    <option value="ja">🇯🇵 Japanese (日本語)</option>
+                                    <option value="ko">🇰🇷 Korean (한국어)</option>
+                                    <option value="ar">🇸🇦 Arabic (العربية)</option>
+                                    <option value="hi">🇮🇳 Hindi (हिन्दी)</option>
+                                    <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
+                                    <option value="th">🇹🇭 Thai (ไทย)</option>
+                                    <option value="nl">🇳🇱 Dutch (Nederlands)</option>
+                                    <option value="pl">🇵🇱 Polish (Polski)</option>
+                                    <option value="tr">🇹🇷 Turkish (Türkçe)</option>
+                                    <option value="uk">🇺🇦 Ukrainian (Українська)</option>
+                                    <option value="he">🇮🇱 Hebrew (עברית)</option>
+                                    <option value="fa">🇮🇷 Persian (فارسی)</option>
+                                </select>
+                            </div>
+                            <p class="ocs__text ocs__dashboard-fineprint">Translation powered by Google Translate.</p>
+                        </div>
+                    </div>
+                    <!-- Text-to-Speech Section -->
+                    <div class="ocs__card">
+                        <div class="ocs__card-header">
+                            <h3 class="ocs__dashboard-card-title">Text-to-Speech</h3>
+                            <div class="ocs__links">
+                                <button type="button" id="tts-test-btn" class="ocs__btn accent small">Test Voice</button>
+                            </div>
+                        </div>
+                        <div class="ocs__grid--col2">
+                            <div>
+                                <label class="ocs__label">Voice</label>
+                                <select id="pref-tts-voice" class="ocs__input ocs__dashboard-full-width">
+                                    <option value="">Loading voices...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="ocs__label">Speed: <span id="tts-rate-label">1.0</span>x</label>
+                                <input type="range" id="pref-tts-rate" min="0.5" max="2" step="0.1" value="1" class="ocs__dashboard-full-width" />
+                            </div>
+                            <div>
+                                <label class="ocs__label">Pitch: <span id="tts-pitch-label">1.0</span></label>
+                                <input type="range" id="pref-tts-pitch" min="0.5" max="2" step="0.1" value="1" class="ocs__dashboard-full-width" />
+                            </div>
+                            <div>
+                                <label class="ocs__label">Volume: <span id="tts-volume-label">100</span>%</label>
+                                <input type="range" id="pref-tts-volume" min="0" max="1" step="0.1" value="1" class="ocs__dashboard-full-width" />
+                            </div>
+                        </div>
+                        <div class="ocs__dashboard-card-spaced">
+                            <label class="ocs__label">Test Text</label>
+                            <input type="text" id="tts-test-text" class="ocs__input ocs__dashboard-full-width" value="Hello! This is a test of the text-to-speech feature." placeholder="Enter text to test..." />
+                        </div>
+                        <p class="ocs__text ocs__dashboard-fineprint ocs__dashboard-card-spaced-sm">Uses your browser's built-in speech synthesis. Available voices depend on your operating system.</p>
+                    </div>
+                    <div class="ocs__card ocs__prefs-actions">
+                        <button type="button" data-save-all class="ocs__btn accent fill medium">Save</button>
+                    </div>
+                </div>
+
+                <!-- ===== Head tracking ===== -->
+                <div id="tab-content-tracking" class="ocs__tabs-panel" role="tabpanel" hidden>
+                    <!-- Head Tracking Cursor Section -->
+                    <div class="ocs__card">
+                        <div class="ocs__card-header">
+                            <h3 class="ocs__dashboard-card-title">Head Tracking Cursor</h3>
+                            <label class="ocs__dashboard-toggle-label">
+                                <input id="pref-head-tracking-enabled" type="checkbox" class="ocs__dashboard-sr-only" />
+                                <div id="head-tracking-toggle-track" class="ocs__dashboard-toggle-track bg-neutral-600">
+                                    <div id="head-tracking-toggle-dot" class="ocs__dashboard-toggle-dot"></div>
+                                </div>
+                                <span class="ocs__dashboard-toggle-text">Enable</span>
+                            </label>
+                        </div>
+
+                        <p class="ocs__text ocs__dashboard-card-desc">Use your webcam and head movement to drive an on-screen cursor, from <a href="https://aadibhat09.github.io/NodCursor/" target="_blank" rel="noopener noreferrer" class="ocs__dashboard-link">NodCursor</a>. This uses MediaPipe from CDN.</p>
+
+                        <div>
+                            <label class="ocs__label">Sensitivity: <span id="head-tracking-sensitivity-label">0.45</span></label>
+                            <input type="range" id="pref-head-tracking-sensitivity" min="0.10" max="0.90" step="0.05" value="0.45" class="ocs__dashboard-full-width" />
+                        </div>
+
+                        <div class="ocs__dashboard-card-spaced">
+                            <p class="ocs__dashboard-calibration-title">Calibration</p>
+                            <p class="ocs__text ocs__dashboard-fineprint ocs__dashboard-card-spaced-sm">Capture center, left, right, up, and down while head tracking is active.</p>
+                            <div class="ocs__dashboard-calibration-grid">
+                                <button type="button" id="head-calibrate-center" class="ocs__btn small">Capture Center</button>
+                                <button type="button" id="head-calibrate-left" class="ocs__btn small">Capture Left</button>
+                                <button type="button" id="head-calibrate-right" class="ocs__btn small">Capture Right</button>
+                                <button type="button" id="head-calibrate-up" class="ocs__btn small">Capture Up</button>
+                                <button type="button" id="head-calibrate-down" class="ocs__btn small">Capture Down</button>
+                            </div>
+                            <div class="ocs__links ocs__dashboard-card-spaced-sm">
+                                <button type="button" id="head-calibration-save" class="ocs__btn accent fill small">Save Calibration</button>
+                                <button type="button" id="head-calibration-load" class="ocs__btn accent small">Load Calibration</button>
+                                <button type="button" id="head-calibration-reset" class="ocs__btn small">Reset Calibration</button>
+                            </div>
+                            <p id="head-calibration-status" class="ocs__text ocs__dashboard-fineprint ocs__dashboard-card-spaced-sm"></p>
+                        </div>
+
+                        <p id="head-tracking-status" class="ocs__text ocs__dashboard-card-spaced-sm"></p>
+                    </div>
+                </div>
+</div>

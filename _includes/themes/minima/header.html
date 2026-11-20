@@ -34,15 +34,15 @@
                     SRFSC site: a few council links (srfsc_navigation.header_links in _config.yml) replace
                     the OCS nav_pages. The Login button keeps the OCS #loginArea look but opens the SRFSC
                     login (the OCS login.js that normally fills #loginArea is not loaded in this mode).
-                    The full list stays in the council sidebar. srfscNav.js swaps the label for
-                    "My profile" once the member has a session.
+                    The full list stays in the council sidebar. Once the member has a session,
+                    srfscNav.js shows their name here, linking to the settings page.
                     {%- endcomment -%}
                     {%- assign srfsc_root = srfsc_navigation.root | relative_url -%}
                     {%- for link in srfsc_navigation.header_links -%}
                     {%- assign link_url = srfsc_root | append: link.path -%}
                     <a class="page-link" href="{{ link_url | escape }}" {% if page.url == link_url %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>
                     {%- endfor -%}
-                    <a class="page-link" id="loginArea" href="{{ srfsc_root }}{{ srfsc_navigation.account.path | escape }}" data-profile-title="{{ srfsc_navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ srfsc_navigation.account.profile_path | escape }}">{{ srfsc_navigation.account.header_title | default: srfsc_navigation.account.title | escape }}</a>
+                    <a class="page-link" id="loginArea" href="{{ srfsc_root }}{{ srfsc_navigation.account.path | escape }}" data-profile-title="{{ srfsc_navigation.account.profile_title | escape }}" data-profile-url="{{ srfsc_root }}{{ srfsc_navigation.account.settings_path | default: srfsc_navigation.account.profile_path | escape }}">{{ srfsc_navigation.account.header_title | default: srfsc_navigation.account.title | escape }}</a>
                     {%- else -%}
                     {%- for path in site.minima.nav_pages -%}
                     {%- assign my_page = site.pages | where: "path", path | first -%}

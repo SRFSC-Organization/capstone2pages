@@ -57,7 +57,8 @@ srfsc_navigation:
     - { title: Request Help, path: "request/", active: request }
     - { title: About, path: "about/", active: about }
   # header_title: label of the OCS-styled Login button in the site header (opens the SRFSC login).
-  account: { title: Sign in, header_title: Login, path: "login/", profile_path: "profile/", profile_title: My profile }
+  # settings_path: where the member's name in the site header leads once they are signed in.
+  account: { title: Sign in, header_title: Login, path: "login/", profile_path: "profile/", profile_title: My profile, settings_path: "settings/" }
   signup: { title: Sign up, path: "signup/" }
   donate: { title: Donate, path: "get-involved/#donate" }
   # Section sidebar: a small "On this page" list beside each SRFSC page, one pill per panel

@@ -1,0 +1,284 @@
+// =============================================================================
+// SRFSC settings page (navigation/settings.md): the preferences panel.
+//
+// Adapted from Open-Coding-Society/pages _sass/open-coding/preferences.scss (commit 5755dc3):
+// same class names and layout, in council colors instead of the --pref-* variables, because
+// the SRFSC pages keep their own palette. Also covers the few shared OCS helper classes the
+// copied markup uses that this repo's Sass does not have yet (ocs__tabs, ocs__label,
+// ocs__dashboard-*). Nested inside .srfsc-app by main.scss.
+// =============================================================================
+
+$prefs-radius: 12px;
+$prefs-radius-sm: 6px;
+$prefs-gap: 0.75rem;
+
+@mixin prefs-box($padding: $prefs-gap) {
+  padding: $padding;
+  border: 1px solid $srfsc-border;
+  border-radius: $prefs-radius;
+}
+
+@mixin prefs-row($gap: 0.5rem) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $gap;
+}
+
+// ---------- Account ----------
+.srfsc-settings__name { max-width: 34rem; }
+
+// ---------- Shared OCS helpers used by the copied markup ----------
+// `&.srfsc-settings`: this file is nested in .srfsc-app, and the page puts both classes on one element.
+&.srfsc-settings {
+  .ocs__tabs { margin-bottom: 1rem; }
+  .ocs__tabs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    border-bottom: 1px solid $srfsc-border;
+  }
+  // Tabs, not buttons: undo the SRFSC .ocs__btn look and the site theme's button corners.
+  .ocs__tabs-btn,
+  html.user-theme-active & .ocs__tabs-btn {
+    min-height: 0;
+    padding: 0.6rem 0.9rem;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: $srfsc-muted;
+    font-family: $srfsc-font-sans;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover { color: $srfsc-text; }
+    &[aria-selected="true"] { border-bottom-color: $srfsc-ember !important; color: $srfsc-text; }
+  }
+  .ocs__tabs-panel[hidden] { display: none; }
+
+  .ocs__card {
+    background: $srfsc-raised;
+    border: 1px solid $srfsc-border;
+    border-radius: $prefs-radius;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    color: $srfsc-text;
+  }
+  .ocs__card-header {
+    @include prefs-row($prefs-gap);
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .ocs__dashboard-card-title { margin: 0; font-size: 1.05rem; font-weight: 600; }
+  .ocs__label { display: block; margin-bottom: 0.35rem; color: $srfsc-muted; font-size: 0.85rem; font-weight: 600; }
+  .ocs__input {
+    box-sizing: border-box;
+    min-height: 42px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid rgba($srfsc-text, 0.22);
+    border-radius: 10px;
+    background: $srfsc-bg;
+    color: $srfsc-text;
+    font-family: $srfsc-font-sans;
+    font-size: 0.95rem;
+  }
+  .ocs__dashboard-full-width { width: 100%; }
+  .ocs__dashboard-column { display: flex; flex-direction: column; gap: $prefs-gap; }
+  .ocs__dashboard-fineprint { margin: 0; color: $srfsc-muted; font-size: 0.85rem; }
+  .ocs__dashboard-card-desc { color: $srfsc-muted; }
+  .ocs__dashboard-card-spaced { margin-top: 1rem; }
+  .ocs__dashboard-card-spaced-sm { margin-top: 0.6rem; }
+  .ocs__dashboard-link { color: $srfsc-gold; }
+  .ocs__grid--col2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $prefs-gap;
+    @media (max-width: 600px) { grid-template-columns: minmax(0, 1fr); }
+  }
+  .ocs__dashboard-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  // Head tracking on/off switch (preferences.js moves the dot and recolors the track).
+  .ocs__dashboard-toggle-label { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+  .ocs__dashboard-toggle-track {
+    position: relative;
+    width: 2.75rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: $srfsc-slate;
+    transition: background-color 0.2s ease;
+  }
+  .ocs__dashboard-toggle-dot {
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s ease;
+  }
+  .ocs__dashboard-calibration-title { margin: 0; font-weight: 600; }
+  .ocs__dashboard-calibration-grid { @include prefs-row; margin-top: 0.5rem; }
+  input[type="range"] { accent-color: $srfsc-ember; }
+}
+
+// ---------- Panel layout (from the OCS preferences grammar) ----------
+.ocs__prefs-grow { flex: 1 1 auto; min-width: 0; }
+
+.ocs__prefs-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  @media (max-width: 900px) { grid-template-columns: minmax(0, 1fr); }
+}
+.ocs__prefs-main { display: flex; flex-direction: column; gap: 1rem; }
+.ocs__prefs-aside {
+  position: sticky;
+  top: 1.5rem;
+  @media (max-width: 900px) { position: static; }
+}
+
+&.srfsc-settings .ocs__card.ocs__prefs-card { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 0; }
+.ocs__prefs-step { @include prefs-row($prefs-gap); }
+.ocs__prefs-step-num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: rgba($srfsc-text, 0.12);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.ocs__prefs-group-title {
+  margin: 0;
+  color: $srfsc-muted;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+// Theme swatches: a sample in the theme's own colors (painted by preferences.js), then its name.
+.ocs__prefs .ocs__prefs-swatch,
+html.user-theme-active & .ocs__prefs .ocs__prefs-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 0;
+  padding: 0.5rem;
+  border: 2px solid $srfsc-border;
+  border-radius: $prefs-radius !important;
+  background: none;
+  color: $srfsc-text;
+  text-align: left;
+  cursor: pointer;
+  &:hover { border-color: rgba($srfsc-text, 0.3); }
+  &[aria-pressed="true"] { border-color: $srfsc-ember; }
+}
+.ocs__prefs-swatch-sample {
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 4.5rem;
+  padding: 0.5rem 0.6rem;
+  box-sizing: border-box;
+  border: 1px solid rgba($srfsc-text, 0.12);
+  border-radius: $prefs-radius-sm;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.ocs__prefs-swatch-bar { width: 40%; height: 0.375rem; border-radius: 0.2rem; }
+.ocs__prefs-swatch-name { font-size: 0.8rem; }
+
+.ocs__prefs-mine-row { @include prefs-box; @include prefs-row($prefs-gap); flex-wrap: nowrap; }
+.ocs__prefs-mine-dot {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid $srfsc-border;
+  border-radius: $prefs-radius-sm;
+}
+.ocs__prefs-save-theme {
+  @include prefs-row;
+  align-items: flex-end;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid $srfsc-border;
+}
+
+// Fine-tune: four colors, then font / size / button style.
+.ocs__prefs-colors {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $prefs-gap;
+  @media (max-width: 600px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.ocs__prefs-color {
+  @include prefs-box;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  input[type="color"] {
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid $srfsc-border;
+    border-radius: $prefs-radius-sm;
+    background: none;
+    cursor: pointer;
+  }
+  code { font-size: 0.8rem; color: $srfsc-muted; background: none; }
+}
+.ocs__prefs-color-row { @include prefs-row(0.6rem); }
+.ocs__prefs-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $prefs-gap;
+  @media (max-width: 600px) { grid-template-columns: minmax(0, 1fr); }
+}
+
+// Live preview (painted in the form's colors by preferences-layout.js) and contrast checks.
+.ocs__prefs-preview { overflow: hidden; border: 1px solid $srfsc-border; border-radius: $prefs-radius; }
+.ocs__prefs-preview-bar { height: 2.25rem; }
+.ocs__prefs-preview-body {
+  display: flex;
+  flex-direction: column;
+  gap: $prefs-gap;
+  padding: 1.25rem;
+  h4, p { margin: 0; }
+  h4 { font-size: 1.25em; font-weight: 700; }
+  p { line-height: 1.6; }
+}
+.ocs__prefs [data-preview="selection"] { padding: 0 2px; border-radius: 2px; }
+.ocs__prefs [data-preview="link"] { text-decoration: underline; }
+.ocs__prefs-preview-buttons {
+  @include prefs-row;
+  span { padding: 0.5rem 0.9rem; border: 1px solid transparent; font-weight: 600; }
+}
+.ocs__prefs-checks { display: flex; flex-direction: column; gap: 0.5rem; }
+.ocs__prefs-check {
+  @include prefs-box(0.6rem $prefs-gap);
+  display: flex;
+  justify-content: space-between;
+  gap: $prefs-gap;
+  font-size: 0.85rem;
+  strong[data-status="pass"] { color: #7ee2a8; }
+  strong[data-status="warning"] { color: #ffb38a; }
+}
+.ocs__prefs-actions { @include prefs-row; }
