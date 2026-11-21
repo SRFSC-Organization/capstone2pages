@@ -79,6 +79,15 @@ loadAccount();
 
 // ---------- 2. Preferences ----------
 
+// Language menu: one option per language in the site engine's list (assets/js/user-preferences.js),
+// A to Z, so the menu and the Google Translate widget always offer the same languages. Runs before
+// initializePreferences so a saved language can be selected when the form fills.
+const languageSelect = document.getElementById('pref-language');
+const languages = Object.values(window.SitePreferences?.LANGUAGES || {})
+  .filter((language) => language.code)
+  .sort((a, b) => a.name.localeCompare(b.name));
+languageSelect.append(...languages.map((language) => new Option(language.name, language.code)));
+
 // SRFSC accounts have no preferences storage yet, and the OCS Spring endpoints these
 // call (/api/user/preferences) belong to a different login. Keep preferences in this
 // browser's localStorage only, the same path OCS uses for guests.

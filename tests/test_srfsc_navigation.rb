@@ -107,6 +107,12 @@ class SrfscNavigationTest
        preferences-status preset-themes custom-themes new-theme-name save-theme-btn
        pref-head-tracking-enabled].each { |id| assert_includes panel, %(id="#{id}") }
     refute_includes panel, 'id="ai-theme-form"'
+    # The language menu is filled from the site engine's list: every Google Translate language.
+    engine = File.read(File.join(@root, 'assets/js/user-preferences.js'))
+    codes = engine[/const LANGUAGES = \{(.*?)\n  \};/m, 1].scan(/code: '([^']+)'/).flatten
+    raise "Only #{codes.size} languages in user-preferences.js" if codes.size < 180
+    raise 'Duplicate language codes' if codes.uniq.size != codes.size
+    %w[es zh-CN haw jw mni-Mtei zu].each { |code| raise "Missing #{code}" unless codes.include?(code) }
   end
 
   def test_placement_switches_between_sidebar_and_top_bar
